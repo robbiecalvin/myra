@@ -1,0 +1,437 @@
+:root {
+  --bg: #070711;
+  --panel: rgba(255, 255, 255, 0.06);
+  --panel2: rgba(255, 255, 255, 0.04);
+  --border: rgba(255, 255, 255, 0.12);
+  --text: rgba(245, 245, 255, 0.92);
+  --muted: rgba(245, 245, 255, 0.65);
+  --accent: #ffd27d;
+  --accent2: #e0a84b;
+  --shadow: 0 22px 70px rgba(0, 0, 0, 0.55);
+  --radius: 18px;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--text) !important;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial,
+    sans-serif !important;
+  background: radial-gradient(circle at 30% 10%, rgba(255, 210, 125, 0.2), transparent 55%),
+    radial-gradient(circle at 80% 30%, rgba(90, 140, 255, 0.15), transparent 50%),
+    linear-gradient(180deg, #070711 0%, #05050b 100%) !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  overflow-x: hidden;
+}
+
+/* Main app shell */
+#myra-app {
+  max-width: 940px;
+  margin: 40px auto 24px !important;
+  padding: 26px 22px !important;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.03)) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius) !important;
+  box-shadow: var(--shadow) !important;
+}
+
+.screen {
+  display: none;
+}
+
+.screen.active,
+.screen[style*="display:block"],
+.screen[style*="display: block"] {
+  display: block;
+  animation: myraFadeUp 280ms ease both;
+}
+
+@keyframes myraFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+h1,
+h2,
+h3 {
+  letter-spacing: -0.01em;
+}
+
+p {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+select {
+  width: 100%;
+  padding: 14px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(0, 0, 0, 0.35);
+  color: var(--text);
+  outline: none;
+}
+
+input[type="range"] {
+  width: 100%;
+}
+
+button,
+.btn {
+  appearance: none;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text);
+  border-radius: 14px;
+  padding: 12px 14px;
+  cursor: pointer;
+  font-weight: 750;
+  letter-spacing: 0.02em;
+  transition: transform 140ms ease, background 140ms ease, border-color 140ms ease;
+}
+
+button:hover,
+.btn:hover {
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.22);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: #1a0c06;
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #ffe1a8, #f1b257);
+}
+
+/* Results cards */
+#results .wine,
+.beer-card,
+.card {
+  background: rgba(10, 10, 18, 0.75) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 16px !important;
+  padding: 16px 16px !important;
+  margin-bottom: 14px;
+}
+
+#results {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 14px;
+}
+
+.myra-result-card {
+  background: rgba(10, 10, 18, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.55);
+}
+
+.myra-result-header {
+  padding: 18px 18px 10px;
+  background: radial-gradient(circle at 25% 0%, rgba(255, 210, 125, 0.12), transparent 60%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0));
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.myra-result-title {
+  margin: 0;
+  font-size: 1.25rem;
+  letter-spacing: -0.02em;
+}
+
+.myra-result-subtitle {
+  margin: 6px 0 0;
+  color: rgba(245, 245, 255, 0.7);
+  font-size: 0.95rem;
+}
+
+.myra-badges {
+  margin-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.myra-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(245, 245, 255, 0.82);
+  font-size: 0.9rem;
+}
+
+.myra-result-body {
+  padding: 16px 18px 18px;
+}
+
+.myra-kv {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px 14px;
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.myra-kv li {
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 12px 12px;
+  color: rgba(245, 245, 255, 0.82);
+}
+
+.myra-kv strong {
+  display: block;
+  color: rgba(245, 245, 255, 0.65);
+  font-size: 0.85rem;
+  margin-bottom: 4px;
+  letter-spacing: 0.02em;
+}
+
+.myra-result-actions {
+  margin-top: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.myra-link {
+  text-decoration: none;
+}
+
+/* Confidence badge */
+.myra-badge-confidence {
+  background: rgba(255, 210, 125, 0.10);
+  border-color: rgba(255, 210, 125, 0.25);
+  color: rgba(255, 235, 200, 0.92);
+}
+
+/* Transcript (speech recognition) */
+.myra-transcript {
+  margin: 14px 0 0;
+  padding: 12px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  background: rgba(0, 0, 0, 0.28);
+}
+
+.myra-transcript-row {
+  display: grid;
+  grid-template-columns: 90px minmax(0, 1fr);
+  gap: 10px;
+  align-items: start;
+}
+
+.myra-transcript-label {
+  color: rgba(245, 245, 255, 0.7);
+  font-weight: 750;
+  letter-spacing: 0.02em;
+  font-size: 0.85rem;
+  padding-top: 3px;
+}
+
+.myra-transcript-text {
+  color: rgba(245, 245, 255, 0.85);
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+.myra-transcript-actions {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.myra-transcript-editrow {
+  display: grid;
+  grid-template-columns: 90px minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+}
+
+.myra-transcript-input {
+  width: 100%;
+  padding: 12px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(0, 0, 0, 0.35);
+  color: rgba(245, 245, 255, 0.92);
+  outline: none;
+}
+
+.myra-compare {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 12px;
+}
+
+@media (max-width: 740px) {
+  .myra-compare {
+    grid-template-columns: 1fr;
+  }
+}
+
+.myra-explain {
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+@media (max-width: 740px) {
+  .myra-explain {
+    grid-template-columns: 1fr;
+  }
+}
+
+.myra-explain-box {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 12px 12px;
+}
+
+.myra-explain-title {
+  margin: 0 0 6px;
+  color: rgba(245, 245, 255, 0.72);
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  font-size: 0.85rem;
+}
+
+.myra-explain-list {
+  margin: 0;
+  padding-left: 18px;
+  color: rgba(245, 245, 255, 0.82);
+}
+
+.myra-explain-list li {
+  margin: 6px 0;
+}
+
+button:focus-visible,
+.btn:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 2px solid rgba(255, 210, 125, 0.95);
+  outline-offset: 2px;
+}
+
+/* Store box (call + map + directions) */
+.myra-store {
+  margin-top: 14px;
+  padding: 14px 14px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 14px;
+  background: rgba(10, 8, 22, 0.35);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.24);
+}
+
+.myra-store-title {
+  margin: 0 0 6px;
+  font-size: 1.05rem;
+  letter-spacing: -0.01em;
+}
+
+.myra-store-phone {
+  color: rgba(245, 245, 255, 0.8);
+  margin: 0 0 10px;
+}
+
+.myra-store-link {
+  color: rgba(255, 230, 160, 0.95);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 230, 160, 0.35);
+}
+
+.myra-store-link:hover {
+  border-bottom-color: rgba(255, 230, 160, 0.8);
+}
+
+.myra-store-help {
+  color: rgba(245, 245, 255, 0.72);
+  margin: 0 0 10px;
+}
+
+.myra-store-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.myra-store-maprow {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+}
+
+.myra-store-map {
+  width: 100%;
+  height: 220px;
+  border: 0;
+  display: block;
+  filter: saturate(0.95) contrast(1.05);
+}
+
+.myra-link.btn,
+.myra-link.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.myra-media {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 14px;
+  align-items: start;
+}
+
+.myra-media img {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 14px;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+@media (max-width: 520px) {
+  .myra-media {
+    grid-template-columns: 1fr;
+  }
+  .myra-media img {
+    width: 100%;
+    height: 220px;
+  }
+}
+
+/* De-emphasize legacy backgrounds/effects on wine/beer pages */
+#winewater,
+#beerwater,
+canvas#room-canvas {
+  display: none !important;
+}

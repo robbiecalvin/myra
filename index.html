@@ -1,0 +1,3157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Myra</title>
+    <link rel="stylesheet" href="/css/myra-app.css" />
+  </head>
+  <body>
+    <div class="wrap" style="max-width: 940px; margin: 60px auto 80px; padding: 0 22px;">
+      <div class="hero" style="text-align: center; margin-bottom: 26px;">
+        <h1 style="margin: 0; font-size: clamp(2.2rem, 5vw, 3.1rem); letter-spacing: -0.02em;">Myra</h1>
+        <p style="margin: 12px auto 0; max-width: 70ch;">
+          Wine, beer, and spirits recommendations from your inventory.
+        </p>
+      </div>
+
+      <div id="myra-app">
+        <div class="screen active" id="screen-home">
+          <h2 style="margin: 0 0 12px;">Choose how you want to use Myra</h2>
+          <p style="margin: 0;">
+            Guided mode asks one question at a time. Talk mode lets you speak a full request.
+          </p>
+          <div class="actions" style="margin-top: 18px; display: flex; gap: 12px; flex-wrap: wrap;">
+            <button class="btn btn-primary" id="btnGuided" type="button">Start Myra</button>
+            <button class="btn" id="btnTalk" type="button">Talk to Myra</button>
+            <a class="btn" href="/diagnostics.html">Diagnostics</a>
+          </div>
+          <div id="homeStatus" style="margin-top: 12px; color: rgba(245,245,255,0.7); min-height: 1.2em;"></div>
+        </div>
+
+        <div class="screen" id="screen-step">
+          <h2 id="stepTitle" style="margin: 0 0 12px;"></h2>
+          <div id="stepBody"></div>
+          <div class="actions" style="margin-top: 18px; display: flex; gap: 12px; flex-wrap: wrap;">
+            <button class="btn" id="btnBack" type="button">Back</button>
+            <button class="btn btn-primary" id="btnNext" type="button">Next</button>
+            <button class="btn" id="btnCancel" type="button">Start Over</button>
+          </div>
+          <div id="stepStatus" style="margin-top: 12px; color: rgba(245,245,255,0.7); min-height: 1.2em;"></div>
+        </div>
+
+        <div class="screen" id="screen-results">
+          <h2 style="margin: 0 0 12px;">Myra’s Pick</h2>
+          <div id="results" aria-live="polite"></div>
+          <div class="actions" style="margin-top: 18px; display: flex; gap: 12px; flex-wrap: wrap;">
+            <button class="btn" id="btnResultsStartOver" type="button">Start Over</button>
+            <button class="btn btn-primary" id="btnResultsRefine" type="button">Refine (Voice)</button>
+            <button class="btn" id="btnResultsTalk" type="button">Talk to Myra</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="voice" style="margin: 16px auto 0; display: flex; gap: 12px; align-items: center; justify-content: center; flex-wrap: wrap;">
+        <button class="btn" id="micBtn" type="button" disabled>Mic</button>
+        <div id="micStatus" style="min-height: 1.2em; color: rgba(245,245,255,0.7);" aria-live="polite"></div>
+      </div>
+    </div>
+
+    <script src="/js/myra-voice.js"></script>
+    <script src="/js/myra-nlu.js"></script>
+    <script>
+      (function () {
+        "use strict";
+
+        const els = {
+          home: document.getElementById("screen-home"),
+          step: document.getElementById("screen-step"),
+          results: document.getElementById("screen-results"),
+          resultsBox: document.getElementById("results"),
+          homeStatus: document.getElementById("homeStatus"),
+          stepTitle: document.getElementById("stepTitle"),
+          stepBody: document.getElementById("stepBody"),
+          stepStatus: document.getElementById("stepStatus"),
+
+          btnGuided: document.getElementById("btnGuided"),
+          btnTalk: document.getElementById("btnTalk"),
+          btnBack: document.getElementById("btnBack"),
+          btnNext: document.getElementById("btnNext"),
+          btnCancel: document.getElementById("btnCancel"),
+          btnResultsStartOver: document.getElementById("btnResultsStartOver"),
+          btnResultsRefine: document.getElementById("btnResultsRefine"),
+          btnResultsTalk: document.getElementById("btnResultsTalk"),
+
+          micBtn: document.getElementById("micBtn"),
+          micStatus: document.getElementById("micStatus"),
+        };
+
+        const state = {
+          guided: false,
+          interaction: null, // "guided" | "talk" | "manual"
+          lastUtterance: null, // talk mode transcript (editable)
+          lastPick: null, // { mode, name }
+          mode: null, // "wine" | "beer" | "bar"
+          stepIndex: 0,
+          stepAnswers: { wine: {}, beer: {}, bar: {} }, // guided transcripts per step key
+          wine: {},
+          beer: {},
+          bar: {},
+        };
+
+        const data = {
+          wordmap: null,
+          images: null,
+          wineInv: null,
+          beerInv: null,
+          barInv: null,
+        };
+
+        const STORE = {
+          name: "Cross Town Liquor Store",
+          phoneDisplay: "(604) 683-8438",
+          phoneTel: "+16046838438",
+          mapsQuery: "My Liquor Store: Crosstown Vancouver BC",
+        };
+
+        const PRICE_BANDS = {
+          wine: {
+            budget: { min: 0, max: 20 },
+            mid: { min: 20, max: 35 },
+            premium: { min: 35, max: 60 },
+            highend: { min: 60, max: 300 },
+          },
+          bar: {
+            budget: { min: 0, max: 25 },
+            mid: { min: 25, max: 45 },
+            premium: { min: 45, max: 80 },
+            highend: { min: 80, max: 300 },
+          },
+        };
+
+        function show(which) {
+          [els.home, els.step, els.results].forEach(el => el.classList.remove("active"));
+          which.classList.add("active");
+        }
+
+        function safeText(v) {
+          return String(v || "").trim();
+        }
+
+        function normalize(s) {
+          return window.MyraNlu ? window.MyraNlu.normalize(s) : safeText(s).toLowerCase();
+        }
+
+        function mergeUnique(list, add) {
+          const out = Array.isArray(list) ? [...list] : [];
+          (Array.isArray(add) ? add : []).forEach(v => {
+            const s = safeText(v);
+            if (!s) return;
+            if (!out.includes(s)) out.push(s);
+          });
+          return out;
+        }
+
+        function mergeExcludes(into, patch) {
+          if (!patch || typeof patch !== "object") return;
+          if (!into.excludes || typeof into.excludes !== "object") into.excludes = {};
+          for (const [k, v] of Object.entries(patch)) {
+            into.excludes[k] = mergeUnique(into.excludes[k], v);
+          }
+        }
+
+        function applyStatePatch(mode, patch) {
+          if (!patch || typeof patch !== "object") return;
+          if (mode === "wine") {
+            if (patch.excludes) mergeExcludes(state.wine, patch.excludes);
+            const { excludes, ...rest } = patch;
+            Object.assign(state.wine, rest);
+            return;
+          }
+          if (mode === "beer") {
+            if (patch.excludes) mergeExcludes(state.beer, patch.excludes);
+            const { excludes, ...rest } = patch;
+            Object.assign(state.beer, rest);
+            return;
+          }
+          if (mode === "bar") {
+            if (patch.excludes) mergeExcludes(state.bar, patch.excludes);
+            const { excludes, ...rest } = patch;
+            Object.assign(state.bar, rest);
+          }
+        }
+
+        async function loadAll() {
+          async function fetchJsonWithCache(url, cacheKey) {
+            try {
+              const r = await fetch(url, { cache: "no-cache" });
+              if (!r.ok) throw new Error(`fetch_failed_${r.status}`);
+              const j = await r.json();
+              try {
+                localStorage.setItem(cacheKey, JSON.stringify(j));
+              } catch {
+                // ignore storage quota failures
+              }
+              return { json: j, fromCache: false };
+            } catch (err) {
+              const cached = (() => {
+                try {
+                  const raw = localStorage.getItem(cacheKey);
+                  return raw ? JSON.parse(raw) : null;
+                } catch {
+                  return null;
+                }
+              })();
+              if (cached != null) {
+                return { json: cached, fromCache: true };
+              }
+              throw err;
+            }
+          }
+
+          const notes = [];
+          if (!data.wordmap) {
+            const { json, fromCache } = await fetchJsonWithCache("/data/myra-wordmap.json", "myra:cache:wordmap");
+            data.wordmap = json;
+            if (fromCache) notes.push("wordmap");
+          }
+          if (!data.images) {
+            // Optional image map; safe default is empty.
+            try {
+              const { json } = await fetchJsonWithCache("/data/myra-images.json", "myra:cache:images");
+              data.images = json && typeof json === "object" ? json : {};
+            } catch {
+              data.images = {};
+            }
+          }
+          if (!data.wineInv) {
+            const { json, fromCache } = await fetchJsonWithCache("/data/inventory.json", "myra:cache:wineInv");
+            data.wineInv = json;
+            prepWineInventory(data.wineInv);
+            if (fromCache) notes.push("wine inventory");
+          }
+          if (!data.beerInv) {
+            const { json, fromCache } = await fetchJsonWithCache("/data/beerinventory2.json", "myra:cache:beerInv");
+            data.beerInv = json;
+            prepBeerInventory(data.beerInv);
+            if (fromCache) notes.push("beer inventory");
+          }
+          if (!data.barInv) {
+            const { json, fromCache } = await fetchJsonWithCache("/data/hardbarinventory.json", "myra:cache:barInv");
+            data.barInv = json;
+            prepBarInventory(data.barInv);
+            if (fromCache) notes.push("spirits inventory");
+          }
+          if (notes.length) {
+            els.homeStatus.textContent = `Using cached data (${notes.join(", ")}).`;
+          }
+        }
+
+        function splitPipe(raw) {
+          const s = safeText(raw);
+          if (!s || s === "N/A" || s.toLowerCase() === "none") return [];
+          return s
+            .split("|")
+            .map(v => safeText(v))
+            .filter(Boolean);
+        }
+
+        function prepWineInventory(inv) {
+          if (!Array.isArray(inv)) return;
+          const byCategory = new Map();
+          const byCountry = new Map();
+          const byTier = new Map();
+          inv.forEach(w => {
+            const rm = w.recommendation_matches || {};
+            const stock = safeText(rm.stock_status).toLowerCase();
+            w._myra = {
+              rm,
+              stock,
+              priceNum: parseMoney(w.price),
+              flavors: [rm.flavor_primary, rm.flavor_secondary, rm.flavor_tertiary].map(safeText).filter(Boolean),
+              foodsByType: {
+                meats: splitPipe(rm.meats),
+                cheese: splitPipe(rm.cheese),
+                pasta: splitPipe(rm.pasta),
+                specialty: splitPipe(rm.specialty),
+              },
+            };
+
+            const push = (m, k) => {
+              const key = safeText(k);
+              if (!key) return;
+              if (!m.has(key)) m.set(key, []);
+              m.get(key).push(w);
+            };
+            const canonTier = v => {
+              const t = normalize(v);
+              if (!t) return "";
+              if (/\b(budget|cheap|value|affordable|wallet)\b/.test(t)) return "budget";
+              if (/\b(mid|middle|moderate|reasonable|standard)\b/.test(t)) return "mid";
+              if (/\b(premium|nice|better|step up|upgrade|treat)\b/.test(t)) return "premium";
+              if (/\b(high end|highend|top shelf|luxury|splurge|no budget)\b/.test(t)) return "highend";
+              return "";
+            };
+            push(byCategory, rm.category);
+            push(byCountry, rm.country);
+            push(byTier, rm.price_tier);
+            const ct = canonTier(rm.price_tier);
+            if (ct) push(byTier, ct);
+          });
+          data.wineIdx = { byCategory, byCountry, byTier };
+        }
+
+        function prepBeerInventory(inv) {
+          if (!Array.isArray(inv)) return;
+          inv.forEach(b => {
+            const abv = (() => {
+              const raw = safeText(b.abv_percent);
+              const m = raw.match(/(\d+(\.\d+)?)/);
+              if (!m) return null;
+              let n = Number(m[1]);
+              if (!Number.isFinite(n)) return null;
+              // Inventory sometimes stores ABV as a fraction (0.05 = 5%).
+              if (n > 0 && n <= 1) n = n * 100;
+              return n;
+            })();
+            b._myra = {
+              abv: Number.isFinite(abv) ? abv : null,
+              hops: splitPipe(b.hops),
+              tags: splitPipe(b.classification_tags).map(v => v.toLowerCase()),
+              foods: splitPipe(b.foods_best_with).map(v => normalize(v)),
+              can: b.can === "✅" || b.can === true,
+              bottle: b.bottle === "✅" || b.bottle === true,
+            };
+          });
+        }
+
+        function prepBarInventory(inv) {
+          if (!Array.isArray(inv)) return;
+          inv.forEach(r => {
+            const abv = toNum(r.abv, null);
+            r._myra = {
+              abv: Number.isFinite(abv) ? abv : null,
+              sweet: String(r.sweet || "").trim() === "1",
+              bitter: String(r.bitter || "").trim() === "1",
+              creamy: String(r.creamy || "").trim() === "1",
+            };
+          });
+        }
+
+        function uniq(list) {
+          const set = new Set();
+          list.forEach(v => {
+            const s = safeText(v);
+            if (s && s !== "N/A") set.add(s);
+          });
+          return [...set].sort((a, b) => a.localeCompare(b));
+        }
+
+        function wineM(w, field) {
+          const rm = w?._myra?.rm || w.recommendation_matches;
+          return rm && rm[field] ? rm[field] : "";
+        }
+
+        function wineUnique(field) {
+          return uniq(data.wineInv.map(w => wineM(w, field)));
+        }
+
+        function wineUniquePipe(field) {
+          const out = [];
+          data.wineInv.forEach(w => {
+            const raw = wineM(w, field);
+            if (!raw || raw === "N/A") return;
+            String(raw)
+              .split("|")
+              .map(v => v.trim())
+              .filter(Boolean)
+              .forEach(v => out.push(v));
+          });
+          return uniq(out);
+        }
+
+        function beerUnique(field) {
+          const out = [];
+          data.beerInv.forEach(b => {
+            const raw = b[field];
+            if (!raw) return;
+            if (field === "classification_tags" || field === "foods_best_with" || field === "hops") {
+              String(raw)
+                .split("|")
+                .map(v => v.trim())
+                .filter(Boolean)
+                .forEach(v => out.push(v));
+              return;
+            }
+            out.push(String(raw).trim());
+          });
+          return uniq(out);
+        }
+
+        function barUnique(field) {
+          return uniq(data.barInv.map(r => r[field]));
+        }
+
+        function clamp(n, min, max) {
+          return Math.max(min, Math.min(max, n));
+        }
+
+        function toNum(v, fallback) {
+          const n = Number(v);
+          return Number.isFinite(n) ? n : fallback;
+        }
+
+        function applyTierBands(kind, prefs) {
+          if (!prefs || typeof prefs !== "object") return;
+          const canonicalTier = v => {
+            const t = normalize(v);
+            if (!t) return "";
+            if (/\b(budget|cheap|value|affordable|wallet)\b/.test(t)) return "budget";
+            if (/\b(mid|middle|moderate|reasonable|standard)\b/.test(t)) return "mid";
+            if (/\b(premium|nice|better|step up|upgrade|treat)\b/.test(t)) return "premium";
+            if (/\b(high end|highend|top shelf|luxury|splurge|no budget)\b/.test(t)) return "highend";
+            return t;
+          };
+
+          const tier = canonicalTier(prefs.price);
+          if (!tier) return;
+          if (prefs.priceMin != null || prefs.priceMax != null || prefs.priceTarget != null) return;
+          const bands = PRICE_BANDS[kind];
+          if (!bands || !bands[tier]) return;
+          prefs.priceMin = bands[tier].min;
+          prefs.priceMax = bands[tier].max;
+        }
+
+        function confidenceLabel(conf) {
+          const c = toNum(conf, 0.0);
+          if (c >= 0.85) return "High confidence";
+          if (c >= 0.7) return "Good confidence";
+          if (c >= 0.55) return "Low confidence";
+          return "Very low confidence";
+        }
+
+        function wineBodyIndex(w) {
+          const b = String(wineM(w, "style_body") || "").toLowerCase();
+          if (b === "light") return 2;
+          if (b === "medium") return 3;
+          if (b === "full") return 5;
+          return 3;
+        }
+
+        function wineDrynessIndex(w) {
+          const tannin = String(wineM(w, "style_tannin") || "").toLowerCase();
+          const acid = String(wineM(w, "style_acidity") || "").toLowerCase();
+          const idx = v => (v === "low" ? 2 : v === "medium" ? 3 : v === "high" ? 4 : 3);
+          return clamp(Math.round((idx(tannin) + idx(acid)) / 2), 1, 5);
+        }
+
+        function scoreWine(w) {
+          const s = state.wine;
+          let sc = 0;
+          if (s.category && wineM(w, "category") === s.category) sc += 5;
+          if (s.grape && wineM(w, "grape_primary") === s.grape) sc += 4;
+          if (s.occasion && wineM(w, "buyer_event") === s.occasion) sc += 3;
+          if (s.foodChoice && s.foodType) {
+            const raw = String(wineM(w, s.foodType) || "");
+            const ok = raw
+              .split("|")
+              .map(v => v.trim())
+              .filter(Boolean)
+              .includes(s.foodChoice);
+            if (ok) sc += 4;
+          }
+          if (Array.isArray(s.flavors)) {
+            s.flavors.forEach(f => {
+              if (wineM(w, "flavor_primary") === f) sc += 3;
+              if (wineM(w, "flavor_secondary") === f) sc += 2;
+              if (wineM(w, "flavor_tertiary") === f) sc += 1;
+            });
+          }
+          if (s.acidity && String(wineM(w, "style_acidity") || "").toLowerCase() === s.acidity) sc += 2;
+          if (s.tannin && String(wineM(w, "style_tannin") || "").toLowerCase() === s.tannin) sc += 2;
+          if (s.country && wineM(w, "country") === s.country) sc += 2;
+          if (s.price && wineM(w, "price_tier") === s.price) sc += 2;
+
+          const prefBody = toNum(s.body, 3);
+          const prefSweet = toNum(s.sweetness, 3);
+          sc += Math.max(0, 3 - Math.abs(prefBody - wineBodyIndex(w))) * 1.25;
+          sc += Math.max(0, 3 - Math.abs(prefSweet - wineDrynessIndex(w))) * 0.9;
+          return sc;
+        }
+
+        function parseMoney(value) {
+          const raw = safeText(value);
+          if (!raw) return null;
+          const m = raw.match(/(\d+(\.\d+)?)/);
+          if (!m) return null;
+          const n = Number(m[1]);
+          return Number.isFinite(n) ? n : null;
+        }
+
+        function wineStrictFilter(w) {
+          const s = state.wine;
+          const rm = w?._myra?.rm || w.recommendation_matches || {};
+
+          const canonTier = v => {
+            const t = normalize(v);
+            if (!t) return "";
+            if (/\b(budget|cheap|value|affordable|wallet)\b/.test(t)) return "budget";
+            if (/\b(mid|middle|moderate|reasonable|standard)\b/.test(t)) return "mid";
+            if (/\b(premium|nice|better|step up|upgrade|treat)\b/.test(t)) return "premium";
+            if (/\b(high end|highend|top shelf|luxury|splurge|no budget)\b/.test(t)) return "highend";
+            return t;
+          };
+
+          if (s.category && rm.category !== s.category) return false;
+          if (s.grape && rm.grape_primary !== s.grape) return false;
+          if (s.occasion && rm.buyer_event !== s.occasion) return false;
+          if (s.country && rm.country !== s.country) return false;
+          if (s.price && rm.price_tier && canonTier(rm.price_tier) !== canonTier(s.price)) return false;
+          if (s.acidity && String(rm.style_acidity || "").toLowerCase() !== s.acidity) return false;
+          if (s.tannin && String(rm.style_tannin || "").toLowerCase() !== s.tannin) return false;
+          if (s.excludes?.names?.includes(safeText(w.name))) return false;
+          if (s.excludes?.countries?.includes(safeText(rm.country))) return false;
+          if (s.excludes?.grapes?.includes(safeText(rm.grape_primary))) return false;
+          if (s.excludes?.categories?.includes(safeText(rm.category))) return false;
+
+          if (s.foodChoice && s.foodType) {
+            const foods = w?._myra?.foodsByType?.[s.foodType] || splitPipe(rm[s.foodType]);
+            const ok = foods.includes(s.foodChoice);
+            if (!ok) return false;
+          }
+
+          if (Array.isArray(s.flavors) && s.flavors.length) {
+            const vals = w?._myra?.flavors || [rm.flavor_primary, rm.flavor_secondary, rm.flavor_tertiary].filter(Boolean);
+            const wantAny = s.flavors.some(f => vals.includes(f));
+            if (!wantAny) return false;
+          }
+          if (Array.isArray(s.excludes?.flavors) && s.excludes.flavors.length) {
+            const vals = w?._myra?.flavors || [rm.flavor_primary, rm.flavor_secondary, rm.flavor_tertiary].filter(Boolean);
+            const hasExcluded = s.excludes.flavors.some(f => vals.includes(f));
+            if (hasExcluded) return false;
+          }
+
+          const p = w?._myra?.priceNum != null ? w._myra.priceNum : parseMoney(w.price);
+          if (s.priceMax != null && p != null && p > s.priceMax) return false;
+          if (s.priceMin != null && p != null && p < s.priceMin) return false;
+          if (s.priceTarget != null && p != null) {
+            const target = toNum(s.priceTarget, null);
+            if (target != null) {
+              // Treat "exactly/around $X" as a tight-ish band to avoid zero-result strict filters.
+              const tol = Math.max(5, Math.round(target * 0.12)); // $5 or ~12%
+              if (Math.abs(p - target) > tol) return false;
+            }
+          }
+
+          return true;
+        }
+
+        function wineAvailabilityText(w) {
+          const rm = w?._myra?.rm || w.recommendation_matches || {};
+          const ss = String(rm.stock_status || "").trim().toLowerCase();
+          if (!ss) return null;
+          if (ss === "in stock") return "In stock at Cross Town Liquor Store";
+          if (ss === "out of stock") return "Out of stock at Cross Town Liquor Store";
+          if (ss === "low in stock") return "Low in stock at Cross Town Liquor Store";
+          return `${rm.stock_status} at Cross Town Liquor Store`;
+        }
+
+        function wineIsInStock(w) {
+          const rm = w?._myra?.rm || w?.recommendation_matches || {};
+          const ss = String(rm.stock_status || "").trim().toLowerCase();
+          if (!ss) return null;
+          if (ss === "in stock" || ss === "low in stock") return true;
+          if (ss === "out of stock") return false;
+          return null;
+        }
+
+        function genericAvailabilityText(obj) {
+          if (!obj || typeof obj !== "object") return null;
+          if (obj.recommendation_matches && obj.recommendation_matches.stock_status) return wineAvailabilityText(obj);
+          const v = obj.in_stock ?? obj.inStock ?? obj.stock_status ?? obj.stockStatus ?? null;
+          if (v == null) return null;
+          const s = String(v).trim().toLowerCase();
+          if (!s || s === "none" || s === "n/a") return null;
+          if (s === "1" || s === "true" || s === "✅" || s === "in stock") return "In stock at Cross Town Liquor Store";
+          if (s === "0" || s === "false" || s === "❌" || s === "out of stock") return "Out of stock at Cross Town Liquor Store";
+          return `${v} at Cross Town Liquor Store`;
+        }
+
+        function createStoreBox({ inStock } = {}) {
+          const wrap = document.createElement("div");
+          wrap.className = "myra-store";
+
+          const title = document.createElement("h4");
+          title.className = "myra-store-title";
+          title.textContent = STORE.name;
+
+          const phone = document.createElement("div");
+          phone.className = "myra-store-phone";
+          phone.innerHTML = `Phone: <a class="myra-store-link" href="tel:${STORE.phoneTel}">${STORE.phoneDisplay}</a>`;
+
+          const mapRow = document.createElement("div");
+          mapRow.className = "myra-store-maprow";
+          const iframe = document.createElement("iframe");
+          iframe.className = "myra-store-map";
+          iframe.title = `${STORE.name} map`;
+          iframe.setAttribute("loading", "lazy");
+          iframe.setAttribute("referrerpolicy", "no-referrer-when-downgrade");
+          iframe.src = `https://www.google.com/maps?q=${encodeURIComponent(STORE.mapsQuery)}&output=embed`;
+          mapRow.appendChild(iframe);
+
+          const actions = document.createElement("div");
+          actions.className = "myra-store-actions";
+
+          const btnCall = document.createElement("a");
+          btnCall.className = inStock === true ? "btn btn-primary" : "btn";
+          btnCall.href = `tel:${STORE.phoneTel}`;
+          btnCall.textContent = inStock === true ? "Call to Hold" : "Call Store";
+
+          const btnView = document.createElement("a");
+          btnView.className = "btn";
+          btnView.target = "_blank";
+          btnView.rel = "noopener noreferrer";
+          btnView.href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(STORE.mapsQuery)}`;
+          btnView.textContent = "View Map";
+
+          const btnDir = document.createElement("a");
+          btnDir.className = inStock === true ? "btn" : "btn btn-primary";
+          btnDir.target = "_blank";
+          btnDir.rel = "noopener noreferrer";
+          btnDir.href = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(STORE.mapsQuery)}`;
+          btnDir.textContent = "Directions";
+
+          const btnDirFromMe = document.createElement("button");
+          btnDirFromMe.className = "btn";
+          btnDirFromMe.type = "button";
+          btnDirFromMe.textContent = "Directions From Me";
+          btnDirFromMe.addEventListener("click", () => {
+            if (!navigator.geolocation) {
+              window.open(btnDir.href, "_blank", "noopener,noreferrer");
+              return;
+            }
+            btnDirFromMe.disabled = true;
+            navigator.geolocation.getCurrentPosition(
+              pos => {
+                const { latitude, longitude } = pos.coords || {};
+                const origin = Number.isFinite(latitude) && Number.isFinite(longitude) ? `${latitude},${longitude}` : "";
+                const url = origin
+                  ? `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(origin)}&destination=${encodeURIComponent(STORE.mapsQuery)}`
+                  : btnDir.href;
+                window.open(url, "_blank", "noopener,noreferrer");
+                btnDirFromMe.disabled = false;
+              },
+              () => {
+                window.open(btnDir.href, "_blank", "noopener,noreferrer");
+                btnDirFromMe.disabled = false;
+              },
+              { enableHighAccuracy: false, timeout: 8000, maximumAge: 600000 }
+            );
+          });
+
+          actions.appendChild(btnCall);
+          actions.appendChild(btnDir);
+          actions.appendChild(btnDirFromMe);
+          actions.appendChild(btnView);
+
+          wrap.appendChild(title);
+          wrap.appendChild(phone);
+
+          const help = document.createElement("div");
+          help.className = "myra-store-help";
+          if (inStock === true) {
+            help.textContent = "In stock: want to call and put it on hold?";
+          } else if (inStock === false) {
+            help.textContent = "Out of stock: you can still call to check restocks or alternatives.";
+          } else {
+            help.textContent = "Need directions from where you are?";
+          }
+          wrap.appendChild(help);
+          wrap.appendChild(actions);
+          wrap.appendChild(mapRow);
+          return wrap;
+        }
+
+        function parseBeerAbvPercent(b) {
+          const raw = String(b.abv_percent || "").trim();
+          const m = raw.match(/(\d+(\.\d+)?)/);
+          if (!m) return null;
+          let n = Number(m[1]);
+          if (!Number.isFinite(n)) return null;
+          if (n > 0 && n <= 1) n = n * 100;
+          return n;
+        }
+
+        function beerAbvMatches(b) {
+          const s = state.beer;
+          const abv = b?._myra?.abv != null ? b._myra.abv : parseBeerAbvPercent(b);
+          if (abv == null) return true;
+          switch (s.abvRange) {
+            case "low":
+              return abv < 4.5;
+            case "standard":
+              return abv >= 4.5 && abv <= 6.0;
+            case "strong":
+              return abv > 6.0 && abv <= 7.5;
+            case "dangerous":
+              return abv >= 8.0;
+            case "any":
+            default:
+              return true;
+          }
+        }
+
+        function truthyMark(v) {
+          return v === "✅" || v === true || v === 1 || v === "1";
+        }
+
+        function beerDirectionMatches(b, direction) {
+          const t = b?._myra?.tags ? b._myra.tags.join(" ") : String(b.classification_tags || "").toLowerCase();
+          const want = String(direction || "").toLowerCase();
+          if (!want) return true;
+          if (want.includes("crisp")) return t.includes("crisp") || t.includes("clean");
+          if (want.includes("hoppy")) return t.includes("hop") || t.includes("bitter");
+          if (want.includes("juicy")) return t.includes("hazy") || t.includes("juicy");
+          if (want.includes("malty")) return t.includes("malt") || t.includes("malty") || t.includes("caramel");
+          if (want.includes("roasty")) return t.includes("roast") || t.includes("roasty") || t.includes("dark");
+          if (want.includes("refreshing")) return t.includes("refresh") || t.includes("session");
+          if (want.includes("rich")) return t.includes("rich") || t.includes("full");
+          return true;
+        }
+
+        function beerStrictFilter(b) {
+          const s = state.beer;
+          if (!beerAbvMatches(b)) return false;
+          if (s.category && safeText(b.category) !== s.category) return false;
+          if (s.style && safeText(b.style) !== s.style) return false;
+          if (s.brewery && safeText(b.brewery) !== s.brewery) return false;
+          if (s.excludes?.names?.includes(safeText(b.name))) return false;
+          if (s.excludes?.categories?.includes(safeText(b.category))) return false;
+          if (s.excludes?.styles?.includes(safeText(b.style))) return false;
+          if (s.excludes?.breweries?.includes(safeText(b.brewery))) return false;
+
+          if (s.hop) {
+            const hops = b?._myra?.hops || splitPipe(b.hops);
+            if (!hops.includes(s.hop)) return false;
+          }
+
+          if (s.yeast && safeText(b.yeast) !== s.yeast) return false;
+
+          if (s.tag) {
+            const tags = b?._myra?.tags || splitPipe(b.classification_tags).map(v => v.toLowerCase());
+            if (!tags.includes(String(s.tag).toLowerCase())) return false;
+          }
+
+          if (s.container === "can" && !(b?._myra?.can ?? truthyMark(b.can))) return false;
+          if (s.container === "bottle" && !(b?._myra?.bottle ?? truthyMark(b.bottle))) return false;
+          if (s.package && !truthyMark(b[s.package])) return false;
+
+          if (s.withFood === "yes" && s.foodToken) {
+            const want = normalize(s.foodToken);
+            const beerFoods = b?._myra?.foods || splitPipe(b.foods_best_with).map(v => normalize(v));
+            if (!beerFoods.includes(want)) return false;
+          }
+
+          if (s.flavorDirection && !beerDirectionMatches(b, s.flavorDirection)) return false;
+          return true;
+        }
+
+        function scoreBeer(b) {
+          const s = state.beer;
+          let sc = 0;
+          if (s.category && b.category === s.category) sc += 5;
+          if (s.style && b.style === s.style) sc += 4;
+          if (s.occasion && String(b.classification_tags || "").includes(s.occasion)) sc += 3;
+          if (s.brewery && String(b.brewery || "") === s.brewery) sc += 3;
+          if (s.hop) {
+            const hops = String(b.hops || "")
+              .split("|")
+              .map(v => v.trim())
+              .filter(Boolean);
+            if (hops.includes(s.hop)) sc += 2;
+          }
+          if (s.yeast && String(b.yeast || "") === s.yeast) sc += 2;
+          if (s.tag) {
+            const tags = String(b.classification_tags || "")
+              .split("|")
+              .map(v => v.trim())
+              .filter(Boolean);
+            if (tags.includes(s.tag)) sc += 2;
+          }
+          if (s.container === "can" && (b.can === "✅" || b.can === true)) sc += 2;
+          if (s.container === "bottle" && (b.bottle === "✅" || b.bottle === true)) sc += 2;
+          if (s.package) {
+            const v = b[s.package];
+            if (v === "✅" || v === true) sc += 2;
+          }
+          if (s.withFood === "yes" && s.foodToken) {
+            const want = normalize(s.foodToken);
+            const beerFoods = String(b.foods_best_with || "")
+              .split("|")
+              .map(v => normalize(v))
+              .filter(Boolean);
+            if (want && beerFoods.includes(want)) sc += 4;
+          }
+          if (s.flavorDirection) {
+            if (beerDirectionMatches(b, s.flavorDirection)) sc += 3;
+          }
+          return sc;
+        }
+
+        function barStrictFilter(r) {
+          const s = state.bar;
+          if (s.name && safeText(r.name) !== s.name) return false;
+          if (s.spirit && safeText(r.spirit) !== s.spirit) return false;
+          if (s.excludes?.names?.includes(safeText(r.name))) return false;
+          if (s.excludes?.spirits?.includes(safeText(r.spirit))) return false;
+
+          const sweet = r?._myra?.sweet ?? (String(r.sweet || "").trim() === "1");
+          const bitter = r?._myra?.bitter ?? (String(r.bitter || "").trim() === "1");
+          const creamy = r?._myra?.creamy ?? (String(r.creamy || "").trim() === "1");
+          if (s.sweet === true && !sweet) return false;
+          if (s.bitter === true && !bitter) return false;
+          if (s.creamy === true && !creamy) return false;
+
+          const abv = r?._myra?.abv != null ? r._myra.abv : Number(r.abv);
+          if (s.proofPref === "high" && Number.isFinite(abv) && abv < 45) return false;
+          if (s.proofPref === "low" && Number.isFinite(abv) && abv > 35) return false;
+          return true;
+        }
+
+        function scoreBar(r) {
+          const s = state.bar;
+          let sc = 0;
+          if (s.spirit && safeText(r.spirit) === s.spirit) sc += 6;
+          if (s.name && safeText(r.name) === s.name) sc += 10;
+          const sweet = r?._myra?.sweet ?? (String(r.sweet || "").trim() === "1");
+          const bitter = r?._myra?.bitter ?? (String(r.bitter || "").trim() === "1");
+          const creamy = r?._myra?.creamy ?? (String(r.creamy || "").trim() === "1");
+          if (s.sweet) sc += sweet ? 3 : -1;
+          if (s.bitter) sc += bitter ? 3 : -1;
+          if (s.creamy) sc += creamy ? 3 : -1;
+          const abv = r?._myra?.abv != null ? r._myra.abv : Number(r.abv);
+          if (Number.isFinite(abv)) {
+            const target = s.serve === "shots" ? 45 : 40;
+            const dist = Math.abs(abv - target);
+            sc += clamp(3 - dist / 10, 0, 3);
+            if (s.proofPref === "high" && abv >= 45) sc += 2;
+            if (s.proofPref === "low" && abv <= 35) sc += 2;
+          }
+          return sc;
+        }
+
+        function renderSelect(id, label, options, value) {
+          const wrap = document.createElement("div");
+          const l = document.createElement("label");
+          l.setAttribute("for", id);
+          l.textContent = label;
+          const s = document.createElement("select");
+          s.id = id;
+          const optAny = document.createElement("option");
+          optAny.value = "";
+          optAny.textContent = "Any";
+          s.appendChild(optAny);
+          options.forEach(v => {
+            const o = document.createElement("option");
+            o.value = v;
+            o.textContent = v;
+            s.appendChild(o);
+          });
+          s.value = value || "";
+          wrap.appendChild(l);
+          wrap.appendChild(s);
+          return wrap;
+        }
+
+        function renderModeChooser() {
+          els.stepTitle.textContent = "Are you looking for wine, beer, or spirits?";
+          els.stepBody.innerHTML = "";
+          const row = document.createElement("div");
+          row.style.display = "flex";
+          row.style.flexWrap = "wrap";
+          row.style.gap = "10px";
+          ["wine", "beer", "bar"].forEach(m => {
+            const b = document.createElement("button");
+            b.className = "btn btn-primary";
+            b.type = "button";
+            b.textContent = m === "bar" ? "Spirits" : m[0].toUpperCase() + m.slice(1);
+            b.addEventListener("click", () => {
+              state.mode = m;
+              state.stepIndex = 0;
+              show(els.step);
+              renderStep();
+            });
+            row.appendChild(b);
+          });
+          els.stepBody.appendChild(row);
+          els.btnBack.disabled = true;
+        }
+
+        function stepsForMode(mode) {
+          if (mode === "wine") {
+            return [
+              {
+                key: "category",
+                title: "What kind of wine?",
+                prompt: "What kind of wine? Red, white, rose, or sparkling.",
+                render() {
+                  return renderSelect("wineCategory", "Wine category", wineUnique("category"), state.wine.category);
+                },
+                commit() {
+                  state.wine.category = document.getElementById("wineCategory").value || null;
+                },
+                parseAnswer(a) {
+                  const parsed = window.MyraNlu.parseWine(a, { wordmap: data.wordmap });
+                  if (parsed.statePatch?.category) state.wine.category = parsed.statePatch.category;
+                },
+              },
+              {
+                key: "grape",
+                title: "Any specific type?",
+                prompt: "Any specific grape or type? Or say any.",
+                render() {
+                  // Grapes filtered by category
+                  const grapes = uniq(
+                    data.wineInv
+                      .filter(w => !state.wine.category || wineM(w, "category") === state.wine.category)
+                      .map(w => wineM(w, "grape_primary"))
+                  );
+                  return renderSelect("wineGrape", "Grape / type", grapes, state.wine.grape);
+                },
+                commit() {
+                  state.wine.grape = document.getElementById("wineGrape").value || null;
+                },
+                parseAnswer(a) {
+                  const grapes = uniq(
+                    data.wineInv
+                      .filter(w => !state.wine.category || wineM(w, "category") === state.wine.category)
+                      .map(w => wineM(w, "grape_primary"))
+                  );
+                  const parsed = window.MyraNlu.parseWine(a, { grapes, wordmap: data.wordmap });
+                  if (parsed.statePatch?.grape) state.wine.grape = parsed.statePatch.grape;
+                },
+              },
+              {
+                key: "occasion",
+                title: "What’s the vibe?",
+                prompt: "What's the vibe? And are you eating food?",
+                render() {
+                  const wrap = document.createElement("div");
+                  wrap.appendChild(renderSelect("wineOccasion", "Occasion", wineUnique("buyer_event"), state.wine.occasion));
+                  const l = document.createElement("label");
+                  l.setAttribute("for", "wineWithFood");
+                  l.textContent = "Food involved?";
+                  const s = document.createElement("select");
+                  s.id = "wineWithFood";
+                  [["", "Undecided"], ["yes", "Yes"], ["no", "No"]].forEach(([v, t]) => {
+                    const o = document.createElement("option");
+                    o.value = v;
+                    o.textContent = t;
+                    s.appendChild(o);
+                  });
+                  s.value = state.wine.withFood || "";
+                  wrap.appendChild(l);
+                  wrap.appendChild(s);
+                  return wrap;
+                },
+                commit() {
+                  state.wine.occasion = document.getElementById("wineOccasion").value || null;
+                  state.wine.withFood = document.getElementById("wineWithFood").value || null;
+                },
+                parseAnswer(a) {
+                  const parsed = window.MyraNlu.parseWine(a, { buyerEvents: wineUnique("buyer_event"), wordmap: data.wordmap });
+                  if (parsed.statePatch?.occasion) state.wine.occasion = parsed.statePatch.occasion;
+                  const n = normalize(a);
+                  if (/\b(yes|yeah|yep|eating|with food|pair|pairing)\b/.test(n)) state.wine.withFood = "yes";
+                  if (/\b(no|nope|without food|just wine)\b/.test(n)) state.wine.withFood = "no";
+                },
+              },
+              {
+                key: "food",
+                title: "What’s on the plate?",
+                prompt: "What are you eating? For example steak, sushi, lamb, hard cheese, pasta, thai, mexican.",
+                render() {
+                  const wrap = document.createElement("div");
+                  const typeOpts = ["meats", "cheese", "pasta", "specialty"];
+                  const typeSel = document.createElement("select");
+                  typeSel.id = "wineFoodType";
+                  typeOpts.forEach(t => {
+                    const o = document.createElement("option");
+                    o.value = t;
+                    o.textContent = t;
+                    typeSel.appendChild(o);
+                  });
+                  typeSel.value = state.wine.foodType || "meats";
+
+                  const foodSel = document.createElement("select");
+                  foodSel.id = "wineFoodChoice";
+
+                  function fillFoods() {
+                    foodSel.innerHTML = `<option value=\"\">Choose</option>`;
+                    const list = wineUniquePipe(typeSel.value);
+                    list.forEach(v => {
+                      const o = document.createElement("option");
+                      o.value = v;
+                      o.textContent = v;
+                      foodSel.appendChild(o);
+                    });
+                    foodSel.value = state.wine.foodChoice || "";
+                  }
+
+                  const l1 = document.createElement("label");
+                  l1.textContent = "Food type";
+                  wrap.appendChild(l1);
+                  wrap.appendChild(typeSel);
+                  const l2 = document.createElement("label");
+                  l2.textContent = "Dish";
+                  wrap.appendChild(l2);
+                  wrap.appendChild(foodSel);
+
+                  typeSel.addEventListener("change", fillFoods);
+                  fillFoods();
+                  return wrap;
+                },
+                commit() {
+                  if (state.wine.withFood !== "yes") {
+                    state.wine.foodType = null;
+                    state.wine.foodChoice = null;
+                    return;
+                  }
+                  state.wine.foodType = document.getElementById("wineFoodType").value || null;
+                  state.wine.foodChoice = document.getElementById("wineFoodChoice").value || null;
+                },
+                parseAnswer(a) {
+                  if (state.wine.withFood !== "yes") return;
+                  const foodsByType = {};
+                  ["meats", "cheese", "pasta", "specialty"].forEach(t => (foodsByType[t] = wineUniquePipe(t)));
+                  const parsed = window.MyraNlu.parseWine(a, { foodsByType, wordmap: data.wordmap });
+                  if (parsed.statePatch?.foodType) state.wine.foodType = parsed.statePatch.foodType;
+                  if (parsed.statePatch?.foodChoice) state.wine.foodChoice = parsed.statePatch.foodChoice;
+                },
+              },
+              {
+                key: "sliders",
+                title: "Dryness and body",
+                prompt: "Do you want it dry or sweet, and light, medium, or full bodied?",
+                render() {
+                  const wrap = document.createElement("div");
+                  const l1 = document.createElement("label");
+                  l1.textContent = "Dry ↔ Sweet";
+                  const r1 = document.createElement("input");
+                  r1.type = "range";
+                  r1.min = "1";
+                  r1.max = "5";
+                  r1.value = String(state.wine.sweetness || 3);
+                  r1.id = "wineSweet";
+
+                  const l2 = document.createElement("label");
+                  l2.textContent = "Light ↔ Full Body";
+                  const r2 = document.createElement("input");
+                  r2.type = "range";
+                  r2.min = "1";
+                  r2.max = "5";
+                  r2.value = String(state.wine.body || 3);
+                  r2.id = "wineBody";
+
+                  wrap.appendChild(l1);
+                  wrap.appendChild(r1);
+                  wrap.appendChild(l2);
+                  wrap.appendChild(r2);
+                  return wrap;
+                },
+                commit() {
+                  state.wine.sweetness = toNum(document.getElementById("wineSweet").value, 3);
+                  state.wine.body = toNum(document.getElementById("wineBody").value, 3);
+                },
+                parseAnswer(a) {
+                  const parsed = window.MyraNlu.parseWine(a, { wordmap: data.wordmap });
+                  if (parsed.statePatch?.sweetness) state.wine.sweetness = parsed.statePatch.sweetness;
+                  if (parsed.statePatch?.body) state.wine.body = parsed.statePatch.body;
+                  if (parsed.statePatch?.acidity) state.wine.acidity = parsed.statePatch.acidity;
+                  if (parsed.statePatch?.tannin) state.wine.tannin = parsed.statePatch.tannin;
+                },
+              },
+              {
+                key: "flavors",
+                title: "Flavors (optional)",
+                prompt: "Name up to three flavors you like. Or say skip.",
+                render() {
+                  const wrap = document.createElement("div");
+                  const flavors = uniq(
+                    wineUnique("flavor_primary").concat(wineUnique("flavor_secondary")).concat(wineUnique("flavor_tertiary"))
+                  );
+                  const selected = Array.isArray(state.wine.flavors) ? state.wine.flavors : [];
+                  const box = document.createElement("div");
+                  box.id = "wineFlavorBox";
+                  box.style.display = "grid";
+                  box.style.gridTemplateColumns = "repeat(auto-fit, minmax(180px, 1fr))";
+                  box.style.gap = "10px";
+                  flavors.forEach(f => {
+                    const label = document.createElement("label");
+                    label.className = "pill";
+                    const input = document.createElement("input");
+                    input.type = "checkbox";
+                    input.value = f;
+                    input.checked = selected.includes(f);
+                    label.appendChild(input);
+                    label.appendChild(document.createTextNode(" " + f));
+                    box.appendChild(label);
+                  });
+                  box.addEventListener("change", e => {
+                    const checked = box.querySelectorAll("input:checked");
+                    if (checked.length <= 3) return;
+                    e.target.checked = false;
+                  });
+                  wrap.appendChild(box);
+                  return wrap;
+                },
+                commit() {
+                  const box = document.getElementById("wineFlavorBox");
+                  if (!box) return;
+                  state.wine.flavors = [...box.querySelectorAll("input:checked")].map(i => i.value).slice(0, 3);
+                },
+                parseAnswer(a) {
+                  const flavors = uniq(
+                    wineUnique("flavor_primary").concat(wineUnique("flavor_secondary")).concat(wineUnique("flavor_tertiary"))
+                  );
+                  const parsed = window.MyraNlu.parseWine(a, { flavors, wordmap: data.wordmap });
+                  if (Array.isArray(parsed.statePatch?.flavors)) state.wine.flavors = parsed.statePatch.flavors.slice(0, 3);
+                },
+              },
+              {
+                key: "region",
+                title: "Region and price",
+                prompt: "Any country or price tier? For example Italy and mid range.",
+                render() {
+                  const wrap = document.createElement("div");
+                  wrap.appendChild(renderSelect("wineCountry", "Country", wineUnique("country"), state.wine.country));
+                  wrap.appendChild(renderSelect("winePrice", "Price tier", wineUnique("price_tier"), state.wine.price));
+                  return wrap;
+                },
+                commit() {
+                  state.wine.country = document.getElementById("wineCountry").value || null;
+                  state.wine.price = document.getElementById("winePrice").value || null;
+                },
+                parseAnswer(a) {
+                  const parsed = window.MyraNlu.parseWine(a, { countries: wineUnique("country"), wordmap: data.wordmap });
+                  if (parsed.statePatch?.country) state.wine.country = parsed.statePatch.country;
+                  if (parsed.statePatch?.price) state.wine.price = parsed.statePatch.price;
+                },
+              },
+              {
+                key: "avoid",
+                title: "Anything to avoid?",
+                prompt: "Anything you want to avoid? For example not France, no Chardonnay, or no oak. Or say no.",
+                render() {
+                  const wrap = document.createElement("div");
+                  const l = document.createElement("label");
+                  l.textContent = "Avoid (optional)";
+                  const i = document.createElement("input");
+                  i.type = "text";
+                  i.id = "wineAvoid";
+                  i.className = "myra-transcript-input";
+                  i.value = state.stepAnswers?.wine?.avoid || "";
+                  i.placeholder = "Example: not France, no Chardonnay";
+                  wrap.appendChild(l);
+                  wrap.appendChild(i);
+                  return wrap;
+                },
+                commit() {
+                  const v = safeText(document.getElementById("wineAvoid").value);
+                  state.stepAnswers.wine.avoid = v;
+                  if (!v) return;
+                  const parsed = window.MyraNlu.parseWine(v, {
+                    countries: wineUnique("country"),
+                    grapes: wineUnique("grape_primary"),
+                    flavors: uniq(wineUnique("flavor_primary").concat(wineUnique("flavor_secondary")).concat(wineUnique("flavor_tertiary"))),
+                    wordmap: data.wordmap,
+                  });
+                  applyStatePatch("wine", parsed.statePatch || {});
+                },
+                parseAnswer(a) {
+                  const n = normalize(a);
+                  if (/\b(no|none|nothing)\b/.test(n)) return;
+                  const parsed = window.MyraNlu.parseWine(a, {
+                    countries: wineUnique("country"),
+                    grapes: wineUnique("grape_primary"),
+                    flavors: uniq(wineUnique("flavor_primary").concat(wineUnique("flavor_secondary")).concat(wineUnique("flavor_tertiary"))),
+                    wordmap: data.wordmap,
+                  });
+                  applyStatePatch("wine", parsed.statePatch || {});
+                },
+              },
+            ];
+          }
+
+          if (mode === "beer") {
+            return [
+              {
+                key: "category",
+                title: "What kind of beer?",
+                prompt: "What kind of beer? For example lager, ale, IPA, or sour.",
+                render() {
+                  return renderSelect("beerCategory", "Category", beerUnique("category"), state.beer.category);
+                },
+                commit() {
+                  state.beer.category = document.getElementById("beerCategory").value || null;
+                },
+                parseAnswer(a) {
+                  const parsed = window.MyraNlu.parseBeer(a, { categories: beerUnique("category"), wordmap: data.wordmap });
+                  if (parsed.statePatch?.category) state.beer.category = parsed.statePatch.category;
+                },
+              },
+              {
+                key: "style",
+                title: "Any specific style?",
+                prompt: "Any specific style? Or say any.",
+                render() {
+                  const styles = uniq(
+                    data.beerInv
+                      .filter(b => !state.beer.category || b.category === state.beer.category)
+                      .map(b => b.style)
+                  );
+                  return renderSelect("beerStyle", "Style", styles, state.beer.style);
+                },
+                commit() {
+                  state.beer.style = document.getElementById("beerStyle").value || null;
+                },
+                parseAnswer(a) {
+                  const styles = beerUnique("style");
+                  const parsed = window.MyraNlu.parseBeer(a, { styles, wordmap: data.wordmap });
+                  if (parsed.statePatch?.style) state.beer.style = parsed.statePatch.style;
+                },
+              },
+              {
+                key: "food",
+                title: "Any food pairing?",
+                prompt: "Tell me the food, like fish and chips, burgers, fried chicken, or say no food.",
+                render() {
+                  const wrap = document.createElement("div");
+                  const l = document.createElement("label");
+                  l.textContent = "Food (optional)";
+                  const s = document.createElement("select");
+                  s.id = "beerFood";
+                  const opt0 = document.createElement("option");
+                  opt0.value = "";
+                  opt0.textContent = "No food preference";
+                  s.appendChild(opt0);
+                  beerUnique("foods_best_with").forEach(v => {
+                    const o = document.createElement("option");
+                    o.value = v;
+                    o.textContent = v;
+                    s.appendChild(o);
+                  });
+                  s.value = state.beer.foodToken || "";
+                  wrap.appendChild(l);
+                  wrap.appendChild(s);
+                  return wrap;
+                },
+                commit() {
+                  const v = document.getElementById("beerFood").value || null;
+                  state.beer.foodToken = v;
+                  state.beer.withFood = v ? "yes" : "no";
+                },
+                parseAnswer(a) {
+                  const parsed = window.MyraNlu.parseBeer(a, { foods: beerUnique("foods_best_with"), wordmap: data.wordmap });
+                  if (parsed.statePatch?.foodToken) {
+                    state.beer.foodToken = parsed.statePatch.foodToken;
+                    state.beer.withFood = "yes";
+                  }
+                  const n = normalize(a);
+                  if (/\b(no food|without food|just beer)\b/.test(n)) {
+                    state.beer.foodToken = null;
+                    state.beer.withFood = "no";
+                  }
+                },
+              },
+              {
+                key: "direction",
+                title: "Flavor direction",
+                prompt: "Crisp and clean, hoppy and bitter, juicy and hazy, malty and smooth, or roasty and dark?",
+                render() {
+                  const opts = [
+                    "Crisp & Clean",
+                    "Malty & Smooth",
+                    "Hoppy & Bitter",
+                    "Juicy & Hazy",
+                    "Roasty & Dark",
+                    "Light & Refreshing",
+                    "Rich & Full",
+                  ];
+                  return renderSelect("beerDir", "Direction", opts, state.beer.flavorDirection);
+                },
+                commit() {
+                  state.beer.flavorDirection = document.getElementById("beerDir").value || null;
+                },
+                parseAnswer(a) {
+                  const parsed = window.MyraNlu.parseBeer(a, { wordmap: data.wordmap });
+                  if (parsed.statePatch?.flavorDirection) state.beer.flavorDirection = parsed.statePatch.flavorDirection;
+                },
+              },
+              {
+                key: "abv",
+                title: "Strength (ABV)",
+                prompt: "How strong? Low, standard, strong, dangerous, or say any.",
+                render() {
+                  const opts = ["any", "low", "standard", "strong", "dangerous"];
+                  const wrap = document.createElement("div");
+                  const l = document.createElement("label");
+                  l.textContent = "ABV range";
+                  const s = document.createElement("select");
+                  s.id = "beerAbv";
+                  opts.forEach(v => {
+                    const o = document.createElement("option");
+                    o.value = v;
+                    o.textContent = v;
+                    s.appendChild(o);
+                  });
+                  s.value = state.beer.abvRange || "any";
+                  wrap.appendChild(l);
+                  wrap.appendChild(s);
+                  return wrap;
+                },
+                commit() {
+                  state.beer.abvRange = document.getElementById("beerAbv").value || "any";
+                },
+                parseAnswer(a) {
+                  const parsed = window.MyraNlu.parseBeer(a, { wordmap: data.wordmap });
+                  if (parsed.statePatch?.abvRange) state.beer.abvRange = parsed.statePatch.abvRange;
+                },
+              },
+              {
+                key: "avoid",
+                title: "Anything to avoid?",
+                prompt: "Anything you want to avoid? For example not IPA, no stout, or not Steamworks. Or say no.",
+                render() {
+                  const wrap = document.createElement("div");
+                  const l = document.createElement("label");
+                  l.textContent = "Avoid (optional)";
+                  const i = document.createElement("input");
+                  i.type = "text";
+                  i.id = "beerAvoid";
+                  i.className = "myra-transcript-input";
+                  i.value = state.stepAnswers?.beer?.avoid || "";
+                  i.placeholder = "Example: not IPA, no Steamworks";
+                  wrap.appendChild(l);
+                  wrap.appendChild(i);
+                  return wrap;
+                },
+                commit() {
+                  const v = safeText(document.getElementById("beerAvoid").value);
+                  state.stepAnswers.beer.avoid = v;
+                  if (!v) return;
+                  const parsed = window.MyraNlu.parseBeer(v, {
+                    categories: beerUnique("category"),
+                    styles: beerUnique("style"),
+                    breweries: beerUnique("brewery"),
+                    wordmap: data.wordmap,
+                  });
+                  applyStatePatch("beer", parsed.statePatch || {});
+                },
+                parseAnswer(a) {
+                  const n = normalize(a);
+                  if (/\b(no|none|nothing)\b/.test(n)) return;
+                  const parsed = window.MyraNlu.parseBeer(a, {
+                    categories: beerUnique("category"),
+                    styles: beerUnique("style"),
+                    breweries: beerUnique("brewery"),
+                    wordmap: data.wordmap,
+                  });
+                  applyStatePatch("beer", parsed.statePatch || {});
+                },
+              },
+            ];
+          }
+
+          // bar
+          return [
+            {
+              key: "intent",
+              title: "Bottle or cocktail?",
+              prompt: "Are you buying a bottle, or trying to make a cocktail?",
+              render() {
+                const opts = ["bottle", "cocktail"];
+                const wrap = document.createElement("div");
+                const l = document.createElement("label");
+                l.textContent = "Intent";
+                const s = document.createElement("select");
+                s.id = "barIntent";
+                const optAny = document.createElement("option");
+                optAny.value = "";
+                optAny.textContent = "No preference";
+                s.appendChild(optAny);
+                opts.forEach(v => {
+                  const o = document.createElement("option");
+                  o.value = v;
+                  o.textContent = v[0].toUpperCase() + v.slice(1);
+                  s.appendChild(o);
+                });
+                s.value = state.bar.intent || "";
+                wrap.appendChild(l);
+                wrap.appendChild(s);
+                return wrap;
+              },
+              commit() {
+                state.bar.intent = document.getElementById("barIntent").value || null;
+              },
+              parseAnswer(a) {
+                const parsed = window.MyraNlu.parseBar(a, { wordmap: data.wordmap });
+                if (parsed.statePatch?.intent) state.bar.intent = parsed.statePatch.intent;
+                const n = normalize(a);
+                if (/\bbottle\b/.test(n)) state.bar.intent = "bottle";
+                if (/\b(cocktail|drink|mixed drink|mix)\b/.test(n)) state.bar.intent = "cocktail";
+              },
+            },
+            {
+              key: "spirit",
+              title: "Base spirit",
+              prompt: "What spirit are we building around? Gin, rum, tequila, whiskey, vodka, or liqueur.",
+              render() {
+                return renderSelect("barSpirit", "Spirit", barUnique("spirit"), state.bar.spirit);
+              },
+              commit() {
+                state.bar.spirit = document.getElementById("barSpirit").value || null;
+              },
+              parseAnswer(a) {
+                const parsed = window.MyraNlu.parseBar(a, { spirits: barUnique("spirit"), wordmap: data.wordmap });
+                if (parsed.statePatch?.spirit) state.bar.spirit = parsed.statePatch.spirit;
+              },
+            },
+            {
+              key: "profile",
+              title: "Taste direction",
+              prompt: "Should it be sweet, bitter, creamy, or any combination?",
+              render() {
+                const wrap = document.createElement("div");
+                wrap.style.display = "flex";
+                wrap.style.gap = "10px";
+                wrap.style.flexWrap = "wrap";
+                const mk = (id, label, checked) => {
+                  const l = document.createElement("label");
+                  l.className = "pill";
+                  const i = document.createElement("input");
+                  i.type = "checkbox";
+                  i.id = id;
+                  i.checked = Boolean(checked);
+                  l.appendChild(i);
+                  l.appendChild(document.createTextNode(" " + label));
+                  return l;
+                };
+                wrap.appendChild(mk("barSweet", "Sweet", state.bar.sweet));
+                wrap.appendChild(mk("barBitter", "Bitter", state.bar.bitter));
+                wrap.appendChild(mk("barCreamy", "Creamy", state.bar.creamy));
+                return wrap;
+              },
+              commit() {
+                state.bar.sweet = Boolean(document.getElementById("barSweet").checked);
+                state.bar.bitter = Boolean(document.getElementById("barBitter").checked);
+                state.bar.creamy = Boolean(document.getElementById("barCreamy").checked);
+              },
+              parseAnswer(a) {
+                const parsed = window.MyraNlu.parseBar(a, { wordmap: data.wordmap });
+                if (parsed.statePatch?.sweet !== undefined) state.bar.sweet = Boolean(parsed.statePatch.sweet);
+                if (parsed.statePatch?.bitter !== undefined) state.bar.bitter = Boolean(parsed.statePatch.bitter);
+                if (parsed.statePatch?.creamy !== undefined) state.bar.creamy = Boolean(parsed.statePatch.creamy);
+              },
+            },
+            {
+              key: "serve",
+              title: "Serve",
+              prompt: "How are you serving it? Neat, on the rocks, cocktail, or shots?",
+              render() {
+                const opts = ["", "neat", "rocks", "cocktail", "shots"];
+                const wrap = document.createElement("div");
+                const l = document.createElement("label");
+                l.textContent = "Serve";
+                const s = document.createElement("select");
+                s.id = "barServe";
+                opts.forEach(v => {
+                  const o = document.createElement("option");
+                  o.value = v;
+                  o.textContent = v || "No preference";
+                  s.appendChild(o);
+                });
+                s.value = state.bar.serve || "";
+                wrap.appendChild(l);
+                wrap.appendChild(s);
+                return wrap;
+              },
+              commit() {
+                state.bar.serve = document.getElementById("barServe").value || null;
+              },
+              parseAnswer(a) {
+                const parsed = window.MyraNlu.parseBar(a, { wordmap: data.wordmap });
+                if (parsed.statePatch?.serve) state.bar.serve = parsed.statePatch.serve;
+              },
+            },
+            {
+              key: "avoid",
+              title: "Anything to avoid?",
+              prompt: "Anything you want to avoid? For example no whiskey or not vodka. Or say no.",
+              render() {
+                const wrap = document.createElement("div");
+                const l = document.createElement("label");
+                l.textContent = "Avoid (optional)";
+                const i = document.createElement("input");
+                i.type = "text";
+                i.id = "barAvoid";
+                i.className = "myra-transcript-input";
+                i.value = state.stepAnswers?.bar?.avoid || "";
+                i.placeholder = "Example: no whiskey";
+                wrap.appendChild(l);
+                wrap.appendChild(i);
+                return wrap;
+              },
+              commit() {
+                const v = safeText(document.getElementById("barAvoid").value);
+                state.stepAnswers.bar.avoid = v;
+                if (!v) return;
+                const parsed = window.MyraNlu.parseBar(v, {
+                  spirits: barUnique("spirit"),
+                  names: barUnique("name"),
+                  wordmap: data.wordmap,
+                });
+                applyStatePatch("bar", parsed.statePatch || {});
+              },
+              parseAnswer(a) {
+                const n = normalize(a);
+                if (/\b(no|none|nothing)\b/.test(n)) return;
+                const parsed = window.MyraNlu.parseBar(a, {
+                  spirits: barUnique("spirit"),
+                  names: barUnique("name"),
+                  wordmap: data.wordmap,
+                });
+                applyStatePatch("bar", parsed.statePatch || {});
+              },
+            },
+          ];
+        }
+
+        function renderStep() {
+          if (!state.mode) {
+            renderModeChooser();
+            return;
+          }
+
+          const steps = stepsForMode(state.mode);
+          const step = steps[state.stepIndex];
+          if (!step) {
+            void showResults();
+            return;
+          }
+
+          els.btnBack.disabled = state.stepIndex === 0;
+          els.stepTitle.textContent = step.title;
+          els.stepBody.innerHTML = "";
+          els.stepBody.appendChild(step.render());
+
+          // Guided transcript + edit (for when speech recognition mishears).
+          const last = state.stepAnswers?.[state.mode]?.[step.key] || "";
+          if (last) {
+            const box = document.createElement("div");
+            box.className = "myra-transcript";
+            box.innerHTML = `
+              <div class="myra-transcript-row">
+                <div class="myra-transcript-label">You said</div>
+                <div class="myra-transcript-text">${last.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</div>
+              </div>
+            `;
+            const actions = document.createElement("div");
+            actions.className = "myra-transcript-actions";
+            const btnEdit = document.createElement("button");
+            btnEdit.className = "btn";
+            btnEdit.type = "button";
+            btnEdit.textContent = "Edit";
+
+            btnEdit.addEventListener("click", () => {
+              box.innerHTML = "";
+              const row = document.createElement("div");
+              row.className = "myra-transcript-editrow";
+              const input = document.createElement("input");
+              input.type = "text";
+              input.value = last;
+              input.className = "myra-transcript-input";
+              input.setAttribute("aria-label", "Edit transcript");
+              const btnApply = document.createElement("button");
+              btnApply.className = "btn btn-primary";
+              btnApply.type = "button";
+              btnApply.textContent = "Apply";
+              btnApply.addEventListener("click", () => {
+                const next = safeText(input.value);
+                if (!next) return;
+                state.stepAnswers[state.mode][step.key] = next;
+                try {
+                  step.parseAnswer(next);
+                } catch (err) {
+                  console.error(err);
+                }
+                renderStep();
+              });
+              row.appendChild(input);
+              row.appendChild(btnApply);
+              box.appendChild(row);
+            });
+
+            actions.appendChild(btnEdit);
+            box.appendChild(actions);
+            els.stepBody.appendChild(box);
+          }
+          els.stepStatus.textContent = " ";
+        }
+
+        async function showResults() {
+          els.resultsBox.innerHTML = "";
+          show(els.results);
+
+          function savePrefs() {
+            const snapshot = {
+              version: 1,
+              mode: state.mode,
+              wine: state.wine,
+              beer: state.beer,
+              bar: state.bar,
+              stepAnswers: state.stepAnswers,
+              lastUtterance: state.lastUtterance,
+            };
+            try {
+              localStorage.setItem("myra:prefs:v1", JSON.stringify(snapshot));
+            } catch {
+              // ignore quota
+            }
+          }
+
+          if (state.interaction === "talk" && state.lastUtterance) {
+            const box = document.createElement("div");
+            box.className = "myra-transcript";
+            const label = document.createElement("div");
+            label.className = "myra-transcript-label";
+            label.textContent = "You said";
+            const input = document.createElement("input");
+            input.type = "text";
+            input.className = "myra-transcript-input";
+            input.value = state.lastUtterance;
+            const btnApply = document.createElement("button");
+            btnApply.className = "btn btn-primary";
+            btnApply.type = "button";
+            btnApply.textContent = "Re-run";
+            btnApply.addEventListener("click", async () => {
+              state.lastUtterance = safeText(input.value);
+              if (!state.lastUtterance) return;
+              resetAll();
+              state.interaction = "talk";
+              state.lastUtterance = safeText(input.value);
+              applyTalkText(state.lastUtterance);
+              await showResults();
+            });
+            const row = document.createElement("div");
+            row.className = "myra-transcript-editrow";
+            row.appendChild(label);
+            row.appendChild(input);
+            row.appendChild(btnApply);
+            box.appendChild(row);
+            els.resultsBox.appendChild(box);
+          }
+
+          if (state.mode === "wine") {
+            applyTierBands("wine", state.wine);
+            const inStock = data.wineInv.filter(w => String(wineM(w, "stock_status") || "").toLowerCase() === "in stock");
+            const inv = inStock.length ? inStock : data.wineInv;
+            const baseSet = new Set(inv);
+
+            const indexedPools = [];
+            if (data.wineIdx?.byCategory && state.wine.category) {
+              const p = data.wineIdx.byCategory.get(state.wine.category);
+              if (p && p.length) indexedPools.push(p);
+            }
+            if (data.wineIdx?.byCountry && state.wine.country) {
+              const p = data.wineIdx.byCountry.get(state.wine.country);
+              if (p && p.length) indexedPools.push(p);
+            }
+            if (data.wineIdx?.byTier && state.wine.price) {
+              const p = data.wineIdx.byTier.get(state.wine.price);
+              if (p && p.length) indexedPools.push(p);
+            }
+
+            // Start from the smallest indexed pool, then strict-filter against the current base inventory.
+            let candidateBase = inv;
+            if (indexedPools.length) {
+              candidateBase = indexedPools.sort((a, b) => a.length - b.length)[0].filter(w => baseSet.has(w));
+              if (!candidateBase.length) candidateBase = inv;
+            }
+
+            const strict = candidateBase.filter(wineStrictFilter);
+
+            function pickBest(list) {
+              const best = list
+                .map(w => ({ w, s: scoreWine(w) }))
+                .sort((a, b) => b.s - a.s)[0];
+              return best ? best.w : null;
+            }
+
+            function renderWineCard(w, label, { confidence } = {}) {
+              const rm = w?._myra?.rm || w.recommendation_matches || {};
+              const flavorLine = (w?._myra?.flavors || [rm.flavor_primary, rm.flavor_secondary, rm.flavor_tertiary].filter(Boolean)).join(", ");
+              const subtitleBits = [rm.category, rm.grape_primary, rm.country].filter(Boolean);
+              const avail = wineAvailabilityText(w);
+              const div = document.createElement("div");
+              div.className = "myra-result-card";
+              const q = encodeURIComponent(`${w.name} wine bottle`);
+              const img =
+                (data.images && data.images.by_sku && w.sku && data.images.by_sku[w.sku]) ||
+                (data.images && data.images.by_name && w.name && data.images.by_name[w.name]) ||
+                "";
+
+              const detailsHtml = `
+                ${flavorLine ? `<p style="margin: 0;">Notes: ${flavorLine}.</p>` : `<p style="margin: 0;"> </p>`}
+                <ul class="myra-kv">
+                  ${avail ? `<li><strong>Availability</strong>${avail}</li>` : ""}
+                  ${state.wine.foodChoice ? `<li><strong>Pairing</strong>${state.wine.foodChoice}</li>` : ""}
+                  ${rm.meats && rm.meats !== "N/A" ? `<li><strong>Meats</strong>${rm.meats}</li>` : ""}
+                  ${rm.cheese && rm.cheese !== "N/A" ? `<li><strong>Cheese</strong>${rm.cheese}</li>` : ""}
+                  ${rm.pasta && rm.pasta !== "N/A" ? `<li><strong>Pasta</strong>${rm.pasta}</li>` : ""}
+                  ${rm.specialty && rm.specialty !== "N/A" ? `<li><strong>Other</strong>${rm.specialty}</li>` : ""}
+                </ul>
+                ${wineExplainHtml(w)}
+                <div class="myra-result-actions">
+                  ${w.url ? `<a class="myra-link btn btn-primary" href="${w.url}" target="_blank" rel="noopener noreferrer">View Bottle</a>` : ""}
+                  <a class="myra-link btn" href="https://www.google.com/search?tbm=isch&q=${q}" target="_blank" rel="noopener noreferrer">Search Images</a>
+                </div>
+              `;
+
+              div.innerHTML = `
+                <div class="myra-result-header">
+                  <h3 class="myra-result-title">${label ? `${label}: ` : ""}${w.name}</h3>
+                  <div class="myra-result-subtitle">${subtitleBits.join(" · ")}${w.sku ? ` · ${w.sku}` : ""}</div>
+                  <div class="myra-badges">
+                    ${confidence != null ? `<span class="myra-badge myra-badge-confidence">${confidenceLabel(confidence)}</span>` : ""}
+                    ${w.price ? `<span class="myra-badge">${w.price}</span>` : ""}
+                    ${w.alcohol ? `<span class="myra-badge">${w.alcohol}% ABV</span>` : ""}
+                    ${rm.style_body ? `<span class="myra-badge">${rm.style_body} body</span>` : ""}
+                    ${rm.style_acidity ? `<span class="myra-badge">${rm.style_acidity} acidity</span>` : ""}
+                    ${rm.style_tannin ? `<span class="myra-badge">${rm.style_tannin} tannin</span>` : ""}
+                    ${rm.price_tier ? `<span class="myra-badge">${rm.price_tier}</span>` : ""}
+                    ${rm.stock_status ? `<span class="myra-badge">${rm.stock_status}</span>` : ""}
+                  </div>
+                </div>
+                <div class="myra-result-body">
+                  ${
+                    img
+                      ? `<div class="myra-media"><img src="${img}" alt="${w.name}"><div>${detailsHtml}</div></div>`
+                      : detailsHtml
+                  }
+                </div>
+              `;
+              div.appendChild(createStoreBox({ inStock: wineIsInStock(w) }));
+              return div;
+            }
+
+            function wineWantedSummary() {
+              const s = state.wine;
+              const parts = [];
+              if (s.price) parts.push(s.price);
+              else if (s.priceMax != null) parts.push(`under $${s.priceMax}`);
+              else if (s.priceMin != null) parts.push(`over $${s.priceMin}`);
+              else if (s.priceTarget != null) parts.push(`around $${s.priceTarget}`);
+              if (s.category) parts.push(String(s.category));
+              if (s.country) parts.push(`from ${s.country}`);
+              if (s.grape) parts.push(s.grape);
+              return parts.length ? parts.join(" ") : "your preferences";
+            }
+
+            function wineGotSummary(w) {
+              const rm = w?._myra?.rm || w.recommendation_matches || {};
+              const parts = [];
+              if (rm.price_tier) parts.push(String(rm.price_tier).toLowerCase());
+              if (rm.category) parts.push(String(rm.category));
+              if (rm.country) parts.push(`from ${rm.country}`);
+              return parts.length ? parts.join(" ") : w.name;
+            }
+
+            function wineMismatches(w) {
+              const rm = w?._myra?.rm || w.recommendation_matches || {};
+              const s = state.wine;
+              const out = [];
+
+              if (s.category && rm.category && rm.category !== s.category) out.push({ key: "category", wanted: s.category, got: rm.category });
+              if (s.country && rm.country && rm.country !== s.country) out.push({ key: "country", wanted: s.country, got: rm.country });
+              if (s.grape && rm.grape_primary && rm.grape_primary !== s.grape) out.push({ key: "grape", wanted: s.grape, got: rm.grape_primary });
+              if (s.occasion && rm.buyer_event && rm.buyer_event !== s.occasion) out.push({ key: "occasion", wanted: s.occasion, got: rm.buyer_event });
+              if (s.price && rm.price_tier && rm.price_tier !== s.price) out.push({ key: "price_tier", wanted: s.price, got: rm.price_tier });
+              if (s.acidity && rm.style_acidity && String(rm.style_acidity).toLowerCase() !== String(s.acidity).toLowerCase()) {
+                out.push({ key: "acidity", wanted: s.acidity, got: rm.style_acidity });
+              }
+              if (s.tannin && rm.style_tannin && String(rm.style_tannin).toLowerCase() !== String(s.tannin).toLowerCase()) {
+                out.push({ key: "tannin", wanted: s.tannin, got: rm.style_tannin });
+              }
+
+              if (s.foodChoice && s.foodType) {
+                const foods = w?._myra?.foodsByType?.[s.foodType] || splitPipe(rm[s.foodType]);
+                const ok = foods.includes(s.foodChoice);
+                if (!ok) out.push({ key: "pairing", wanted: s.foodChoice, got: rm[s.foodType] || "not listed" });
+              }
+
+              if (Array.isArray(s.flavors) && s.flavors.length) {
+                const vals = w?._myra?.flavors || [rm.flavor_primary, rm.flavor_secondary, rm.flavor_tertiary].filter(Boolean);
+                const wantAny = s.flavors.some(f => vals.includes(f));
+                if (!wantAny) out.push({ key: "flavors", wanted: s.flavors.join(", "), got: vals.join(", ") || "no match" });
+              }
+
+              const p = w?._myra?.priceNum != null ? w._myra.priceNum : parseMoney(w.price);
+              if (s.priceMax != null && p != null && p > s.priceMax) out.push({ key: "priceMax", wanted: `<= $${s.priceMax}`, got: `$${p}` });
+              if (s.priceMin != null && p != null && p < s.priceMin) out.push({ key: "priceMin", wanted: `>= $${s.priceMin}`, got: `$${p}` });
+              if (s.priceTarget != null && p != null) {
+                const target = toNum(s.priceTarget, null);
+                if (target != null) {
+                  const tol = Math.max(5, Math.round(target * 0.12));
+                  if (Math.abs(p - target) > tol) out.push({ key: "priceTarget", wanted: `~ $${target}`, got: `$${p}` });
+                }
+              }
+
+              return out;
+            }
+
+            function wineExplainHtml(w) {
+              const rm = w?._myra?.rm || w.recommendation_matches || {};
+              const s = state.wine;
+              const matched = [];
+              const missed = wineMismatches(w);
+
+              const hasPref =
+                Boolean(s.category || s.country || s.grape || s.occasion || s.price || s.foodChoice || (Array.isArray(s.flavors) && s.flavors.length));
+              if (!hasPref && !(s.priceMax != null || s.priceMin != null || s.priceTarget != null)) return "";
+
+              if (s.category && rm.category === s.category) matched.push(`Category: ${rm.category}`);
+              if (s.country && rm.country === s.country) matched.push(`Country: ${rm.country}`);
+              if (s.grape && rm.grape_primary === s.grape) matched.push(`Grape: ${rm.grape_primary}`);
+              if (s.occasion && rm.buyer_event === s.occasion) matched.push(`Occasion: ${rm.buyer_event}`);
+              if (s.price && rm.price_tier && normalize(rm.price_tier) === normalize(s.price)) matched.push(`Price tier: ${rm.price_tier}`);
+              if (s.foodChoice) matched.push(`Pairing: ${s.foodChoice}`);
+              if (Array.isArray(s.flavors) && s.flavors.length) matched.push(`Flavors: ${s.flavors.join(", ")}`);
+
+              const avoidBits = [];
+              (s.excludes?.countries || []).forEach(v => avoidBits.push(v));
+              (s.excludes?.grapes || []).forEach(v => avoidBits.push(v));
+              (s.excludes?.categories || []).forEach(v => avoidBits.push(v));
+              (s.excludes?.flavors || []).forEach(v => avoidBits.push(v));
+              if (avoidBits.length) matched.push(`Avoiding: ${avoidBits.join(", ")}`);
+
+              const missedLines = missed.map(m => {
+                const label =
+                  m.key === "price_tier" ? "Price tier" :
+                  m.key === "priceMax" || m.key === "priceMin" || m.key === "priceTarget" ? "Price" :
+                  m.key === "pairing" ? "Pairing" :
+                  m.key[0].toUpperCase() + m.key.slice(1);
+                return `${label}: wanted ${m.wanted}, got ${m.got}`;
+              });
+
+              return `
+                <div class="myra-explain">
+                  <div class="myra-explain-box">
+                    <div class="myra-explain-title">Matched</div>
+                    <ul class="myra-explain-list">
+                      ${(matched.length ? matched : ["Best available match"]).map(x => `<li>${x}</li>`).join("")}
+                    </ul>
+                  </div>
+                  ${
+                    missedLines.length
+                      ? `<div class="myra-explain-box">
+                          <div class="myra-explain-title">Couldn't Match</div>
+                          <ul class="myra-explain-list">${missedLines.map(x => `<li>${x}</li>`).join("")}</ul>
+                        </div>`
+                      : `<div class="myra-explain-box">
+                          <div class="myra-explain-title">Couldn't Match</div>
+                          <ul class="myra-explain-list"><li>Nothing. Exact match.</li></ul>
+                        </div>`
+                  }
+                </div>
+              `;
+            }
+
+            function wineMismatchSpeech(primary, backup, droppedKey) {
+              const wanted = wineWantedSummary();
+              const got = wineGotSummary(primary);
+              const mism = wineMismatches(primary);
+
+              // If this was a deliberate single-constraint relax, prioritize explaining that constraint.
+              const keyToExplain = droppedKey || (mism[0] ? mism[0].key : null);
+              const byKey = k => mism.find(x => x.key === k) || null;
+              let focus = null;
+              if (keyToExplain === "country") focus = byKey("country");
+              else if (keyToExplain === "price") focus = byKey("price_tier") || byKey("priceMax") || byKey("priceTarget") || byKey("priceMin");
+              else if (keyToExplain === "food") focus = byKey("pairing");
+              else if (keyToExplain === "flavors") focus = byKey("flavors");
+              else if (keyToExplain === "grape") focus = byKey("grape");
+              else if (keyToExplain === "occasion") focus = byKey("occasion");
+              else if (keyToExplain === "tannin") focus = byKey("tannin");
+              else if (keyToExplain === "acidity") focus = byKey("acidity");
+
+              const why = focus
+                ? `I understand you wanted ${wanted}, but I could not match ${focus.key === "price_tier" ? "that price tier" : focus.key} exactly. You asked for ${focus.wanted}, but I found ${focus.got}.`
+                : `I understand you wanted ${wanted}, but I couldn't match every detail exactly.`;
+
+              const primaryAvail = wineAvailabilityText(primary);
+              const primaryLine = `Closest pick is ${primary.name}${primaryAvail ? `. ${primaryAvail}` : ""}.`;
+
+              if (backup) {
+                const backupAvail = wineAvailabilityText(backup);
+                const backupLine = `Backup pick is ${backup.name}${backupAvail ? `. ${backupAvail}` : ""}.`;
+                let bridge = "";
+                if (droppedKey === "country" && state.wine.country) {
+                  bridge = ` If you're set on ${state.wine.country}, the backup keeps that country but may be more expensive.`;
+                } else if (droppedKey === "price" && (state.wine.price || state.wine.priceMax != null || state.wine.priceTarget != null)) {
+                  bridge = " If you're set on the price/budget, the backup keeps that budget but may be from a different region.";
+                }
+                return `${why}${bridge} I was only able to match ${got}. ${primaryLine} ${backupLine}`;
+              }
+
+              return `${why} I was only able to match ${got}. ${primaryLine}`;
+            }
+
+            if (strict.length) {
+              const w = pickBest(strict);
+              if (!w) return;
+              const conf = 0.92;
+              els.resultsBox.appendChild(renderWineCard(w, "Best match", { confidence: conf }));
+              state.lastPick = { mode: "wine", name: w.name };
+              const avail = wineAvailabilityText(w);
+              const inStock = wineIsInStock(w);
+              const tone = conf >= 0.85 ? "I'm confident about this pick." : "This is my best match.";
+              const spoken =
+                `${tone} ${w.name}.${avail ? ` ${avail}.` : ""}` +
+                (inStock ? ` If you'd like, you can call ${STORE.name} at ${STORE.phoneDisplay} to put it on hold.` : "") +
+                ` Need directions?`;
+              window.MyraVoice && window.MyraVoice.speak(spoken);
+              savePrefs();
+              return;
+            }
+
+            if (
+              state.interaction !== "manual" &&
+              window.MyraVoice &&
+              (window.SpeechRecognition || window.webkitSpeechRecognition) &&
+              !state.wine.priorityKeep &&
+              state.wine.country &&
+              (state.wine.price || state.wine.priceMax != null || state.wine.priceMin != null || state.wine.priceTarget != null)
+            ) {
+              const a = await ask(`I can't always match both country and budget. Which matters more to you, the country or the price?`);
+              const n = normalize(a);
+              if (n.includes("country") || n.includes("france") || n.includes("italy") || n.includes("region")) state.wine.priorityKeep = "country";
+              else if (n.includes("price") || n.includes("budget") || n.includes("cheap") || n.includes("cost")) state.wine.priorityKeep = "price";
+            }
+
+            // No exact match: pick a closest option by relaxing ONE constraint (country/price are most common).
+            const relaxOrder = (() => {
+              const base = ["flavors", "food", "grape", "occasion", "tannin", "acidity", "country", "price"];
+              if (state.wine.priorityKeep === "country") {
+                // Prefer keeping country: relax price sooner.
+                return base.map(k => (k === "country" ? "price" : k === "price" ? "country" : k));
+              }
+              if (state.wine.priorityKeep === "price") {
+                // Prefer keeping price: relax country sooner (already the case), but keep as-is.
+                return base;
+              }
+              return base;
+            })();
+            let primary = null;
+            let dropped = null;
+
+            for (const key of relaxOrder) {
+              const saved = { ...state.wine };
+              if (key === "flavors") state.wine.flavors = [];
+              if (key === "food") {
+                state.wine.foodType = null;
+                state.wine.foodChoice = null;
+              }
+              if (key === "grape") state.wine.grape = null;
+              if (key === "occasion") state.wine.occasion = null;
+              if (key === "tannin") state.wine.tannin = null;
+              if (key === "acidity") state.wine.acidity = null;
+              if (key === "country") state.wine.country = null;
+              if (key === "price") {
+                state.wine.price = null;
+                state.wine.priceMax = null;
+                state.wine.priceMin = null;
+              }
+
+              const relaxed = inv.filter(wineStrictFilter);
+              if (relaxed.length) {
+                primary = pickBest(relaxed);
+                dropped = key;
+                Object.assign(state.wine, saved); // restore for explanation context
+                break;
+              }
+              Object.assign(state.wine, saved);
+            }
+
+            if (!primary) {
+              // Absolute fallback: best overall in category if possible.
+              const fallback = inv
+                .filter(w => !state.wine.category || wineM(w, "category") === state.wine.category);
+              primary = pickBest(fallback.length ? fallback : inv);
+              if (!primary) return;
+              els.resultsBox.appendChild(renderWineCard(primary, "Closest pick", { confidence: 0.55 }));
+              state.lastPick = { mode: "wine", name: primary.name };
+              const avail = wineAvailabilityText(primary);
+              const inStock = wineIsInStock(primary);
+              const spoken =
+                `I couldn't find an exact match, so I picked the closest option: ${primary.name}.${avail ? ` ${avail}.` : ""}` +
+                (inStock ? ` If you'd like, you can call ${STORE.name} at ${STORE.phoneDisplay} to put it on hold.` : "") +
+                ` Need directions?`;
+              window.MyraVoice && window.MyraVoice.speak(spoken);
+              savePrefs();
+              return;
+            }
+
+            const explanation = document.createElement("p");
+            explanation.style.margin = "14px 2px";
+            explanation.style.color = "rgba(245,245,255,0.75)";
+
+            const wantedCountry = state.wine.country;
+            const wantedTier = state.wine.price;
+            const wantedMax = state.wine.priceMax;
+
+            if (dropped === "country" && wantedCountry) {
+              explanation.textContent =
+                `I couldn't find an exact match from ${wantedCountry}. Here is the closest option that fits your other preferences.`;
+            } else if (dropped === "price" && (wantedTier || wantedMax != null)) {
+              explanation.textContent =
+                `I couldn't find an exact match in your budget. Here is the closest option that fits your other preferences.`;
+            } else {
+              explanation.textContent =
+                `I couldn't find an exact match with every preference, so I picked the closest option.`;
+            }
+
+            let primaryCardEl = null;
+            {
+              const mism = wineMismatches(primary);
+              const conf = clamp(0.82 - mism.length * 0.06, 0.45, 0.86);
+              primaryCardEl = renderWineCard(primary, "Closest pick", { confidence: conf });
+              els.resultsBox.appendChild(primaryCardEl);
+            }
+            state.lastPick = { mode: "wine", name: primary.name };
+
+            // Backup option: try to satisfy the dropped constraint by relaxing the opposite (country <-> price).
+            let backup = null;
+            if (dropped === "country" && wantedCountry) {
+              const saved = { ...state.wine };
+              // Force country, relax price.
+              state.wine.country = wantedCountry;
+              state.wine.price = null;
+              state.wine.priceMax = null;
+              state.wine.priceMin = null;
+              const pool = inv.filter(wineStrictFilter);
+              backup = pickBest(pool);
+              Object.assign(state.wine, saved);
+
+              if (backup) {
+                const p = document.createElement("p");
+                p.style.margin = "10px 2px 12px";
+                p.style.color = "rgba(245,245,255,0.75)";
+                p.textContent =
+                  "If you're set on that country, here is a backup option that may be more expensive.";
+                els.resultsBox.appendChild(explanation);
+                els.resultsBox.appendChild(p);
+                {
+                  const mism = wineMismatches(backup);
+                  const conf = clamp(0.8 - mism.length * 0.06, 0.45, 0.84);
+                  const backupCardEl = renderWineCard(backup, "Backup pick", { confidence: conf });
+                  const compare = document.createElement("div");
+                  compare.className = "myra-compare";
+                  if (primaryCardEl && primaryCardEl.parentNode) primaryCardEl.parentNode.removeChild(primaryCardEl);
+                  if (primaryCardEl) compare.appendChild(primaryCardEl);
+                  compare.appendChild(backupCardEl);
+                  els.resultsBox.appendChild(compare);
+                }
+                const inStock = [primary, backup].some(x => wineIsInStock(x) === true);
+                const spoken =
+                  wineMismatchSpeech(primary, backup, dropped) +
+                  (inStock ? ` If it's in stock, you can call ${STORE.name} at ${STORE.phoneDisplay} to put it on hold.` : "") +
+                  ` Need directions?`;
+                window.MyraVoice && window.MyraVoice.speak(spoken);
+                savePrefs();
+              } else {
+                els.resultsBox.appendChild(explanation);
+                const inStock = wineIsInStock(primary);
+                const spoken =
+                  wineMismatchSpeech(primary, null, dropped) +
+                  (inStock ? ` If it's in stock, you can call ${STORE.name} at ${STORE.phoneDisplay} to put it on hold.` : "") +
+                  ` Need directions?`;
+                window.MyraVoice && window.MyraVoice.speak(spoken);
+                savePrefs();
+              }
+              return;
+            }
+
+            if (dropped === "price" && (wantedTier || wantedMax != null)) {
+              const saved = { ...state.wine };
+              // Force price, relax country.
+              if (wantedTier) state.wine.price = wantedTier;
+              if (wantedMax != null) state.wine.priceMax = wantedMax;
+              state.wine.country = null;
+              const pool = inv.filter(wineStrictFilter);
+              backup = pickBest(pool);
+              Object.assign(state.wine, saved);
+
+              if (backup) {
+                const p = document.createElement("p");
+                p.style.margin = "10px 2px 12px";
+                p.style.color = "rgba(245,245,255,0.75)";
+                p.textContent =
+                  "If you're set on the price/budget, here's a backup option from a different region.";
+                els.resultsBox.appendChild(explanation);
+                els.resultsBox.appendChild(p);
+                {
+                  const mism = wineMismatches(backup);
+                  const conf = clamp(0.8 - mism.length * 0.06, 0.45, 0.84);
+                  const backupCardEl = renderWineCard(backup, "Backup pick", { confidence: conf });
+                  const compare = document.createElement("div");
+                  compare.className = "myra-compare";
+                  if (primaryCardEl && primaryCardEl.parentNode) primaryCardEl.parentNode.removeChild(primaryCardEl);
+                  if (primaryCardEl) compare.appendChild(primaryCardEl);
+                  compare.appendChild(backupCardEl);
+                  els.resultsBox.appendChild(compare);
+                }
+                const inStock = [primary, backup].some(x => wineIsInStock(x) === true);
+                const spoken =
+                  wineMismatchSpeech(primary, backup, dropped) +
+                  (inStock ? ` If it's in stock, you can call ${STORE.name} at ${STORE.phoneDisplay} to put it on hold.` : "") +
+                  ` Need directions?`;
+                window.MyraVoice && window.MyraVoice.speak(spoken);
+                savePrefs();
+              } else {
+                els.resultsBox.appendChild(explanation);
+                const inStock = wineIsInStock(primary);
+                const spoken =
+                  wineMismatchSpeech(primary, null, dropped) +
+                  (inStock ? ` If it's in stock, you can call ${STORE.name} at ${STORE.phoneDisplay} to put it on hold.` : "") +
+                  ` Need directions?`;
+                window.MyraVoice && window.MyraVoice.speak(spoken);
+                savePrefs();
+              }
+              return;
+            }
+
+            els.resultsBox.appendChild(explanation);
+            {
+              const inStock = wineIsInStock(primary);
+              const spoken =
+                wineMismatchSpeech(primary, null, dropped) +
+                (inStock ? ` If it's in stock, you can call ${STORE.name} at ${STORE.phoneDisplay} to put it on hold.` : "") +
+                ` Need directions?`;
+              window.MyraVoice && window.MyraVoice.speak(spoken);
+              savePrefs();
+            }
+            return;
+          }
+
+          if (state.mode === "beer") {
+            const inv = data.beerInv || [];
+            const strict = inv.filter(beerStrictFilter);
+
+            function pickBest(list) {
+              const best = list
+                .map(b => ({ b, s: scoreBeer(b) }))
+                .sort((a, b) => b.s - a.s)[0];
+              return best ? best.b : null;
+            }
+
+            function renderBeerCard(b, label, { confidence } = {}) {
+              const images = [b.image, b.image2, b.image3, b.image4].filter(Boolean);
+              const hops = b.hops ? String(b.hops).split("|").join(", ") : "";
+              const foods = b.foods_best_with ? String(b.foods_best_with).split("|").join(", ") : "";
+              const avail = genericAvailabilityText(b);
+              const q = encodeURIComponent(`${b.name} beer can`);
+              const abv = b?._myra?.abv;
+              const abvText = Number.isFinite(abv) ? `${abv.toFixed(1)}% ABV` : safeText(b.abv_percent);
+              const div = document.createElement("div");
+              div.className = "myra-result-card";
+              div.innerHTML = `
+                <div class="myra-result-header">
+                  <h3 class="myra-result-title">${label ? `${label}: ` : ""}${b.name}</h3>
+                  <div class="myra-result-subtitle">${[b.category, b.style].filter(Boolean).join(" · ")}${abvText ? ` · ${abvText}` : ""}</div>
+                  <div class="myra-badges">
+                    ${confidence != null ? `<span class="myra-badge myra-badge-confidence">${confidenceLabel(confidence)}</span>` : ""}
+                    ${b.brewery ? `<span class="myra-badge">${b.brewery}</span>` : ""}
+                    ${state.beer.container ? `<span class="myra-badge">${state.beer.container}</span>` : ""}
+                    ${state.beer.package ? `<span class="myra-badge">${String(state.beer.package).replace('available_','')}</span>` : ""}
+                  </div>
+                </div>
+                <div class="myra-result-body">
+                  <div class="myra-media">
+                    ${images[0] ? `<img src="${images[0]}" alt="${b.name}">` : ""}
+                    <div>
+                      ${b.description ? `<p style="margin: 0;">${b.description}</p>` : `<p style="margin: 0;"> </p>`}
+                      <ul class="myra-kv">
+                        ${avail ? `<li><strong>Availability</strong>${avail}</li>` : ""}
+                        ${b.flavor ? `<li><strong>Flavor</strong>${b.flavor}</li>` : ""}
+                        ${b.aroma ? `<li><strong>Aroma</strong>${b.aroma}</li>` : ""}
+                        ${b.appearance ? `<li><strong>Appearance</strong>${b.appearance}</li>` : ""}
+                        ${b.body ? `<li><strong>Body</strong>${b.body}</li>` : ""}
+                        ${b.carbonation ? `<li><strong>Carbonation</strong>${b.carbonation}</li>` : ""}
+                        ${b.malt ? `<li><strong>Malt</strong>${b.malt}</li>` : ""}
+                        ${hops ? `<li><strong>Hops</strong>${hops}</li>` : ""}
+                        ${b.yeast ? `<li><strong>Yeast</strong>${b.yeast}</li>` : ""}
+                        ${foods ? `<li><strong>Goes With</strong>${foods}</li>` : ""}
+                      </ul>
+                      ${beerExplainHtml(b)}
+                      <div class="myra-result-actions">
+                        <a class="myra-link btn" href="https://www.google.com/search?tbm=isch&q=${q}" target="_blank" rel="noopener noreferrer">Search Images</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              `;
+              div.appendChild(createStoreBox({ inStock: null }));
+              return div;
+            }
+
+            function beerMismatches(b) {
+              const s = state.beer;
+              const out = [];
+              if (s.category && safeText(b.category) !== s.category) out.push({ key: "category", wanted: s.category, got: safeText(b.category) });
+              if (s.style && safeText(b.style) !== s.style) out.push({ key: "style", wanted: s.style, got: safeText(b.style) });
+              if (s.brewery && safeText(b.brewery) !== s.brewery) out.push({ key: "brewery", wanted: s.brewery, got: safeText(b.brewery) });
+              if (s.container) {
+                const got = b._myra?.can ? "can" : b._myra?.bottle ? "bottle" : "";
+                if (got && got !== s.container) out.push({ key: "container", wanted: s.container, got });
+              }
+              if (s.abvRange && s.abvRange !== "any" && !beerAbvMatches(b)) {
+                out.push({ key: "abv", wanted: s.abvRange, got: Number.isFinite(b._myra?.abv) ? `${b._myra.abv.toFixed(1)}%` : safeText(b.abv_percent) });
+              }
+              if (s.foodToken && s.withFood === "yes") {
+                const want = normalize(s.foodToken);
+                const foods = b?._myra?.foods || splitPipe(b.foods_best_with).map(v => normalize(v));
+                if (want && !foods.includes(want)) out.push({ key: "pairing", wanted: s.foodToken, got: safeText(b.foods_best_with) || "not listed" });
+              }
+              return out;
+            }
+
+            function beerExplainHtml(b) {
+              const s = state.beer;
+              const matched = [];
+              const missed = beerMismatches(b);
+              const hasPref = Boolean(s.category || s.style || s.brewery || s.container || (s.abvRange && s.abvRange !== "any") || s.foodToken);
+              if (!hasPref) return "";
+
+              if (s.category && safeText(b.category) === s.category) matched.push(`Category: ${safeText(b.category)}`);
+              if (s.style && safeText(b.style) === s.style) matched.push(`Style: ${safeText(b.style)}`);
+              if (s.brewery && safeText(b.brewery) === s.brewery) matched.push(`Brewery: ${safeText(b.brewery)}`);
+              if (s.container) matched.push(`Container: ${s.container}`);
+              if (s.abvRange && s.abvRange !== "any") matched.push(`ABV: ${s.abvRange}`);
+              if (s.foodToken) matched.push(`Pairing: ${s.foodToken}`);
+
+              const avoidBits = [];
+              (s.excludes?.categories || []).forEach(v => avoidBits.push(v));
+              (s.excludes?.styles || []).forEach(v => avoidBits.push(v));
+              (s.excludes?.breweries || []).forEach(v => avoidBits.push(v));
+              if (avoidBits.length) matched.push(`Avoiding: ${avoidBits.join(", ")}`);
+
+              const missedLines = missed.map(m => `${m.key[0].toUpperCase() + m.key.slice(1)}: wanted ${m.wanted}, got ${m.got}`);
+              return `
+                <div class="myra-explain">
+                  <div class="myra-explain-box">
+                    <div class="myra-explain-title">Matched</div>
+                    <ul class="myra-explain-list">${(matched.length ? matched : ["Best available match"]).map(x => `<li>${x}</li>`).join("")}</ul>
+                  </div>
+                  <div class="myra-explain-box">
+                    <div class="myra-explain-title">Couldn't Match</div>
+                    <ul class="myra-explain-list">${(missedLines.length ? missedLines : ["Nothing. Exact match."]).map(x => `<li>${x}</li>`).join("")}</ul>
+                  </div>
+                </div>
+              `;
+            }
+
+            function beerMismatchSpeech(primary, backup, droppedKey) {
+              const wanted = [];
+              if (state.beer.category) wanted.push(state.beer.category);
+              if (state.beer.style) wanted.push(state.beer.style);
+              if (state.beer.container) wanted.push(`in a ${state.beer.container}`);
+              if (state.beer.abvRange && state.beer.abvRange !== "any") wanted.push(`${state.beer.abvRange} ABV`);
+              const wantedLine = wanted.length ? wanted.join(" ") : "your preferences";
+
+              const focus = (() => {
+                if (droppedKey === "category" && state.beer.category) return { key: "category", wanted: state.beer.category, got: safeText(primary.category) };
+                if (droppedKey === "style" && state.beer.style) return { key: "style", wanted: state.beer.style, got: safeText(primary.style) };
+                if (droppedKey === "container" && state.beer.container) return { key: "container", wanted: state.beer.container, got: primary.can === "✅" ? "can" : primary.bottle === "✅" ? "bottle" : "unknown" };
+                if (droppedKey === "abv" && state.beer.abvRange) return { key: "abv", wanted: state.beer.abvRange, got: safeText(primary.abv_percent) };
+                return null;
+              })();
+
+              const why = focus
+                ? `I understand you wanted ${wantedLine}, but I could not match ${focus.key} exactly. You asked for ${focus.wanted}, but I found ${focus.got}.`
+                : `I understand you wanted ${wantedLine}, but I couldn't match every detail exactly.`;
+
+              const primaryLine = `Closest pick is ${primary.name}.`;
+              if (backup) return `${why} ${primaryLine} Backup pick is ${backup.name}.`;
+              return `${why} ${primaryLine}`;
+            }
+
+            if (strict.length) {
+              const b = pickBest(strict);
+              if (!b) return;
+              const conf = 0.9;
+              els.resultsBox.appendChild(renderBeerCard(b, "Best match", { confidence: conf }));
+              state.lastPick = { mode: "beer", name: b.name };
+              const avail = genericAvailabilityText(b);
+              const tone = conf >= 0.85 ? "I'm confident about this pick." : "This is my best match.";
+              window.MyraVoice && window.MyraVoice.speak(`${tone} ${b.name}.${avail ? ` ${avail}.` : ""}`);
+              savePrefs();
+              return;
+            }
+
+            if (
+              state.interaction !== "manual" &&
+              window.MyraVoice &&
+              (window.SpeechRecognition || window.webkitSpeechRecognition) &&
+              !state.beer.priorityKeep &&
+              state.beer.category &&
+              state.beer.style
+            ) {
+              const a = await ask(`I can't always match both category and style. Which matters more to you, the category or the style?`);
+              const n = normalize(a);
+              if (n.includes("category")) state.beer.priorityKeep = "category";
+              else if (n.includes("style")) state.beer.priorityKeep = "style";
+            }
+
+            const relaxOrder = (() => {
+              const base = ["food", "direction", "package", "container", "tag", "hop", "yeast", "brewery", "style", "category", "abv"];
+              if (state.beer.priorityKeep === "style") {
+                // Prefer keeping style: relax category sooner.
+                return base.map(k => (k === "style" ? "category" : k === "category" ? "style" : k));
+              }
+              if (state.beer.priorityKeep === "category") return base;
+              return base;
+            })();
+            let primary = null;
+            let dropped = null;
+
+            for (const key of relaxOrder) {
+              const saved = { ...state.beer };
+
+              if (key === "food") {
+                state.beer.foodToken = null;
+                state.beer.withFood = null;
+              }
+              if (key === "direction") state.beer.flavorDirection = null;
+              if (key === "package") state.beer.package = null;
+              if (key === "container") state.beer.container = null;
+              if (key === "tag") state.beer.tag = null;
+              if (key === "hop") state.beer.hop = null;
+              if (key === "yeast") state.beer.yeast = null;
+              if (key === "brewery") state.beer.brewery = null;
+              if (key === "style") state.beer.style = null;
+              if (key === "category") state.beer.category = null;
+              if (key === "abv") state.beer.abvRange = "any";
+
+              const relaxed = inv.filter(beerStrictFilter);
+              if (relaxed.length) {
+                primary = pickBest(relaxed);
+                dropped = key;
+                Object.assign(state.beer, saved);
+                break;
+              }
+              Object.assign(state.beer, saved);
+            }
+
+            if (!primary) {
+              primary = pickBest(inv);
+              if (!primary) return;
+              els.resultsBox.appendChild(renderBeerCard(primary, "Closest pick", { confidence: 0.55 }));
+              state.lastPick = { mode: "beer", name: primary.name };
+              const avail = genericAvailabilityText(primary);
+              window.MyraVoice &&
+                window.MyraVoice.speak(
+                  `I couldn't find an exact match, so I picked the closest option: ${primary.name}.${avail ? ` ${avail}.` : ""}`
+                );
+              savePrefs();
+              return;
+            }
+
+            const wantedCategory = state.beer.category;
+            const wantedStyle = state.beer.style;
+            const explanation = document.createElement("p");
+            explanation.style.margin = "14px 2px";
+            explanation.style.color = "rgba(245,245,255,0.75)";
+
+            if (dropped === "category" && wantedCategory) {
+              explanation.textContent = `I couldn't find an exact match in ${wantedCategory}. Here is the closest option that fits your other preferences.`;
+            } else if (dropped === "style" && wantedStyle) {
+              explanation.textContent = `I couldn't find an exact match in the ${wantedStyle} style. Here is the closest option that fits your other preferences.`;
+            } else if (dropped === "container" && state.beer.container) {
+              explanation.textContent = `I couldn't find an exact match in that container. Here is the closest option that fits your other preferences.`;
+            } else {
+              explanation.textContent = `I couldn't find an exact match with every preference, so I picked the closest option.`;
+            }
+
+            let primaryCardEl = renderBeerCard(primary, "Closest pick", { confidence: 0.78 });
+            els.resultsBox.appendChild(primaryCardEl);
+            state.lastPick = { mode: "beer", name: primary.name };
+
+            // Backup option: try to satisfy the dropped constraint by relaxing the opposite (style <-> category).
+            let backup = null;
+            if (dropped === "category" && wantedCategory) {
+              const saved = { ...state.beer };
+              state.beer.category = wantedCategory;
+              state.beer.style = null;
+              const pool = inv.filter(beerStrictFilter);
+              backup = pickBest(pool);
+              Object.assign(state.beer, saved);
+              if (backup) {
+                const p = document.createElement("p");
+                p.style.margin = "10px 2px 12px";
+                p.style.color = "rgba(245,245,255,0.75)";
+                p.textContent = "If you're set on that category, here's a backup option with a different style.";
+                els.resultsBox.appendChild(explanation);
+                els.resultsBox.appendChild(p);
+                {
+                  const backupCardEl = renderBeerCard(backup, "Backup pick", { confidence: 0.72 });
+                  const compare = document.createElement("div");
+                  compare.className = "myra-compare";
+                  if (primaryCardEl && primaryCardEl.parentNode) primaryCardEl.parentNode.removeChild(primaryCardEl);
+                  if (primaryCardEl) compare.appendChild(primaryCardEl);
+                  compare.appendChild(backupCardEl);
+                  els.resultsBox.appendChild(compare);
+                }
+                const avail1 = genericAvailabilityText(primary);
+                const avail2 = genericAvailabilityText(backup);
+                window.MyraVoice &&
+                  window.MyraVoice.speak(
+                    `${beerMismatchSpeech(primary, backup, dropped)}${avail1 ? ` ${avail1}.` : ""}${avail2 ? ` ${avail2}.` : ""}`
+                  );
+                savePrefs();
+              } else {
+                els.resultsBox.appendChild(explanation);
+                const avail1 = genericAvailabilityText(primary);
+                window.MyraVoice &&
+                  window.MyraVoice.speak(`${beerMismatchSpeech(primary, null, dropped)}${avail1 ? ` ${avail1}.` : ""}`);
+                savePrefs();
+              }
+              return;
+            }
+
+            if (dropped === "style" && wantedStyle) {
+              const saved = { ...state.beer };
+              state.beer.style = wantedStyle;
+              state.beer.category = null;
+              const pool = inv.filter(beerStrictFilter);
+              backup = pickBest(pool);
+              Object.assign(state.beer, saved);
+              if (backup) {
+                const p = document.createElement("p");
+                p.style.margin = "10px 2px 12px";
+                p.style.color = "rgba(245,245,255,0.75)";
+                p.textContent = "If you're set on that style, here's a backup option in a different category.";
+                els.resultsBox.appendChild(explanation);
+                els.resultsBox.appendChild(p);
+                {
+                  const backupCardEl = renderBeerCard(backup, "Backup pick", { confidence: 0.72 });
+                  const compare = document.createElement("div");
+                  compare.className = "myra-compare";
+                  if (primaryCardEl && primaryCardEl.parentNode) primaryCardEl.parentNode.removeChild(primaryCardEl);
+                  if (primaryCardEl) compare.appendChild(primaryCardEl);
+                  compare.appendChild(backupCardEl);
+                  els.resultsBox.appendChild(compare);
+                }
+                const avail1 = genericAvailabilityText(primary);
+                const avail2 = genericAvailabilityText(backup);
+                window.MyraVoice &&
+                  window.MyraVoice.speak(
+                    `${beerMismatchSpeech(primary, backup, dropped)}${avail1 ? ` ${avail1}.` : ""}${avail2 ? ` ${avail2}.` : ""}`
+                  );
+                savePrefs();
+              } else {
+                els.resultsBox.appendChild(explanation);
+                const avail1 = genericAvailabilityText(primary);
+                window.MyraVoice &&
+                  window.MyraVoice.speak(`${beerMismatchSpeech(primary, null, dropped)}${avail1 ? ` ${avail1}.` : ""}`);
+                savePrefs();
+              }
+              return;
+            }
+
+            els.resultsBox.appendChild(explanation);
+            {
+              const avail1 = genericAvailabilityText(primary);
+              window.MyraVoice &&
+                window.MyraVoice.speak(`${beerMismatchSpeech(primary, null, dropped)}${avail1 ? ` ${avail1}.` : ""}`);
+              savePrefs();
+            }
+            return;
+          }
+
+          // bar
+          const inv = data.barInv || [];
+          if (state.bar.intent === "cocktail") {
+            const note = document.createElement("p");
+            note.style.margin = "0 2px 14px";
+            note.style.color = "rgba(245,245,255,0.75)";
+            note.textContent = "Cocktail request: this inventory does not include recipes yet, so I will recommend a bottle from what you have.";
+            els.resultsBox.appendChild(note);
+            window.MyraVoice && window.MyraVoice.speak("I heard you want a cocktail, but I do not have cocktail recipes in this inventory yet. I will recommend a bottle.");
+            state.bar.intent = "bottle";
+          }
+          const strict = inv.filter(barStrictFilter);
+
+          function pickBest(list) {
+            const best = list
+              .map(r => ({ r, s: scoreBar(r) }))
+              .sort((a, b) => b.s - a.s)[0];
+            return best ? best.r : null;
+          }
+
+          function renderBarCard(r, label, { confidence } = {}) {
+            const flags = [
+              String(r.sweet || "").trim() === "1" ? "sweet" : null,
+              String(r.bitter || "").trim() === "1" ? "bitter" : null,
+              String(r.creamy || "").trim() === "1" ? "creamy" : null,
+            ].filter(Boolean);
+            const avail = genericAvailabilityText(r);
+            const q = encodeURIComponent(`${safeText(r.name)} ${safeText(r.spirit)} bottle`);
+            const img =
+              (data.images && data.images.by_name && r.name && data.images.by_name[safeText(r.name)]) ||
+              "";
+            const div = document.createElement("div");
+            div.className = "myra-result-card";
+            div.innerHTML = `
+              <div class="myra-result-header">
+                <h3 class="myra-result-title">${label ? `${label}: ` : ""}${safeText(r.name)}</h3>
+                <div class="myra-result-subtitle">${safeText(r.spirit) || ""}${r.abv ? ` · ${r.abv}% ABV` : ""}</div>
+                <div class="myra-badges">
+                  ${confidence != null ? `<span class="myra-badge myra-badge-confidence">${confidenceLabel(confidence)}</span>` : ""}
+                  ${flags.map(f => `<span class="myra-badge">${f}</span>`).join("")}
+                  ${state.bar.serve ? `<span class="myra-badge">${state.bar.serve}</span>` : ""}
+                </div>
+              </div>
+              <div class="myra-result-body">
+                ${
+                  img
+                    ? `<div class="myra-media"><img src="${img}" alt="${safeText(r.name)}"><div>${
+                        safeText(r.description) ? `<p style="margin: 0;">${safeText(r.description)}</p>` : `<p style="margin: 0;"> </p>`
+                      }<ul class="myra-kv">${avail ? `<li><strong>Availability</strong>${avail}</li>` : ""}</ul>${barExplainHtml(r)}<div class="myra-result-actions"><a class="myra-link btn" href="https://www.google.com/search?tbm=isch&q=${q}" target="_blank" rel="noopener noreferrer">Search Images</a></div></div></div>`
+                    : `${safeText(r.description) ? `<p style="margin: 0;">${safeText(r.description)}</p>` : `<p style="margin: 0;"> </p>`}
+                       <ul class="myra-kv">${avail ? `<li><strong>Availability</strong>${avail}</li>` : ""}</ul>
+                       ${barExplainHtml(r)}
+                       <div class="myra-result-actions"><a class="myra-link btn" href="https://www.google.com/search?tbm=isch&q=${q}" target="_blank" rel="noopener noreferrer">Search Images</a></div>`
+                }
+              </div>
+            `;
+            div.appendChild(createStoreBox({ inStock: null }));
+            return div;
+          }
+
+          function barMismatches(r) {
+            const s = state.bar;
+            const out = [];
+            if (s.spirit && safeText(r.spirit) !== s.spirit) out.push({ key: "spirit", wanted: s.spirit, got: safeText(r.spirit) });
+            if (s.name && safeText(r.name) !== s.name) out.push({ key: "name", wanted: s.name, got: safeText(r.name) });
+            const sweet = r?._myra?.sweet ?? (String(r.sweet || "").trim() === "1");
+            const bitter = r?._myra?.bitter ?? (String(r.bitter || "").trim() === "1");
+            const creamy = r?._myra?.creamy ?? (String(r.creamy || "").trim() === "1");
+            if (s.sweet && !sweet) out.push({ key: "sweet", wanted: "sweet", got: "not sweet" });
+            if (s.bitter && !bitter) out.push({ key: "bitter", wanted: "bitter", got: "not bitter" });
+            if (s.creamy && !creamy) out.push({ key: "creamy", wanted: "creamy", got: "not creamy" });
+            if (s.proofPref) {
+              const abv = r?._myra?.abv != null ? r._myra.abv : toNum(r.abv, null);
+              if (Number.isFinite(abv)) {
+                if (s.proofPref === "high" && abv < 45) out.push({ key: "proof", wanted: "high proof", got: `${abv}%` });
+                if (s.proofPref === "low" && abv > 35) out.push({ key: "proof", wanted: "low proof", got: `${abv}%` });
+              }
+            }
+            return out;
+          }
+
+          function barExplainHtml(r) {
+            const s = state.bar;
+            const matched = [];
+            const missed = barMismatches(r);
+            const hasPref = Boolean(s.spirit || s.name || s.sweet || s.bitter || s.creamy || s.proofPref);
+            if (!hasPref) return "";
+
+            if (s.spirit && safeText(r.spirit) === s.spirit) matched.push(`Spirit: ${safeText(r.spirit)}`);
+            if (s.name && safeText(r.name) === s.name) matched.push(`Name: ${safeText(r.name)}`);
+            const prof = [];
+            if (s.sweet) prof.push("sweet");
+            if (s.bitter) prof.push("bitter");
+            if (s.creamy) prof.push("creamy");
+            if (prof.length) matched.push(`Taste: ${prof.join(", ")}`);
+            if (s.proofPref) matched.push(`Proof: ${s.proofPref}`);
+
+            const avoidBits = [];
+            (s.excludes?.spirits || []).forEach(v => avoidBits.push(v));
+            (s.excludes?.names || []).forEach(v => avoidBits.push(v));
+            if (avoidBits.length) matched.push(`Avoiding: ${avoidBits.join(", ")}`);
+
+            const missedLines = missed.map(m => `${m.key[0].toUpperCase() + m.key.slice(1)}: wanted ${m.wanted}, got ${m.got}`);
+            return `
+              <div class="myra-explain">
+                <div class="myra-explain-box">
+                  <div class="myra-explain-title">Matched</div>
+                  <ul class="myra-explain-list">${(matched.length ? matched : ["Best available match"]).map(x => `<li>${x}</li>`).join("")}</ul>
+                </div>
+                <div class="myra-explain-box">
+                  <div class="myra-explain-title">Couldn't Match</div>
+                  <ul class="myra-explain-list">${(missedLines.length ? missedLines : ["Nothing. Exact match."]).map(x => `<li>${x}</li>`).join("")}</ul>
+                </div>
+              </div>
+            `;
+          }
+
+          function barMismatchSpeech(primary, backup, droppedKey) {
+            const wanted = [];
+            if (state.bar.spirit) wanted.push(state.bar.spirit);
+            const prof = [];
+            if (state.bar.sweet) prof.push("sweet");
+            if (state.bar.bitter) prof.push("bitter");
+            if (state.bar.creamy) prof.push("creamy");
+            if (prof.length) wanted.push(prof.join(" and "));
+            if (state.bar.proofPref) wanted.push(`${state.bar.proofPref} proof`);
+            const wantedLine = wanted.length ? wanted.join(" ") : "your preferences";
+
+            const gotSpirit = safeText(primary.spirit);
+            const focus = (() => {
+              if (droppedKey === "spirit" && state.bar.spirit) return { key: "spirit", wanted: state.bar.spirit, got: gotSpirit };
+              if (droppedKey === "profile" && prof.length) return { key: "taste profile", wanted: prof.join(" and "), got: gotSpirit ? `a ${gotSpirit}` : "this" };
+              if (droppedKey === "proof" && state.bar.proofPref) return { key: "proof", wanted: state.bar.proofPref, got: safeText(primary.abv) ? `${primary.abv}%` : "unknown" };
+              return null;
+            })();
+
+            const why = focus
+              ? `I understand you wanted ${wantedLine}, but I could not match ${focus.key} exactly. You asked for ${focus.wanted}, but I found ${focus.got}.`
+              : `I understand you wanted ${wantedLine}, but I couldn't match every detail exactly.`;
+
+            const primaryLine = `Closest pick is ${safeText(primary.name)}.`;
+            if (backup) return `${why} ${primaryLine} Backup pick is ${safeText(backup.name)}.`;
+            return `${why} ${primaryLine}`;
+          }
+
+          if (strict.length) {
+            const r = pickBest(strict);
+            if (!r) return;
+            const conf = 0.9;
+            els.resultsBox.appendChild(renderBarCard(r, "Best match", { confidence: conf }));
+            state.lastPick = { mode: "bar", name: safeText(r.name) };
+            const avail = genericAvailabilityText(r);
+            const tone = conf >= 0.85 ? "I'm confident about this pick." : "This is my best match.";
+            window.MyraVoice && window.MyraVoice.speak(`${tone} ${safeText(r.name)}.${avail ? ` ${avail}.` : ""}`);
+            savePrefs();
+            return;
+          }
+
+          if (
+            state.interaction !== "manual" &&
+            window.MyraVoice &&
+            (window.SpeechRecognition || window.webkitSpeechRecognition) &&
+            !state.bar.priorityKeep &&
+            state.bar.spirit &&
+            (state.bar.sweet || state.bar.bitter || state.bar.creamy)
+          ) {
+            const a = await ask(`I can't always match both base spirit and taste profile. Which matters more to you, the spirit or the taste?`);
+            const n = normalize(a);
+            if (n.includes("spirit") || n.includes("gin") || n.includes("vodka") || n.includes("whiskey") || n.includes("rum") || n.includes("tequila")) state.bar.priorityKeep = "spirit";
+            else if (n.includes("taste") || n.includes("sweet") || n.includes("bitter") || n.includes("creamy")) state.bar.priorityKeep = "profile";
+          }
+
+          const relaxOrder = (() => {
+            const base = ["name", "spirit", "profile", "proof"];
+            if (state.bar.priorityKeep === "spirit") {
+              // Prefer keeping spirit: relax profile sooner.
+              return base.map(k => (k === "spirit" ? "profile" : k === "profile" ? "spirit" : k));
+            }
+            return base;
+          })();
+          let primary = null;
+          let dropped = null;
+
+          for (const key of relaxOrder) {
+            const saved = { ...state.bar };
+            if (key === "name") state.bar.name = null;
+            if (key === "spirit") state.bar.spirit = null;
+            if (key === "profile") {
+              state.bar.sweet = false;
+              state.bar.bitter = false;
+              state.bar.creamy = false;
+            }
+            if (key === "proof") state.bar.proofPref = null;
+
+            const relaxed = inv.filter(barStrictFilter);
+            if (relaxed.length) {
+              primary = pickBest(relaxed);
+              dropped = key;
+              Object.assign(state.bar, saved);
+              break;
+            }
+            Object.assign(state.bar, saved);
+          }
+
+          if (!primary) {
+            primary = pickBest(inv);
+            if (!primary) return;
+            els.resultsBox.appendChild(renderBarCard(primary, "Closest pick", { confidence: 0.55 }));
+            state.lastPick = { mode: "bar", name: safeText(primary.name) };
+            const avail = genericAvailabilityText(primary);
+            window.MyraVoice &&
+              window.MyraVoice.speak(
+                `I couldn't find an exact match, so I picked the closest option: ${safeText(primary.name)}.${avail ? ` ${avail}.` : ""}`
+              );
+            savePrefs();
+            return;
+          }
+
+          const wantedSpirit = state.bar.spirit;
+          const wantedName = state.bar.name;
+          const explanation = document.createElement("p");
+          explanation.style.margin = "14px 2px";
+          explanation.style.color = "rgba(245,245,255,0.75)";
+          if (dropped === "name" && wantedName) {
+            explanation.textContent = `I couldn't find an exact match for ${wantedName}. Here is the closest option that fits your other preferences.`;
+          } else if (dropped === "spirit" && wantedSpirit) {
+            explanation.textContent = `I couldn't find an exact match for ${wantedSpirit}. Here is the closest option that fits your other preferences.`;
+          } else {
+            explanation.textContent = `I couldn't find an exact match with every preference, so I picked the closest option.`;
+          }
+
+          let primaryCardEl = renderBarCard(primary, "Closest pick", { confidence: 0.78 });
+          els.resultsBox.appendChild(primaryCardEl);
+          state.lastPick = { mode: "bar", name: safeText(primary.name) };
+
+          // Backup option: if spirit had to be dropped, offer a backup that stays on spirit while relaxing profile/proof.
+          if (dropped === "spirit" && wantedSpirit) {
+            const saved = { ...state.bar };
+            state.bar.spirit = wantedSpirit;
+            state.bar.name = null;
+            state.bar.sweet = false;
+            state.bar.bitter = false;
+            state.bar.creamy = false;
+            state.bar.proofPref = null;
+            const pool = inv.filter(barStrictFilter);
+            const backup = pickBest(pool);
+            Object.assign(state.bar, saved);
+            if (backup) {
+              const p = document.createElement("p");
+              p.style.margin = "10px 2px 12px";
+              p.style.color = "rgba(245,245,255,0.75)";
+              p.textContent = `If you're set on ${wantedSpirit}, here's a backup option that may differ on taste profile.`;
+              els.resultsBox.appendChild(explanation);
+              els.resultsBox.appendChild(p);
+              {
+                const backupCardEl = renderBarCard(backup, "Backup pick", { confidence: 0.72 });
+                const compare = document.createElement("div");
+                compare.className = "myra-compare";
+                if (primaryCardEl && primaryCardEl.parentNode) primaryCardEl.parentNode.removeChild(primaryCardEl);
+                if (primaryCardEl) compare.appendChild(primaryCardEl);
+                compare.appendChild(backupCardEl);
+                els.resultsBox.appendChild(compare);
+              }
+              const avail1 = genericAvailabilityText(primary);
+              const avail2 = genericAvailabilityText(backup);
+              window.MyraVoice &&
+                window.MyraVoice.speak(
+                  `${barMismatchSpeech(primary, backup, dropped)}${avail1 ? ` ${avail1}.` : ""}${avail2 ? ` ${avail2}.` : ""}`
+                );
+              savePrefs();
+              return;
+            }
+          }
+
+          els.resultsBox.appendChild(explanation);
+          {
+            const avail1 = genericAvailabilityText(primary);
+            window.MyraVoice &&
+              window.MyraVoice.speak(
+                `${barMismatchSpeech(primary, null, dropped)}${avail1 ? ` ${avail1}.` : ""}`
+              );
+            savePrefs();
+          }
+          return;
+        }
+
+        function resetAll() {
+          state.guided = false;
+          state.interaction = null;
+          state.lastUtterance = null;
+          state.lastPick = null;
+          state.mode = null;
+          state.stepIndex = 0;
+          state.stepAnswers = { wine: {}, beer: {}, bar: {} };
+          state.wine = {
+            category: null,
+            grape: null,
+            occasion: null,
+            country: null,
+            price: null,
+            priceMin: null,
+            priceMax: null,
+            priceTarget: null,
+            priorityKeep: null,
+            excludes: { countries: [], grapes: [], categories: [], flavors: [], names: [] },
+            acidity: null,
+            tannin: null,
+            withFood: null,
+            foodType: null,
+            foodChoice: null,
+            flavors: [],
+            sweetness: 3,
+            body: 3,
+          };
+          state.beer = {
+            category: null,
+            style: null,
+            occasion: null,
+            brewery: null,
+            priorityKeep: null,
+            excludes: { categories: [], styles: [], breweries: [], names: [] },
+            hop: null,
+            yeast: null,
+            tag: null,
+            container: null,
+            package: null,
+            withFood: null,
+            foodCategory: null,
+            foodToken: null,
+            flavorDirection: null,
+            abvRange: "any",
+          };
+          state.bar = {
+            intent: null, // "bottle" | "cocktail"
+            priorityKeep: null,
+            spirit: null,
+            name: null,
+            excludes: { spirits: [], names: [] },
+            sweet: false,
+            bitter: false,
+            creamy: false,
+            serve: null,
+            proofPref: null,
+          };
+          els.homeStatus.textContent = " ";
+          els.stepStatus.textContent = " ";
+          els.micStatus.textContent = " ";
+        }
+
+        function applyTalkText(text) {
+          const raw = safeText(text);
+          const n = normalize(raw);
+
+          if (
+            n.includes("beer") ||
+            n.includes("ipa") ||
+            n.includes("lager") ||
+            n.includes("pilsner") ||
+            n.includes("stout") ||
+            n.includes("porter") ||
+            n.includes("ale") ||
+            n.includes("sour")
+          ) {
+            state.mode = "beer";
+          } else if (
+            n.includes("spirit") ||
+            n.includes("liquor") ||
+            n.includes("cocktail") ||
+            n.includes("vodka") ||
+            n.includes("whiskey") ||
+            n.includes("whisky") ||
+            n.includes("gin") ||
+            n.includes("rum") ||
+            n.includes("tequila")
+          ) {
+            state.mode = "bar";
+          } else {
+            state.mode = "wine";
+          }
+
+          if (state.mode === "wine") {
+            const foodsByType = {};
+            ["meats", "cheese", "pasta", "specialty"].forEach(t => (foodsByType[t] = wineUniquePipe(t)));
+            const parsed = window.MyraNlu.parseWine(raw, {
+              grapes: wineUnique("grape_primary"),
+              buyerEvents: wineUnique("buyer_event"),
+              countries: wineUnique("country"),
+              flavors: uniq(wineUnique("flavor_primary").concat(wineUnique("flavor_secondary")).concat(wineUnique("flavor_tertiary"))),
+              foodsByType,
+              wordmap: data.wordmap,
+            });
+            applyStatePatch("wine", parsed.statePatch || {});
+            if (Array.isArray(parsed.statePatch?.flavors)) state.wine.flavors = parsed.statePatch.flavors.slice(0, 3);
+          } else if (state.mode === "beer") {
+            const parsed = window.MyraNlu.parseBeer(raw, {
+              categories: beerUnique("category"),
+              styles: beerUnique("style"),
+              breweries: beerUnique("brewery"),
+              hops: beerUnique("hops"),
+              yeasts: beerUnique("yeast"),
+              tags: beerUnique("classification_tags"),
+              foods: beerUnique("foods_best_with"),
+              wordmap: data.wordmap,
+            });
+            applyStatePatch("beer", parsed.statePatch || {});
+          } else {
+            const parsed = window.MyraNlu.parseBar(raw, {
+              spirits: barUnique("spirit"),
+              names: barUnique("name"),
+              wordmap: data.wordmap,
+            });
+            applyStatePatch("bar", parsed.statePatch || {});
+          }
+        }
+
+        async function ask(prompt) {
+          await window.MyraVoice.speakAsync(prompt);
+          const heard = await window.MyraVoice.listenOnce({ timeoutMs: 9000, startDelayMs: 0 });
+          return safeText(heard);
+        }
+
+        async function guidedFlow() {
+          state.guided = true;
+          state.interaction = "guided";
+          show(els.step);
+          renderModeChooser();
+
+          const a = await ask("Are you looking for wine, beer, or spirits?");
+          const n = normalize(a);
+          if (n.includes("beer")) state.mode = "beer";
+          else if (n.includes("spirit") || n.includes("liquor") || n.includes("vodka") || n.includes("whiskey") || n.includes("gin") || n.includes("rum") || n.includes("tequila")) state.mode = "bar";
+          else state.mode = "wine";
+
+          state.stepIndex = 0;
+          renderStep();
+
+          // Walk steps automatically.
+          while (state.guided) {
+            const steps = stepsForMode(state.mode);
+            const step = steps[state.stepIndex];
+            if (!step) break;
+
+            els.stepStatus.textContent = "Listening…";
+            const answer = await ask(step.prompt);
+            els.stepStatus.textContent = " ";
+            state.stepAnswers[state.mode][step.key] = answer;
+            try {
+              step.parseAnswer(answer);
+            } catch (err) {
+              console.error(err);
+            }
+            // Render and commit from the current state (so UI stays in sync).
+            renderStep();
+            try {
+              step.commit();
+            } catch {
+              // ignore
+            }
+            state.stepIndex++;
+            if (state.stepIndex >= steps.length) break;
+            renderStep();
+          }
+          await showResults();
+          state.guided = false;
+        }
+
+        async function talkFlow() {
+          show(els.home);
+          state.interaction = "talk";
+          els.homeStatus.textContent = "Listening…";
+          const heard = await window.MyraVoice.listenOnce({ timeoutMs: 9000, startDelayMs: 0 });
+          els.homeStatus.textContent = " ";
+          const text = safeText(heard);
+          state.lastUtterance = text;
+          applyTalkText(text);
+          await showResults();
+        }
+
+        async function refineFlow() {
+          show(els.results);
+          if (!window.MyraVoice || typeof window.MyraVoice.listenOnce !== "function") {
+            els.micStatus.textContent = "Voice recognition not available in this browser.";
+            return;
+          }
+          els.micStatus.textContent = "Listening…";
+          const heard = await window.MyraVoice.listenOnce({ timeoutMs: 9000, startDelayMs: 0 });
+          els.micStatus.textContent = " ";
+          const text = safeText(heard);
+          if (!text) return;
+
+          const n = normalize(text);
+          // Global quick commands
+          if (/\b(start over|restart|reset)\b/.test(n)) {
+            resetAll();
+            show(els.home);
+            return;
+          }
+
+          // "Another one" => exclude last pick by name and rerun.
+          if (/\b(another|different|something else|next)\b/.test(n) && state.lastPick?.name) {
+            const name = safeText(state.lastPick.name);
+            if (state.mode === "wine") state.wine.excludes.names = mergeUnique(state.wine.excludes.names, [name]);
+            if (state.mode === "beer") state.beer.excludes.names = mergeUnique(state.beer.excludes.names, [name]);
+            if (state.mode === "bar") state.bar.excludes.names = mergeUnique(state.bar.excludes.names, [name]);
+            await showResults();
+            return;
+          }
+
+          // Price direction shortcuts
+          if (state.mode === "wine") {
+            if (/\b(cheaper|less expensive|lower price|lower budget|more budget)\b/.test(n)) {
+              state.wine.price = "budget";
+              state.wine.priceMin = null;
+              state.wine.priceMax = state.wine.priceMax != null ? Math.max(10, Number(state.wine.priceMax) - 5) : null;
+            }
+            if (/\b(more expensive|nicer|step up|upgrade|premium|top shelf)\b/.test(n)) {
+              state.wine.price = "premium";
+              state.wine.priceMin = null;
+              state.wine.priceMax = null;
+            }
+          }
+
+          // Apply domain patches from NLU.
+          if (state.mode === "wine") {
+            const foodsByType = {};
+            ["meats", "cheese", "pasta", "specialty"].forEach(t => (foodsByType[t] = wineUniquePipe(t)));
+            const parsed = window.MyraNlu.parseWine(text, {
+              grapes: wineUnique("grape_primary"),
+              buyerEvents: wineUnique("buyer_event"),
+              countries: wineUnique("country"),
+              flavors: uniq(wineUnique("flavor_primary").concat(wineUnique("flavor_secondary")).concat(wineUnique("flavor_tertiary"))),
+              foodsByType,
+              wordmap: data.wordmap,
+            });
+            applyStatePatch("wine", parsed.statePatch || {});
+            if (Array.isArray(parsed.statePatch?.flavors)) state.wine.flavors = parsed.statePatch.flavors.slice(0, 3);
+          } else if (state.mode === "beer") {
+            const parsed = window.MyraNlu.parseBeer(text, {
+              categories: beerUnique("category"),
+              styles: beerUnique("style"),
+              breweries: beerUnique("brewery"),
+              hops: beerUnique("hops"),
+              yeasts: beerUnique("yeast"),
+              tags: beerUnique("classification_tags"),
+              foods: beerUnique("foods_best_with"),
+              wordmap: data.wordmap,
+            });
+            applyStatePatch("beer", parsed.statePatch || {});
+          } else {
+            const parsed = window.MyraNlu.parseBar(text, {
+              spirits: barUnique("spirit"),
+              names: barUnique("name"),
+              wordmap: data.wordmap,
+            });
+            applyStatePatch("bar", parsed.statePatch || {});
+          }
+
+          await showResults();
+        }
+
+        function currentSteps() {
+          return state.mode ? stepsForMode(state.mode) : [];
+        }
+
+        function loadPrefs() {
+          try {
+            const raw = localStorage.getItem("myra:prefs:v1");
+            if (!raw) return;
+            const snap = JSON.parse(raw);
+            if (!snap || snap.version !== 1) return;
+
+            // Start from defaults (resetAll already ran), then merge.
+            if (snap.mode === "wine" || snap.mode === "beer" || snap.mode === "bar") state.mode = snap.mode;
+            if (snap.wine && typeof snap.wine === "object") Object.assign(state.wine, snap.wine);
+            if (snap.beer && typeof snap.beer === "object") Object.assign(state.beer, snap.beer);
+            if (snap.bar && typeof snap.bar === "object") Object.assign(state.bar, snap.bar);
+            if (snap.stepAnswers && typeof snap.stepAnswers === "object") state.stepAnswers = snap.stepAnswers;
+            if (snap.lastUtterance && typeof snap.lastUtterance === "string") state.lastUtterance = snap.lastUtterance;
+            els.homeStatus.textContent = "Loaded last preferences.";
+          } catch {
+            // ignore
+          }
+        }
+
+        els.btnGuided.addEventListener("click", async () => {
+          try {
+            await loadAll();
+          } catch (err) {
+            console.error(err);
+            els.homeStatus.textContent = "Failed to load data. Check your server and try again.";
+            return;
+          }
+          resetAll();
+          await guidedFlow();
+        });
+
+        els.btnTalk.addEventListener("click", async () => {
+          try {
+            await loadAll();
+          } catch (err) {
+            console.error(err);
+            els.homeStatus.textContent = "Failed to load data. Check your server and try again.";
+            return;
+          }
+          resetAll();
+          await talkFlow();
+        });
+
+        els.btnBack.addEventListener("click", () => {
+          if (!state.mode) return;
+          state.stepIndex = Math.max(0, state.stepIndex - 1);
+          renderStep();
+        });
+
+        els.btnNext.addEventListener("click", async () => {
+          if (!state.mode) return;
+          state.interaction = "manual";
+          const steps = currentSteps();
+          const step = steps[state.stepIndex];
+          if (step) step.commit();
+          state.stepIndex++;
+          if (state.stepIndex >= steps.length) {
+            await showResults();
+            return;
+          }
+          renderStep();
+        });
+
+        els.btnCancel.addEventListener("click", () => {
+          resetAll();
+          show(els.home);
+        });
+
+        els.btnResultsStartOver.addEventListener("click", () => {
+          resetAll();
+          show(els.home);
+        });
+
+        els.btnResultsTalk.addEventListener("click", async () => {
+          try {
+            await loadAll();
+          } catch (err) {
+            console.error(err);
+            els.homeStatus.textContent = "Failed to load data. Check your server and try again.";
+            return;
+          }
+          resetAll();
+          await talkFlow();
+        });
+
+        els.btnResultsRefine.addEventListener("click", async () => {
+          try {
+            await loadAll();
+          } catch (err) {
+            console.error(err);
+            els.homeStatus.textContent = "Failed to load data. Check your server and try again.";
+            return;
+          }
+          state.interaction = "talk";
+          await refineFlow();
+        });
+
+        // Enable mic button if browser supports recognition; it's informational in this UI.
+        els.micBtn.disabled = !(window.SpeechRecognition || window.webkitSpeechRecognition);
+        els.micBtn.textContent = "Browser Mic";
+        els.micStatus.textContent = els.micBtn.disabled
+          ? "Voice recognition not available in this browser."
+          : " ";
+
+        // Initialize defaults + restore last preferences.
+        resetAll();
+        loadPrefs();
+      })();
+    </script>
+  </body>
+</html>
