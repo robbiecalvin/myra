@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Myra</title>
-    <link rel="stylesheet" href="/css/myra-app.css" />
+    <link rel="stylesheet" href="./css/myra-app.css" />
   </head>
   <body>
     <div class="wrap" style="max-width: 940px; margin: 60px auto 80px; padding: 0 22px;">
@@ -24,7 +24,7 @@
           <div class="actions" style="margin-top: 18px; display: flex; gap: 12px; flex-wrap: wrap;">
             <button class="btn btn-primary" id="btnGuided" type="button">Start Myra</button>
             <button class="btn" id="btnTalk" type="button">Talk to Myra</button>
-            <a class="btn" href="/diagnostics.html">Diagnostics</a>
+            <a class="btn" href="./diagnostics.html">Diagnostics</a>
           </div>
           <div id="homeStatus" style="margin-top: 12px; color: rgba(245,245,255,0.7); min-height: 1.2em;"></div>
         </div>
@@ -57,8 +57,8 @@
       </div>
     </div>
 
-    <script src="/js/myra-voice.js"></script>
-    <script src="/js/myra-nlu.js"></script>
+    <script src="./js/myra-voice.js"></script>
+    <script src="./js/myra-nlu.js"></script>
     <script>
       (function () {
         "use strict";
@@ -211,33 +211,33 @@
 
           const notes = [];
           if (!data.wordmap) {
-            const { json, fromCache } = await fetchJsonWithCache("/data/myra-wordmap.json", "myra:cache:wordmap");
+            const { json, fromCache } = await fetchJsonWithCache("./data/myra-wordmap.json", "myra:cache:wordmap");
             data.wordmap = json;
             if (fromCache) notes.push("wordmap");
           }
           if (!data.images) {
             // Optional image map; safe default is empty.
             try {
-              const { json } = await fetchJsonWithCache("/data/myra-images.json", "myra:cache:images");
+              const { json } = await fetchJsonWithCache("./data/myra-images.json", "myra:cache:images");
               data.images = json && typeof json === "object" ? json : {};
             } catch {
               data.images = {};
             }
           }
           if (!data.wineInv) {
-            const { json, fromCache } = await fetchJsonWithCache("/data/inventory.json", "myra:cache:wineInv");
+            const { json, fromCache } = await fetchJsonWithCache("./data/inventory.json", "myra:cache:wineInv");
             data.wineInv = json;
             prepWineInventory(data.wineInv);
             if (fromCache) notes.push("wine inventory");
           }
           if (!data.beerInv) {
-            const { json, fromCache } = await fetchJsonWithCache("/data/beerinventory2.json", "myra:cache:beerInv");
+            const { json, fromCache } = await fetchJsonWithCache("./data/beerinventory2.json", "myra:cache:beerInv");
             data.beerInv = json;
             prepBeerInventory(data.beerInv);
             if (fromCache) notes.push("beer inventory");
           }
           if (!data.barInv) {
-            const { json, fromCache } = await fetchJsonWithCache("/data/hardbarinventory.json", "myra:cache:barInv");
+            const { json, fromCache } = await fetchJsonWithCache("./data/hardbarinventory.json", "myra:cache:barInv");
             data.barInv = json;
             prepBarInventory(data.barInv);
             if (fromCache) notes.push("spirits inventory");

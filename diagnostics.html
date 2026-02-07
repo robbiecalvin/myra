@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Myra Diagnostics</title>
-    <link rel="stylesheet" href="/css/myra-app.css" />
+    <link rel="stylesheet" href="./css/myra-app.css" />
   </head>
   <body>
     <div class="wrap" style="max-width: 980px; margin: 60px auto 80px; padding: 0 22px;">
@@ -18,7 +18,7 @@
       <div id="myra-app">
         <div class="screen active" style="display:block;">
           <div class="actions" style="display:flex; gap:12px; flex-wrap:wrap; margin-bottom:14px;">
-            <a class="btn" href="/index.html">Back to Myra</a>
+            <a class="btn" href="./index.html">Back to Myra</a>
             <button class="btn btn-primary" id="btnRun" type="button">Run Checks</button>
           </div>
           <div id="status" style="color: rgba(245,245,255,0.7); min-height: 1.2em;" aria-live="polite"></div>
@@ -99,10 +99,10 @@
           els.status.textContent = "Loading…";
 
           const [wine, beer, bar, images] = await Promise.all([
-            loadJson("/data/inventory.json"),
-            loadJson("/data/beerinventory2.json"),
-            loadJson("/data/hardbarinventory.json"),
-            loadJson("/data/myra-images.json").catch(() => ({ version: 1, by_sku: {}, by_name: {} })),
+            loadJson("./data/inventory.json"),
+            loadJson("./data/beerinventory2.json"),
+            loadJson("./data/hardbarinventory.json"),
+            loadJson("./data/myra-images.json").catch(() => ({ version: 1, by_sku: {}, by_name: {} })),
           ]);
 
           els.status.textContent = "Running checks…";
