@@ -438,6 +438,46 @@
           return 3;
         }
 
+        function isEuropeanCountry(country) {
+          const c = normalize(country);
+          if (!c) return false;
+          const eu = new Set([
+            "france",
+            "italy",
+            "spain",
+            "portugal",
+            "germany",
+            "austria",
+            "switzerland",
+            "greece",
+            "hungary",
+            "czech republic",
+            "slovakia",
+            "slovenia",
+            "croatia",
+            "romania",
+            "bulgaria",
+            "serbia",
+            "georgia",
+            "armenia",
+            "england",
+            "united kingdom",
+            "scotland",
+            "wales",
+            "ireland",
+            "netherlands",
+            "belgium",
+            "denmark",
+            "sweden",
+            "norway",
+            "finland",
+            "iceland",
+            "poland",
+            "ukraine",
+          ]);
+          return eu.has(c);
+        }
+
         function wineDrynessIndex(w) {
           const tannin = String(wineM(w, "style_tannin") || "").toLowerCase();
           const acid = String(wineM(w, "style_acidity") || "").toLowerCase();
@@ -471,6 +511,7 @@
           if (s.tannin && String(wineM(w, "style_tannin") || "").toLowerCase() === s.tannin) sc += 2;
           if (s.country && wineM(w, "country") === s.country) sc += 2;
           if (s.price && wineM(w, "price_tier") === s.price) sc += 2;
+          if (s.europePreferred && !s.country && isEuropeanCountry(wineM(w, "country"))) sc += 2;
 
           const prefBody = toNum(s.body, 3);
           const prefSweet = toNum(s.sweetness, 3);
@@ -1817,11 +1858,21 @@
               const missed = wineMismatches(w);
 
               const hasPref =
-                Boolean(s.category || s.country || s.grape || s.occasion || s.price || s.foodChoice || (Array.isArray(s.flavors) && s.flavors.length));
+                Boolean(
+                  s.category ||
+                  s.country ||
+                  s.grape ||
+                  s.occasion ||
+                  s.price ||
+                  s.europePreferred ||
+                  s.foodChoice ||
+                  (Array.isArray(s.flavors) && s.flavors.length)
+                );
               if (!hasPref && !(s.priceMax != null || s.priceMin != null || s.priceTarget != null)) return "";
 
               if (s.category && rm.category === s.category) matched.push(`Category: ${rm.category}`);
               if (s.country && rm.country === s.country) matched.push(`Country: ${rm.country}`);
+              if (s.europePreferred && !s.country && isEuropeanCountry(rm.country)) matched.push("Region: Europe");
               if (s.grape && rm.grape_primary === s.grape) matched.push(`Grape: ${rm.grape_primary}`);
               if (s.occasion && rm.buyer_event === s.occasion) matched.push(`Occasion: ${rm.buyer_event}`);
               if (s.price && rm.price_tier && normalize(rm.price_tier) === normalize(s.price)) matched.push(`Price tier: ${rm.price_tier}`);
@@ -1907,19 +1958,138 @@
               return `${why} I was only able to match ${got}. ${primaryLine}`;
             }
 
+            function wineNarrativeSpeech({ primary, backup, droppedKey, confidence, alt, includeMismatch = false }) {
+              const s = state.wine;
+              const rm = primary?._myra?.rm || primary.recommendation_matches || {};
+              const priceNum = primary?._myra?.priceNum != null ? primary._myra.priceNum : parseMoney(primary.price);
+              const avail = wineAvailabilityText(primary);
+              const inStock = wineIsInStock(primary) === true;
+
+              const catWord = (() => {
+                const c = safeText(s.category || rm.category);
+                if (c.toLowerCase().includes("red")) return "red";
+                if (c.toLowerCase().includes("white")) return "white";
+                if (c.toLowerCase().includes("sparkling")) return "sparkling";
+                if (c.toLowerCase().includes("rose")) return "rose";
+                return c ? c.toLowerCase() : "wine";
+              })();
+
+              const dryness = s.sweetness != null && Number(s.sweetness) <= 2 ? "dry" : "";
+              const budget = (() => {
+                if (s.priceMax != null) return `under $${s.priceMax}`;
+                if (s.priceTarget != null) return `around $${s.priceTarget}`;
+                if (s.priceMin != null) return `over $${s.priceMin}`;
+                if (s.price) return `${safeText(s.price)} priced`;
+                return "";
+              })();
+
+              const pairing = s.foodChoice ? `for ${s.foodChoice}` : "";
+              const regionPref = s.country ? `from ${s.country}` : s.europePreferred ? "European if possible" : "";
+
+              const recapBits = [dryness, catWord, budget, pairing, regionPref].filter(Boolean);
+              const recap = recapBits.length ? recapBits.join(" ") : "a wine recommendation";
+
+              const tannin = safeText(rm.style_tannin);
+              const acid = safeText(rm.style_acidity);
+              const body = safeText(rm.style_body);
+              const whySteak = (() => {
+                if (pairing && pairing.toLowerCase().includes("steak")) {
+                  const bits = [];
+                  if (tannin) bits.push(`${tannin} tannins`);
+                  if (acid) bits.push(`${acid} acidity`);
+                  if (body) bits.push(`${body} body`);
+                  return bits.length
+                    ? `For steak, I look for structure: ${bits.join(", ")}.`
+                    : "For steak, I look for structure: tannin, acidity, and enough body to stand up to the meat.";
+                }
+                return "";
+              })();
+
+              const notes = (primary?._myra?.flavors || [rm.flavor_primary, rm.flavor_secondary, rm.flavor_tertiary].map(safeText).filter(Boolean))
+                .filter(Boolean)
+                .join(", ");
+
+              const confLabel = confidence != null ? confidenceLabel(confidence) : "";
+              const confLine = confLabel ? `Confidence: ${confLabel}.` : "";
+
+              const detailsBits = [];
+              if (safeText(rm.country)) detailsBits.push(`from ${rm.country}`);
+              if (safeText(rm.grape_primary)) detailsBits.push(rm.grape_primary);
+              if (safeText(primary.price)) detailsBits.push(`priced ${primary.price}`);
+              else if (priceNum != null) detailsBits.push(`priced around $${priceNum}`);
+              if (safeText(primary.alcohol)) detailsBits.push(`${primary.alcohol}% ABV`);
+
+              const explainMismatch = includeMismatch ? wineMismatchSpeech(primary, backup || null, droppedKey || null) : "";
+
+              const callHold = inStock
+                ? `It's available. You can call ${STORE.name} at ${STORE.phoneDisplay} to put it on hold. ${primary.sku ? `Ask for SKU ${primary.sku}.` : `Ask for ${primary.name}.`}`
+                : "";
+
+              const directions = `If you need directions, press Directions.`;
+
+              let backupLine = "";
+              if (backup) {
+                const bAvail = wineAvailabilityText(backup);
+                backupLine = `Backup option: ${backup.name}.${bAvail ? ` ${bAvail}.` : ""}`;
+              }
+
+              let altLine = "";
+              if (!backup && alt) {
+                const arm = alt?._myra?.rm || alt.recommendation_matches || {};
+                altLine = `If you want an alternative, I can also suggest ${alt.name}${arm.country ? ` from ${arm.country}` : ""}.`;
+              } else if (!backup) {
+                altLine = "If you want an alternative, press Refine and say another one, or say more bold or more smooth.";
+              }
+
+              const opener = "Hi, I can help with that.";
+              const askLine = `You asked for ${recap}.`;
+              const recLine = `My recommendation is ${primary.name}.`;
+
+              const noteLine = notes ? `Notes: ${notes}.` : "";
+              const structureLine = [body ? `${body} body` : "", acid ? `${acid} acidity` : "", tannin ? `${tannin} tannins` : ""].filter(Boolean).join(", ");
+              const structureSentence = structureLine ? `Style: ${structureLine}.` : "";
+              const availabilitySentence = avail ? `${avail}.` : "";
+
+              return [
+                opener,
+                askLine,
+                explainMismatch,
+                whySteak,
+                confLine,
+                recLine,
+                detailsBits.length ? `Details: ${detailsBits.join(", ")}.` : "",
+                noteLine,
+                structureSentence,
+                availabilitySentence,
+                callHold,
+                backupLine,
+                altLine,
+                directions,
+              ]
+                .map(safeText)
+                .filter(Boolean)
+                .join(" ");
+            }
+
             if (strict.length) {
               const w = pickBest(strict);
               if (!w) return;
               const conf = 0.92;
               els.resultsBox.appendChild(renderWineCard(w, "Best match", { confidence: conf }));
               state.lastPick = { mode: "wine", name: w.name };
-              const avail = wineAvailabilityText(w);
-              const inStock = wineIsInStock(w);
-              const tone = conf >= 0.85 ? "I'm confident about this pick." : "This is my best match.";
-              const spoken =
-                `${tone} ${w.name}.${avail ? ` ${avail}.` : ""}` +
-                (inStock ? ` If you'd like, you can call ${STORE.name} at ${STORE.phoneDisplay} to put it on hold.` : "") +
-                ` Need directions?`;
+              const alt = (() => {
+                const others = strict.filter(x => x !== w);
+                if (!others.length) return null;
+                // Prefer a different country if possible.
+                const rm = w?._myra?.rm || w.recommendation_matches || {};
+                const primaryCountry = safeText(rm.country);
+                const diff = others.filter(x => safeText((x?._myra?.rm || x.recommendation_matches || {}).country) && safeText((x?._myra?.rm || x.recommendation_matches || {}).country) !== primaryCountry);
+                const pool = diff.length ? diff : others;
+                return pool
+                  .map(x => ({ x, s: scoreWine(x) }))
+                  .sort((a, b) => b.s - a.s)[0]?.x || null;
+              })();
+              const spoken = wineNarrativeSpeech({ primary: w, backup: null, droppedKey: null, confidence: conf, alt, includeMismatch: false });
               window.MyraVoice && window.MyraVoice.speak(spoken);
               savePrefs();
               return;
@@ -1991,12 +2161,7 @@
               if (!primary) return;
               els.resultsBox.appendChild(renderWineCard(primary, "Closest pick", { confidence: 0.55 }));
               state.lastPick = { mode: "wine", name: primary.name };
-              const avail = wineAvailabilityText(primary);
-              const inStock = wineIsInStock(primary);
-              const spoken =
-                `I couldn't find an exact match, so I picked the closest option: ${primary.name}.${avail ? ` ${avail}.` : ""}` +
-                (inStock ? ` If you'd like, you can call ${STORE.name} at ${STORE.phoneDisplay} to put it on hold.` : "") +
-                ` Need directions?`;
+              const spoken = wineNarrativeSpeech({ primary, backup: null, droppedKey: null, confidence: 0.55, alt: null, includeMismatch: true });
               window.MyraVoice && window.MyraVoice.speak(spoken);
               savePrefs();
               return;
@@ -2063,19 +2228,27 @@
                   els.resultsBox.appendChild(compare);
                 }
                 const inStock = [primary, backup].some(x => wineIsInStock(x) === true);
-                const spoken =
-                  wineMismatchSpeech(primary, backup, dropped) +
-                  (inStock ? ` If it's in stock, you can call ${STORE.name} at ${STORE.phoneDisplay} to put it on hold.` : "") +
-                  ` Need directions?`;
+                const spoken = wineNarrativeSpeech({
+                  primary,
+                  backup,
+                  droppedKey: dropped,
+                  confidence: clamp(0.82 - wineMismatches(primary).length * 0.06, 0.45, 0.86),
+                  alt: null,
+                  includeMismatch: true,
+                });
                 window.MyraVoice && window.MyraVoice.speak(spoken);
                 savePrefs();
               } else {
                 els.resultsBox.appendChild(explanation);
                 const inStock = wineIsInStock(primary);
-                const spoken =
-                  wineMismatchSpeech(primary, null, dropped) +
-                  (inStock ? ` If it's in stock, you can call ${STORE.name} at ${STORE.phoneDisplay} to put it on hold.` : "") +
-                  ` Need directions?`;
+                const spoken = wineNarrativeSpeech({
+                  primary,
+                  backup: null,
+                  droppedKey: dropped,
+                  confidence: clamp(0.82 - wineMismatches(primary).length * 0.06, 0.45, 0.86),
+                  alt: null,
+                  includeMismatch: true,
+                });
                 window.MyraVoice && window.MyraVoice.speak(spoken);
                 savePrefs();
               }
@@ -2112,19 +2285,27 @@
                   els.resultsBox.appendChild(compare);
                 }
                 const inStock = [primary, backup].some(x => wineIsInStock(x) === true);
-                const spoken =
-                  wineMismatchSpeech(primary, backup, dropped) +
-                  (inStock ? ` If it's in stock, you can call ${STORE.name} at ${STORE.phoneDisplay} to put it on hold.` : "") +
-                  ` Need directions?`;
+                const spoken = wineNarrativeSpeech({
+                  primary,
+                  backup,
+                  droppedKey: dropped,
+                  confidence: clamp(0.82 - wineMismatches(primary).length * 0.06, 0.45, 0.86),
+                  alt: null,
+                  includeMismatch: true,
+                });
                 window.MyraVoice && window.MyraVoice.speak(spoken);
                 savePrefs();
               } else {
                 els.resultsBox.appendChild(explanation);
                 const inStock = wineIsInStock(primary);
-                const spoken =
-                  wineMismatchSpeech(primary, null, dropped) +
-                  (inStock ? ` If it's in stock, you can call ${STORE.name} at ${STORE.phoneDisplay} to put it on hold.` : "") +
-                  ` Need directions?`;
+                const spoken = wineNarrativeSpeech({
+                  primary,
+                  backup: null,
+                  droppedKey: dropped,
+                  confidence: clamp(0.82 - wineMismatches(primary).length * 0.06, 0.45, 0.86),
+                  alt: null,
+                  includeMismatch: true,
+                });
                 window.MyraVoice && window.MyraVoice.speak(spoken);
                 savePrefs();
               }
@@ -2134,10 +2315,14 @@
             els.resultsBox.appendChild(explanation);
             {
               const inStock = wineIsInStock(primary);
-              const spoken =
-                wineMismatchSpeech(primary, null, dropped) +
-                (inStock ? ` If it's in stock, you can call ${STORE.name} at ${STORE.phoneDisplay} to put it on hold.` : "") +
-                ` Need directions?`;
+              const spoken = wineNarrativeSpeech({
+                primary,
+                backup: null,
+                droppedKey: dropped,
+                confidence: clamp(0.82 - wineMismatches(primary).length * 0.06, 0.45, 0.86),
+                alt: null,
+                includeMismatch: true,
+              });
               window.MyraVoice && window.MyraVoice.speak(spoken);
               savePrefs();
             }
@@ -2778,6 +2963,7 @@
             grape: null,
             occasion: null,
             country: null,
+            europePreferred: false,
             price: null,
             priceMin: null,
             priceMax: null,

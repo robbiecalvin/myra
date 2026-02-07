@@ -374,6 +374,12 @@
     };
     if (!raw) return out;
 
+    // Region preference keywords.
+    {
+      const t = normalize(raw);
+      if (/\b(europe|european)\b/.test(t)) out.statePatch.europePreferred = true;
+    }
+
     // Wordmap category aliases (e.g. "rosay" -> "Rose Wine").
     const wm = catalog?.wordmap || null;
     if (wm?.wine?.category_aliases) {
