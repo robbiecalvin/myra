@@ -1,236 +1,142 @@
-# Project: Myra – Pocket Sommelier
-# Phase 1: Mobile App (Consumer-First, Inventory-Neutral)
+# Project: Myra - Pocket Sommelier
+# Phase 2 Next Steps - Retailer Infrastructure & SaaS Layer
 
 ---
 
-## OBJECTIVE
+## Scope
 
-Build Phase 1 of Myra as a production-ready mobile application using React Native.
-
-This version must:
-- Remove all references to Crosstown Liquor or any specific retailer
-- Remove myrabottle.png animation
-- Operate as a pure AI-powered recommendation engine
-- Be inventory-neutral
-- Establish clean mobile UX architecture
-- Prepare for future SaaS retailer integration (Phase 2)
-
-Phase 1 is focused on:
-Product polish
-Mobile UX authority
-Clean architecture foundation
-
-No retailer monetization logic in this phase.
+Phase 1 baseline is complete (mobile app + recommendation API + security upgrade to Expo SDK 54).
+This document now tracks only remaining Phase 2 work.
 
 ---
 
-## TECH STACK
+## Now (highest priority)
 
-Frontend:
-- React Native (Expo preferred for faster iteration)
-- TypeScript required
-- Clean component architecture
+### 1. Foundation: Auth, Roles, and Data Model
 
-Backend:
-- Existing Myra AI logic refactored into API endpoints
-- Node.js (Express) OR Python (FastAPI)
-- RESTful API structure
-- Hosted on existing self-managed infrastructure
+- Add PostgreSQL integration to backend
+- Implement migrations for:
+  - `users`
+  - `stores`
+  - `store_inventory`
+  - `hold_requests`
+  - `store_analytics`
+- Implement JWT auth and role-based access control (`consumer | retailer | admin`)
+- Add protected route middleware and request validation standards
 
-Data:
-- Static curated wine dataset for Phase 1
-- No live retailer inventory
-- Future-ready schema design for store integration
+Definition of done:
+- Authenticated retailer can create and read their own store
+- Unauthorized access to retailer/admin routes is blocked
+- Migrations run cleanly in local/dev
 
----
+### 2. Retailer Registration + Store Profiles
 
-## CORE FEATURES (PHASE 1)
+- Create backend endpoints for retailer account creation and store profile CRUD
+- Add mobile visibility hooks for "Stores Near You" listing data source
+- Ensure free-tier defaults are enforced on new store creation
 
-### 1. Free-Form Recommendation Engine
+Definition of done:
+- Retailer onboarding flow works end-to-end via API
+- Store profile persists and updates correctly
+- Free-tier restrictions are applied server-side
 
-User inputs natural language:
-Example:
-"I need a $30 red wine for steak tonight."
+### 3. Stripe Subscription Integration
 
-App must:
-- Send input to backend
-- Parse intent
-- Extract constraints:
-    - Budget
-    - Wine type
-    - Region (if present)
-    - Occasion (if present)
-- Return top 3 structured recommendations
+- Add Stripe subscription product and checkout/session endpoints
+- Implement webhook endpoint with signature verification
+- Update `stores.subscription_tier` and `stores.subscription_status` from webhook events
+- Add downgrade handling on failed/cancelled subscriptions
 
-Display:
-- Bottle name
-- Region
-- Style
-- Price range
-- Pairing suggestion
-- Short reasoning summary
+Definition of done:
+- Test webhook events update subscription state correctly
+- Premium features are gated strictly by subscription status
 
----
+### 4. Inventory Upload (Premium)
 
-### 2. Clean Mobile UX
+- Build CSV upload endpoint for premium stores
+- Implement CSV schema mapping + validation
+- Replace store inventory atomically on successful upload
+- Add query path for recommendation/store matching by in-stock items
 
-Must include:
+Definition of done:
+- Valid CSV uploads succeed and replace inventory
+- Invalid CSV uploads fail with explicit errors
+- Inventory is queryable by recommendation result logic
 
-- Minimalist dark or neutral theme
-- Smooth transitions
-- Keyboard-aware input field
-- Scrollable results
-- Card-based recommendation layout
+### 5. Priority Placement Logic
 
-No clutter.
-No retailer branding.
-No ads in Phase 1.
+- Implement ranking service in backend (no UI sorting logic):
+  - Premium stores first
+  - Distance ordering within premium
+  - Free-tier stores afterwards
+- Expose ranked store results endpoint for mobile consumption
 
----
-
-### 3. Location Permission (Foundation Only)
-
-Request optional location access.
-
-If granted:
-- Display "Find Stores Near You" button
-- Use Google Maps API to open nearby liquor stores
-- Do NOT integrate specific store data yet
-
-This establishes future retailer positioning.
+Definition of done:
+- Ranking outputs deterministic order per rules
+- Service is unit-tested and isolated from UI
 
 ---
 
-### 4. Recommendation History (Local Only)
+## Soon
 
-Store previous searches locally on device.
+### 6. Hold Request Flow
 
-Allow:
-- View past recommendations
-- Tap to re-open results
+- Backend: create/list/update hold requests (`pending | confirmed | declined`)
+- Retailer-side endpoints for processing requests
+- Consumer-side mobile integration for request status display
 
-No cloud account system in Phase 1.
+### 7. Retailer Dashboard (Web)
 
----
+- Scaffold separate web dashboard app
+- Add login, store profile editor, inventory upload UI, hold request management
+- Add subscription status visibility
 
-### 5. App Structure
+### 8. Analytics Event Pipeline (Phase 2 baseline)
 
-Required Screens:
-
-1. Splash Screen
-2. Home Screen (Input Field + CTA)
-3. Results Screen
-4. History Screen
-5. Settings Screen
-
-Settings must include:
-- Clear privacy note
-- Data usage explanation
-- App version number
+- Record events for:
+  - store profile views
+  - recommendation references
+  - hold requests
+- Add retailer-facing summary endpoints
 
 ---
 
-## ARCHITECTURE REQUIREMENTS
+## Later (Phase 2 completion hardening)
 
-### Code Standards
+### 9. Security hardening and operational controls
 
-- Modular folder structure
-- Components separated from logic
-- API calls abstracted into service layer
-- No inline business logic inside UI components
-- Proper error handling
-- Loading states implemented
-- TypeScript strict mode enabled
+- API rate limiting on sensitive endpoints
+- CORS policy tightening by environment
+- Input validation audits for all new endpoints
+- Secrets/config review for Stripe and JWT
 
----
+### 10. Integration testing + release readiness
 
-### Backend Requirements
-
-Create endpoints:
-
-POST /recommend
-POST /parse-intent
-
-Response must be structured JSON:
-{
-  "budget": number,
-  "style": string,
-  "occasion": string,
-  "recommendations": [
-      {
-          "name": "",
-          "region": "",
-          "price": "",
-          "pairing": "",
-          "reason": ""
-      }
-  ]
-}
-
-Must include:
-- Input validation
-- Sanitization
-- Error responses
+- End-to-end tests for registration -> subscription -> inventory -> ranking -> hold flow
+- Dashboard/backend contract tests
+- Production deployment runbook updates
 
 ---
 
-## NON-GOALS (PHASE 1)
+## Non-goals (do not implement in this phase)
 
-Do NOT implement:
-
-- Retailer dashboard
-- Store registration
-- Payment processing
-- Subscription logic
-- Inventory uploads
-- Priority ranking logic
 - Push notifications
-- Authentication system
-
-These belong to Phase 2.
-
----
-
-## DELIVERABLES
-
-1. Fully functional React Native mobile app
-2. Running backend API
-3. Clean README.md
-4. Environment variable configuration file
-5. Deployment instructions
-6. Version update file documenting changes
-7. Git commit and push to repository
+- Promotion engine
+- AI personalization per user
+- Referral systems
+- Multi-store chain dashboards
+- Deep analytics reporting
 
 ---
 
-## SUCCESS CRITERIA
+## Deliverables for Phase 2 completion
 
-The app must:
-
-- Successfully parse free-form wine requests
-- Return structured recommendations
-- Handle errors gracefully
-- Run on both iOS simulator and Android emulator
-- Be visually polished
-- Be ready for app store submission preparation
-
----
-
-## FUTURE-PROOFING NOTES
-
-Database design must anticipate:
-
-Future "Stores" table:
-- store_id
-- name
-- address
-- geo_location
-- subscription_tier
-- inventory_feed
-
-Do not implement yet.
-Design with scalability in mind.
-
----
-
-END OF PHASE 1 SPECIFICATION
+1. Retailer registration system
+2. Stripe subscriptions + webhook state sync
+3. Premium inventory upload system
+4. Priority placement in store results
+5. Hold request workflow
+6. Retailer dashboard (web)
+7. Updated README and version report
+8. Verified lint/test/build/security checks
+9. Git commit and push

@@ -4,7 +4,7 @@ Myra Phase 1 is a production-ready mobile-first recommendation experience with a
 
 ## Version
 
-Current version: `v0.2`
+Current version: `v0.3`
 
 ## What's New
 
@@ -18,6 +18,9 @@ Current version: `v0.2`
 - Removed specific retailer and `myrabottle.png` references from the primary web entry file
 - Security increment: upgraded mobile stack to Expo SDK 54 with React 19 / React Native 0.81
 - Mobile dependency vulnerability scan now passes with no high-severity findings
+- Phase 2 foundation: PostgreSQL migration system, JWT auth/roles, retailer registration/store profile APIs
+- Phase 2 premium infrastructure: Stripe checkout/webhook handlers, premium-gated CSV inventory upload, ranked `stores/nearby` endpoint
+- Backend ranking service tests added for premium-first placement logic
 
 ## Project Layout
 
@@ -84,6 +87,7 @@ Response shape:
 ```bash
 cd backend
 npm install
+npm run migrate
 npm run dev
 ```
 
@@ -98,6 +102,7 @@ npm run start
 ```
 
 Set `EXPO_PUBLIC_API_BASE_URL` in `.env` if your backend is not on localhost.
+Set backend `DATABASE_URL` and `JWT_SECRET` before starting backend in Phase 2.
 
 ## Verification Commands
 
@@ -114,4 +119,4 @@ cd mobile && npm run lint && npm run build
 
 ## Update Report
 
-See: [`myra-v0.2-updates.md`](myra-v0.2-updates.md)
+See: [`myra-v0.3-updates.md`](myra-v0.3-updates.md)
