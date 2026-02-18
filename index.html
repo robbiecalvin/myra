@@ -9,14 +9,9 @@
   <body>
     <div class="wrap" style="max-width: 940px; margin: 60px auto 80px; padding: 0 22px;">
       <div class="hero" style="text-align: center; margin-bottom: 26px;">
-        <img
-          src="./myrabottle.png"
-          alt="Myra bottle"
-          style="display:block; margin: 0 auto 14px; width: min(220px, 60vw); height: auto;"
-        />
         <h1 style="margin: 0; font-size: clamp(2.2rem, 5vw, 3.1rem); letter-spacing: -0.02em;">Myra</h1>
         <p style="margin: 12px auto 0; max-width: 70ch;">
-          Wine, beer, and spirits recommendations from your inventory.
+          AI-powered wine recommendations for your occasion.
         </p>
       </div>
 
@@ -113,10 +108,10 @@
         };
 
         const STORE = {
-          name: "Cross Town Liquor Store",
-          phoneDisplay: "(604) 683-8438",
-          phoneTel: "+16046838438",
-          mapsQuery: "My Liquor Store: Crosstown Vancouver BC",
+          name: "Nearby Retailers",
+          phoneDisplay: "",
+          phoneTel: "",
+          mapsQuery: "liquor stores near me",
         };
 
         const PRICE_BANDS = {
@@ -596,10 +591,10 @@
           const rm = w?._myra?.rm || w.recommendation_matches || {};
           const ss = String(rm.stock_status || "").trim().toLowerCase();
           if (!ss) return null;
-          if (ss === "in stock") return "In stock at Cross Town Liquor Store";
-          if (ss === "out of stock") return "Out of stock at Cross Town Liquor Store";
-          if (ss === "low in stock") return "Low in stock at Cross Town Liquor Store";
-          return `${rm.stock_status} at Cross Town Liquor Store`;
+          if (ss === "in stock") return "In stock at nearby stores";
+          if (ss === "out of stock") return "Out of stock at nearby stores";
+          if (ss === "low in stock") return "Low in stock at nearby stores";
+          return `${rm.stock_status} at nearby stores`;
         }
 
         function wineIsInStock(w) {
@@ -618,9 +613,9 @@
           if (v == null) return null;
           const s = String(v).trim().toLowerCase();
           if (!s || s === "none" || s === "n/a") return null;
-          if (s === "1" || s === "true" || s === "✅" || s === "in stock") return "In stock at Cross Town Liquor Store";
-          if (s === "0" || s === "false" || s === "❌" || s === "out of stock") return "Out of stock at Cross Town Liquor Store";
-          return `${v} at Cross Town Liquor Store`;
+          if (s === "1" || s === "true" || s === "✅" || s === "in stock") return "In stock at nearby stores";
+          if (s === "0" || s === "false" || s === "❌" || s === "out of stock") return "Out of stock at nearby stores";
+          return `${v} at nearby stores`;
         }
 
         function createStoreBox({ inStock } = {}) {
