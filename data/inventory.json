@@ -1,10 +1,8 @@
 [
   {
-    "name": "CHRONIC CELLARS PETITE SIRAH",
-    "sku": "SKU: 750752",
-    "price": "$29.13",
-    "alcohol": "14.7",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/petite-sirah/chronic-cellars-petite-sirah",
+    "wine_name": "Cellars Petite Sirah",
+    "vineyard": "Chronic",
+    "price_range": "27-32",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Petite Sirah",
@@ -21,16 +19,13 @@
       "flavor_secondary": "pepper",
       "flavor_tertiary": "ink",
       "country": "United States",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "BOGLE OLD VINE ZINFANDEL",
-    "sku": "SKU: 788968",
-    "price": "$29.48",
-    "alcohol": "14.8",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/zinfandel/bogle-old-vine-zinfandel",
+    "wine_name": "Old Vine Zinfandel",
+    "vineyard": "Bogle",
+    "price_range": "27-32",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Zinfandel",
@@ -47,16 +42,13 @@
       "flavor_secondary": "blackberry",
       "flavor_tertiary": "spice",
       "country": "United States",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "CYCLES GLADIATOR ZINFANDEL",
-    "sku": "SKU: 955880",
-    "price": "$22.96",
-    "alcohol": "14",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/zinfandel/cycles-gladiator-zinfandel",
+    "wine_name": "Gladiator Zinfandel",
+    "vineyard": "Cycles",
+    "price_range": "20-25",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Zinfandel",
@@ -73,16 +65,13 @@
       "flavor_secondary": "blackberry",
       "flavor_tertiary": "spice",
       "country": "United States",
-      "price_tier": "mid",
-      "stock_status": "Low in stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "7 TERRACES MARLBOROUGH NEW ZEALAND PINOT NOIR",
-    "sku": "SKU: 893826",
-    "price": "$27.74",
-    "alcohol": "14",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/pinot-noir/seven-terraces-pinot-noir",
+    "wine_name": "Pinot Noir",
+    "vineyard": "7 Terraces Marlborough New Zealand",
+    "price_range": "25-30",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Pinot Noir",
@@ -99,16 +88,13 @@
       "flavor_secondary": "raspberry",
       "flavor_tertiary": "earth",
       "country": "New Zealand",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "ARGYLE RESERVE PINOT NOIR",
-    "sku": "SKU: 30960",
-    "price": "$56.00",
-    "alcohol": "14.1",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/pinot-noir/argyle-reserve-pinot-noir",
+    "wine_name": "Pinot Noir",
+    "vineyard": "Argyle Reserve",
+    "price_range": "54-58",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Pinot Noir",
@@ -125,16 +111,13 @@
       "flavor_secondary": "raspberry",
       "flavor_tertiary": "earth",
       "country": "United States",
-      "price_tier": "premium",
-      "stock_status": "In stock"
+      "price_tier": "premium"
     }
   },
   {
-    "name": "BASK PINOT NOIR",
-    "sku": "SKU: 9330",
-    "price": "$14.99",
-    "alcohol": "13",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/pinot-noir/bask-pinot-noir",
+    "wine_name": "Pinot Noir",
+    "vineyard": "Bask",
+    "price_range": "12-17",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Pinot Noir",
@@ -151,16 +134,13 @@
       "flavor_secondary": "raspberry",
       "flavor_tertiary": "earth",
       "country": "Canada",
-      "price_tier": "budget",
-      "stock_status": "In stock"
+      "price_tier": "budget"
     }
   },
   {
-    "name": "BASK PINOT NOIR 3L",
-    "sku": "SKU: 451790",
-    "price": "$42.96",
-    "alcohol": "12.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/pinot-noir/bask-pinot-noir-3l",
+    "wine_name": "Pinot Noir 3L",
+    "vineyard": "Bask",
+    "price_range": "40-45",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Pinot Noir",
@@ -177,16 +157,13 @@
       "flavor_secondary": "raspberry",
       "flavor_tertiary": "earth",
       "country": "Canada",
-      "price_tier": "premium",
-      "stock_status": "In stock"
+      "price_tier": "premium"
     }
   },
   {
-    "name": "BLUE GROUSE PINOT NOIR",
-    "sku": "SKU: 932111",
-    "price": "$41.22",
-    "alcohol": "12.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/pinot-noir/blue-grouse-pinot-noir",
+    "wine_name": "Pinot Noir",
+    "vineyard": "Blue Grouse",
+    "price_range": "39-44",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Pinot Noir",
@@ -203,16 +180,13 @@
       "flavor_secondary": "raspberry",
       "flavor_tertiary": "earth",
       "country": "Canada",
-      "price_tier": "premium",
-      "stock_status": "Low in stock"
+      "price_tier": "premium"
     }
   },
   {
-    "name": "BLUE MTN PINOT NOIR RESERVE",
-    "sku": "SKU: 702910",
-    "price": "$117.30",
-    "alcohol": "13.3",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/pinot-noir/blue-mtn-pinot-noir-reserve",
+    "wine_name": "Pinot Noir Reserve",
+    "vineyard": "Blue Mtn",
+    "price_range": "115-120",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Pinot Noir",
@@ -229,16 +203,13 @@
       "flavor_secondary": "raspberry",
       "flavor_tertiary": "earth",
       "country": "Canada",
-      "price_tier": "highend",
-      "stock_status": "OUT OF STOCK"
+      "price_tier": "highend"
     }
   },
   {
-    "name": "BREAD & BUTTER PINOT NOIR",
-    "sku": "SKU: 199594",
-    "price": "$27.74",
-    "alcohol": "13.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/pinot-noir/bread-butter-pinot-noir",
+    "wine_name": "Pinot Noir",
+    "vineyard": "Bread & Butter",
+    "price_range": "25-30",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Pinot Noir",
@@ -255,16 +226,13 @@
       "flavor_secondary": "raspberry",
       "flavor_tertiary": "earth",
       "country": "United States",
-      "price_tier": "mid",
-      "stock_status": "Low in stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "CARMEN PREMIER RESERVA PINOT NOIR",
-    "sku": "SKU: 257659",
-    "price": "$16.43",
-    "alcohol": "13.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/pinot-noir/carmen-pinot-noir",
+    "wine_name": "Pinot Noir",
+    "vineyard": "Carmen Premier Reserva",
+    "price_range": "14-19",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Pinot Noir",
@@ -281,16 +249,13 @@
       "flavor_secondary": "raspberry",
       "flavor_tertiary": "earth",
       "country": "Chile",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "CASSINI PINOT NOIR",
-    "sku": "SKU: 167007",
-    "price": "$30.35",
-    "alcohol": "14",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/pinot-noir/cassini-pinot-noir",
+    "wine_name": "Pinot Noir",
+    "vineyard": "Cassini",
+    "price_range": "28-33",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Pinot Noir",
@@ -307,16 +272,13 @@
       "flavor_secondary": "raspberry",
       "flavor_tertiary": "earth",
       "country": "Canada",
-      "price_tier": "premium",
-      "stock_status": "In stock"
+      "price_tier": "premium"
     }
   },
   {
-    "name": "CHATEAU WOLFF ESTATE - PINOT NOIR",
-    "sku": "SKU: 882498",
-    "price": "$28.61",
-    "alcohol": "12",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/chateau-wolff-estate-pinot-noir",
+    "wine_name": "Pinot Noir",
+    "vineyard": "Chateau Wolff Estate",
+    "price_range": "26-31",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Pinot Noir",
@@ -333,16 +295,13 @@
       "flavor_secondary": "raspberry",
       "flavor_tertiary": "earth",
       "country": "Canada",
-      "price_tier": "mid",
-      "stock_status": "Low in stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "CONO SUR PINOT NOIR",
-    "sku": "SKU: 341602",
-    "price": "$14.91",
-    "alcohol": "13.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/pinot-noir/cono-sur-pinot-noir",
+    "wine_name": "Pinot Noir",
+    "vineyard": "Cono Sur",
+    "price_range": "12-17",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Pinot Noir",
@@ -359,16 +318,13 @@
       "flavor_secondary": "raspberry",
       "flavor_tertiary": "earth",
       "country": "Chile",
-      "price_tier": "budget",
-      "stock_status": "In stock"
+      "price_tier": "budget"
     }
   },
   {
-    "name": "COUNTRY VINES - PINOT NOIR 2020",
-    "sku": "SKU: 449465",
-    "price": "$23.17",
-    "alcohol": "12.9",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/pinot-noir/country-vines-pinot-noir-2020",
+    "wine_name": "Pinot Noir 2020",
+    "vineyard": "Country Vines",
+    "price_range": "21-26",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Pinot Noir",
@@ -385,16 +341,13 @@
       "flavor_secondary": "raspberry",
       "flavor_tertiary": "earth",
       "country": "Canada",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "19 CRIMES SNOOP DOGG CALIFORNIA RED BLEND",
-    "sku": "SKU: 10713",
-    "price": "$22.96",
-    "alcohol": "14.1",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/blended-red/19-crimes-snoop-red",
+    "wine_name": "Crimes Snoop Dogg California Red Blend",
+    "vineyard": "19",
+    "price_range": "20-25",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Red Blend",
@@ -411,16 +364,13 @@
       "flavor_secondary": "spice",
       "flavor_tertiary": "oak",
       "country": "United States",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "BLASTED CHURCH BIG BANG THEORY RED BLEND",
-    "sku": "SKU: 475574",
-    "price": "$26.43",
-    "alcohol": "12.9",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/blended-red/blasted-church-big-bang",
+    "wine_name": "Church Big Bang Theory Red Blend",
+    "vineyard": "Blasted",
+    "price_range": "24-29",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Red Blend",
@@ -437,16 +387,13 @@
       "flavor_secondary": "spice",
       "flavor_tertiary": "oak",
       "country": "Canada",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "8TH GENERATION VINEYARD MERLOT CABERNET SAUVIGNON",
-    "sku": "SKU: 79338",
-    "price": "$35.13",
-    "alcohol": "13.8",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/8th-generation-vineyard-merlot",
+    "wine_name": "Merlot Cabernet Sauvignon",
+    "vineyard": "8Th Generation Vineyard",
+    "price_range": "33-38",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Cabernet Sauvignon",
@@ -463,16 +410,13 @@
       "flavor_secondary": "plum",
       "flavor_tertiary": "cedar",
       "country": "Canada",
-      "price_tier": "premium",
-      "stock_status": "OUT OF STOCK"
+      "price_tier": "premium"
     }
   },
   {
-    "name": "ADEGA MERLOT",
-    "sku": "SKU: 419721",
-    "price": "$24.26",
-    "alcohol": "15.4",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/adega-merlot",
+    "wine_name": "Merlot",
+    "vineyard": "Adega",
+    "price_range": "22-27",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Merlot",
@@ -489,16 +433,13 @@
       "flavor_secondary": "chocolate",
       "flavor_tertiary": "herb",
       "country": "Portugal",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "AMA BENE SANGIOVESE",
-    "sku": "SKU: 333821",
-    "price": "$14.04",
-    "alcohol": "13",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/sangiovese/ama-bene-sangiovese",
+    "wine_name": "Bene Sangiovese",
+    "vineyard": "Ama",
+    "price_range": "12-17",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Sangiovese",
@@ -515,16 +456,13 @@
       "flavor_secondary": "tomato",
       "flavor_tertiary": "herb",
       "country": "Italy",
-      "price_tier": "budget",
-      "stock_status": "In stock"
+      "price_tier": "budget"
     }
   },
   {
-    "name": "BENCH 1775 CABERNET SAUVIGNON MERLOT 18",
-    "sku": "SKU: 483529",
-    "price": "$31.00",
-    "alcohol": "14.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/bench-1775-cabernet-sauvignon-merlot-18",
+    "wine_name": "Cabernet Sauvignon Merlot 18",
+    "vineyard": "Bench 1775",
+    "price_range": "29-33",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Cabernet Sauvignon",
@@ -541,16 +479,13 @@
       "flavor_secondary": "plum",
       "flavor_tertiary": "cedar",
       "country": "Canada",
-      "price_tier": "premium",
-      "stock_status": "In stock"
+      "price_tier": "premium"
     }
   },
   {
-    "name": "BLACK CELLAR - MALBEC MERLOT",
-    "sku": "SKU: 351395",
-    "price": "$12.74",
-    "alcohol": "13",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/blended-red/black-cellar-malbec-merlot",
+    "wine_name": "Malbec Merlot",
+    "vineyard": "Black Cellar",
+    "price_range": "10-15",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Merlot",
@@ -567,16 +502,13 @@
       "flavor_secondary": "chocolate",
       "flavor_tertiary": "herb",
       "country": "Canada",
-      "price_tier": "budget",
-      "stock_status": "In stock"
+      "price_tier": "budget"
     }
   },
   {
-    "name": "COURTEILLAC CABERNET SAUVIGNON MERLOT",
-    "sku": "SKU: 250662",
-    "price": "$20.99",
-    "alcohol": "13",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/bordeaux/chateau-de-courteillac-bordeaux",
+    "wine_name": "Cabernet Sauvignon Merlot",
+    "vineyard": "Courteillac",
+    "price_range": "18-23",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Cabernet Sauvignon",
@@ -593,16 +525,13 @@
       "flavor_secondary": "plum",
       "flavor_tertiary": "cedar",
       "country": "France",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "1884 SYRAH",
-    "sku": "SKU: 744532",
-    "price": "$21.83",
-    "alcohol": "13.9",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/syrah/1884-syrah",
+    "wine_name": "Syrah",
+    "vineyard": "1884",
+    "price_range": "19-24",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Syrah",
@@ -619,16 +548,13 @@
       "flavor_secondary": "pepper",
       "flavor_tertiary": "smoke",
       "country": "Argentina",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "ADOBE ORGANIC SYRAH",
-    "sku": "SKU: 5801",
-    "price": "$17.10",
-    "alcohol": "14.4",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/syrah/adobe-organic-syrah",
+    "wine_name": "Syrah",
+    "vineyard": "Adobe Organic",
+    "price_range": "15-20",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Syrah",
@@ -645,16 +571,13 @@
       "flavor_secondary": "pepper",
       "flavor_tertiary": "smoke",
       "country": "Chile",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "ANGELINE CABERNET SAUVIGNON",
-    "sku": "SKU: 264697",
-    "price": "$31.65",
-    "alcohol": "13.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/cabernet-sauvignon/angeline-reserve-cab-sauv",
+    "wine_name": "Cabernet Sauvignon",
+    "vineyard": "Angeline",
+    "price_range": "29-34",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Cabernet Sauvignon",
@@ -671,16 +594,13 @@
       "flavor_secondary": "plum",
       "flavor_tertiary": "cedar",
       "country": "United States",
-      "price_tier": "premium",
-      "stock_status": "In stock"
+      "price_tier": "premium"
     }
   },
   {
-    "name": "AVENUE - SYRAH GRENACHE",
-    "sku": "SKU: 301700",
-    "price": "$19.70",
-    "alcohol": "14.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/avenue-syrah-grenache",
+    "wine_name": "Syrah Grenache",
+    "vineyard": "Avenue",
+    "price_range": "17-22",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Syrah",
@@ -697,16 +617,13 @@
       "flavor_secondary": "pepper",
       "flavor_tertiary": "smoke",
       "country": "France",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "BASK CABERNET SAUVIGNON",
-    "sku": "SKU: 254199",
-    "price": "$40.78",
-    "alcohol": "12.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/cabernet-sauvignon/bask-cabernet-sauvignon",
+    "wine_name": "Cabernet Sauvignon",
+    "vineyard": "Bask",
+    "price_range": "38-43",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Cabernet Sauvignon",
@@ -723,16 +640,13 @@
       "flavor_secondary": "plum",
       "flavor_tertiary": "cedar",
       "country": "Canada",
-      "price_tier": "premium",
-      "stock_status": "OUT OF STOCK"
+      "price_tier": "premium"
     }
   },
   {
-    "name": "BLACK CELLAR CABERNET SAUVIGNON",
-    "sku": "SKU: 374728",
-    "price": "$12.74",
-    "alcohol": "13",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/cabernet-sauvignon/black-cellar-cabernet-sauvignon",
+    "wine_name": "Cabernet Sauvignon",
+    "vineyard": "Black Cellar",
+    "price_range": "10-15",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Cabernet Sauvignon",
@@ -749,16 +663,13 @@
       "flavor_secondary": "plum",
       "flavor_tertiary": "cedar",
       "country": "Canada",
-      "price_tier": "budget",
-      "stock_status": "In stock"
+      "price_tier": "budget"
     }
   },
   {
-    "name": "BLACKMARKET COLLUSION SERIES SYRAH",
-    "sku": "SKU: 65780024",
-    "price": "$34.26",
-    "alcohol": "",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/blackmarket-collusion-series-syrah",
+    "wine_name": "Syrah",
+    "vineyard": "Blackmarket Collusion Series",
+    "price_range": "32-37",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Syrah",
@@ -775,16 +686,13 @@
       "flavor_secondary": "pepper",
       "flavor_tertiary": "smoke",
       "country": "Canada",
-      "price_tier": "premium",
-      "stock_status": "In stock"
+      "price_tier": "premium"
     }
   },
   {
-    "name": "BLASTED CHURCH SYRAH",
-    "sku": "SKU: 37531",
-    "price": "$33.61",
-    "alcohol": "13.7",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/syrah/blasted-church-syrah",
+    "wine_name": "Syrah",
+    "vineyard": "Blasted Church",
+    "price_range": "31-36",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Syrah",
@@ -801,16 +709,13 @@
       "flavor_secondary": "pepper",
       "flavor_tertiary": "smoke",
       "country": "Canada",
-      "price_tier": "premium",
-      "stock_status": "Low in stock"
+      "price_tier": "premium"
     }
   },
   {
-    "name": "BOHEMIAN SYRAH 2020 - WINEMAKERS CUT",
-    "sku": "SKU: 511355",
-    "price": "$33.39",
-    "alcohol": "14",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/bohemian-syrah-2020-winemakers-cut",
+    "wine_name": "Winemakers Cut",
+    "vineyard": "Bohemian Syrah 2020",
+    "price_range": "31-36",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Syrah",
@@ -827,16 +732,13 @@
       "flavor_secondary": "pepper",
       "flavor_tertiary": "smoke",
       "country": "Canada",
-      "price_tier": "premium",
-      "stock_status": "Low in stock"
+      "price_tier": "premium"
     }
   },
   {
-    "name": "BORDERTOWN - CABERNET SAUVIGNON 2020",
-    "sku": "SKU: 76641",
-    "price": "$32.40",
-    "alcohol": "13.4",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/bordertown-cabernet-sauvignon-2020",
+    "wine_name": "Cabernet Sauvignon 2020",
+    "vineyard": "Bordertown",
+    "price_range": "30-35",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Cabernet Sauvignon",
@@ -853,16 +755,13 @@
       "flavor_secondary": "plum",
       "flavor_tertiary": "cedar",
       "country": "Canada",
-      "price_tier": "premium",
-      "stock_status": "In stock"
+      "price_tier": "premium"
     }
   },
   {
-    "name": "BURROWING OWL CABERNET SAUVIGNON 2011",
-    "sku": "SKU: 860015",
-    "price": "$52.96",
-    "alcohol": "14",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/cabernet-sauvignon/burrowing-owl-cabernet-sauvignon-2011",
+    "wine_name": "Cabernet Sauvignon 2011",
+    "vineyard": "Burrowing Owl",
+    "price_range": "50-55",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Cabernet Sauvignon",
@@ -879,16 +778,13 @@
       "flavor_secondary": "plum",
       "flavor_tertiary": "cedar",
       "country": "Canada",
-      "price_tier": "premium",
-      "stock_status": "In stock"
+      "price_tier": "premium"
     }
   },
   {
-    "name": "CABERNET SAUVIGNON - JOSH CELLARS 2018",
-    "sku": "SKU: 850073",
-    "price": "$26.87",
-    "alcohol": "13.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/cabernet-sauvignon/cabernet-sauvignon-josh-cellars-2018",
+    "wine_name": "Josh Cellars 2018",
+    "vineyard": "Cabernet Sauvignon",
+    "price_range": "24-29",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Cabernet Sauvignon",
@@ -905,16 +801,13 @@
       "flavor_secondary": "plum",
       "flavor_tertiary": "cedar",
       "country": "United States",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "CABERNET SAUVIGNON - TOM GORE",
-    "sku": "SKU: 541094",
-    "price": "$25.43",
-    "alcohol": "13.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/cabernet-sauvignon/cabernet-sauvignon-tom-gore",
+    "wine_name": "Tom Gore",
+    "vineyard": "Cabernet Sauvignon",
+    "price_range": "23-28",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Cabernet Sauvignon",
@@ -931,16 +824,13 @@
       "flavor_secondary": "plum",
       "flavor_tertiary": "cedar",
       "country": "United States",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "CARMEN RAYMI CABERNET SAUVIGNON",
-    "sku": "SKU: 255687",
-    "price": "$10.35",
-    "alcohol": "12",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/cabernet-sauvignon/raymi-cabernet-sauvignon",
+    "wine_name": "Cabernet Sauvignon",
+    "vineyard": "Carmen Raymi",
+    "price_range": "8-13",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Cabernet Sauvignon",
@@ -957,16 +847,13 @@
       "flavor_secondary": "plum",
       "flavor_tertiary": "cedar",
       "country": "Chile",
-      "price_tier": "budget",
-      "stock_status": "In stock"
+      "price_tier": "budget"
     }
   },
   {
-    "name": "CONO SUR BICICLETA CABERNET SAUVIGNON",
-    "sku": "SKU: 376848",
-    "price": "$14.99",
-    "alcohol": "13.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/cabernet-sauvignon/cono-sur-cabernet-sauvignon",
+    "wine_name": "Cabernet Sauvignon",
+    "vineyard": "Cono Sur Bicicleta",
+    "price_range": "12-17",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Cabernet Sauvignon",
@@ -983,16 +870,13 @@
       "flavor_secondary": "plum",
       "flavor_tertiary": "cedar",
       "country": "Chile",
-      "price_tier": "budget",
-      "stock_status": "In stock"
+      "price_tier": "budget"
     }
   },
   {
-    "name": "COPPER MOON CABERNET SAUVIGNON",
-    "sku": "SKU: 893289",
-    "price": "$13.83",
-    "alcohol": "13",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/cabernet-sauvignon/copper-moon-cab-sauv",
+    "wine_name": "Cabernet Sauvignon",
+    "vineyard": "Copper Moon",
+    "price_range": "11-16",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Cabernet Sauvignon",
@@ -1009,16 +893,13 @@
       "flavor_secondary": "plum",
       "flavor_tertiary": "cedar",
       "country": "Canada",
-      "price_tier": "budget",
-      "stock_status": "In stock"
+      "price_tier": "budget"
     }
   },
   {
-    "name": "1884 MALBEC RESERVA",
-    "sku": "SKU: 770925",
-    "price": "$21.78",
-    "alcohol": "14",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/red-malbec/1884-malbec-reserva",
+    "wine_name": "Malbec Reserva",
+    "vineyard": "1884",
+    "price_range": "19-24",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Malbec",
@@ -1035,16 +916,13 @@
       "flavor_secondary": "cocoa",
       "flavor_tertiary": "violet",
       "country": "Argentina",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "19 CRIMES SHIRAZ DURIF",
-    "sku": "SKU: 200717",
-    "price": "$21.61",
-    "alcohol": "14",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/syrah/19-crimes-shiraz",
+    "wine_name": "Shiraz Durif",
+    "vineyard": "19 Crimes",
+    "price_range": "19-24",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Shiraz",
@@ -1061,16 +939,13 @@
       "flavor_secondary": "spice",
       "flavor_tertiary": "oak",
       "country": "United States",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "ADEGA CABERNET FRANC",
-    "sku": "SKU: 892844",
-    "price": "$25.13",
-    "alcohol": "14.6",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/cabernet-franc/adega-cabernet-franc",
+    "wine_name": "Cabernet Franc",
+    "vineyard": "Adega",
+    "price_range": "23-28",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Cabernet",
@@ -1087,16 +962,13 @@
       "flavor_secondary": "spice",
       "flavor_tertiary": "oak",
       "country": "Portugal",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "ANTARES SHIRAZ",
-    "sku": "SKU: 741520",
-    "price": "$13.83",
-    "alcohol": "13.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/syrah/antares-shiraz",
+    "wine_name": "Shiraz",
+    "vineyard": "Antares",
+    "price_range": "11-16",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Shiraz",
@@ -1113,16 +985,13 @@
       "flavor_secondary": "spice",
       "flavor_tertiary": "oak",
       "country": "Chile",
-      "price_tier": "budget",
-      "stock_status": "In stock"
+      "price_tier": "budget"
     }
   },
   {
-    "name": "ARGENTO MALBEC RESERVA",
-    "sku": "SKU: 98855",
-    "price": "$20.66",
-    "alcohol": "13",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/red-malbec/argento-malbec",
+    "wine_name": "Malbec Reserva",
+    "vineyard": "Argento",
+    "price_range": "18-23",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Malbec",
@@ -1139,16 +1008,13 @@
       "flavor_secondary": "cocoa",
       "flavor_tertiary": "violet",
       "country": "Argentina",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "BLACK SAGE CABERNET FRANC 10/11",
-    "sku": "SKU: 593038",
-    "price": "$39.04",
-    "alcohol": "13",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/cabernet-franc/black-sage-cabernet-franc-10-11",
+    "wine_name": "Cabernet Franc 10/11",
+    "vineyard": "Black Sage",
+    "price_range": "37-42",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Cabernet",
@@ -1165,16 +1031,13 @@
       "flavor_secondary": "spice",
       "flavor_tertiary": "oak",
       "country": "Canada",
-      "price_tier": "premium",
-      "stock_status": "In stock"
+      "price_tier": "premium"
     }
   },
   {
-    "name": "BODEGA FINCA LAS MORAS MALBEC",
-    "sku": "SKU: 266684",
-    "price": "$16.00",
-    "alcohol": "12.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/red-malbec/finca-las-moras-malbec",
+    "wine_name": "Malbec",
+    "vineyard": "Bodega Finca Las Moras",
+    "price_range": "14-18",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Malbec",
@@ -1191,16 +1054,13 @@
       "flavor_secondary": "cocoa",
       "flavor_tertiary": "violet",
       "country": "Argentina",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "BORDERTOWN CIDER & WINERY CABERNET FRANC",
-    "sku": "SKU: 237266",
-    "price": "$26.00",
-    "alcohol": "14.9",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/cabernet-franc/bordertown-cab-franc",
+    "wine_name": "Cabernet Franc",
+    "vineyard": "Bordertown Cider & Winery",
+    "price_range": "24-28",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Cabernet",
@@ -1217,16 +1077,13 @@
       "flavor_secondary": "spice",
       "flavor_tertiary": "oak",
       "country": "Canada",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "BORSAO TRES PICOS GARNACHA",
-    "sku": "SKU: 125278",
-    "price": "$34.70",
-    "alcohol": "14.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/garnacha/borsao-tres-picos-garnacha",
+    "wine_name": "Tres Picos Garnacha",
+    "vineyard": "Borsao",
+    "price_range": "32-37",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Red Blend",
@@ -1243,16 +1100,13 @@
       "flavor_secondary": "spice",
       "flavor_tertiary": "oak",
       "country": "Spain",
-      "price_tier": "premium",
-      "stock_status": "OUT OF STOCK"
+      "price_tier": "premium"
     }
   },
   {
-    "name": "BURROWING OWL CABERNET FRANC",
-    "sku": "SKU: 556621",
-    "price": "$44.26",
-    "alcohol": "13.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/cabernet-franc/burrowing-owl-cab-franc",
+    "wine_name": "Cabernet Franc",
+    "vineyard": "Burrowing Owl",
+    "price_range": "42-47",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Cabernet",
@@ -1269,16 +1123,13 @@
       "flavor_secondary": "spice",
       "flavor_tertiary": "oak",
       "country": "Canada",
-      "price_tier": "premium",
-      "stock_status": "In stock"
+      "price_tier": "premium"
     }
   },
   {
-    "name": "BURROWING OWL MALBEC",
-    "sku": "SKU: 853275",
-    "price": "$42.91",
-    "alcohol": "14.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/red-malbec/burrowing-owl-malbec",
+    "wine_name": "Malbec",
+    "vineyard": "Burrowing Owl",
+    "price_range": "40-45",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Malbec",
@@ -1295,16 +1146,13 @@
       "flavor_secondary": "cocoa",
       "flavor_tertiary": "violet",
       "country": "Canada",
-      "price_tier": "premium",
-      "stock_status": "In stock"
+      "price_tier": "premium"
     }
   },
   {
-    "name": "CABERNET FRANC SANTA ANA LA MASCOTA 2018",
-    "sku": "SKU: 236406",
-    "price": "$21.86",
-    "alcohol": "14",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/cabernet-franc-santa-ana-la-mascota-2018",
+    "wine_name": "Franc Santa Ana La Mascota 2018",
+    "vineyard": "Cabernet",
+    "price_range": "19-24",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Cabernet",
@@ -1321,16 +1169,13 @@
       "flavor_secondary": "spice",
       "flavor_tertiary": "oak",
       "country": "Argentina",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "COPPER MOON MALBEC",
-    "sku": "SKU: 164368",
-    "price": "$13.78",
-    "alcohol": "14 | 14 | 14",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/red-malbec/copper-moon-malbec",
+    "wine_name": "Malbec",
+    "vineyard": "Copper Moon",
+    "price_range": "11-16",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Malbec",
@@ -1347,16 +1192,13 @@
       "flavor_secondary": "cocoa",
       "flavor_tertiary": "violet",
       "country": "Canada",
-      "price_tier": "budget",
-      "stock_status": "In stock"
+      "price_tier": "budget"
     }
   },
   {
-    "name": "COPPER MOON SHIRAZ",
-    "sku": "SKU: 874552",
-    "price": "$13.61",
-    "alcohol": "13 | 13",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/syrah/copper-moon-shiraz",
+    "wine_name": "Shiraz",
+    "vineyard": "Copper Moon",
+    "price_range": "11-16",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Shiraz",
@@ -1373,16 +1215,13 @@
       "flavor_secondary": "spice",
       "flavor_tertiary": "oak",
       "country": "Canada",
-      "price_tier": "budget",
-      "stock_status": "In stock"
+      "price_tier": "budget"
     }
   },
   {
-    "name": "DE BORTOLI SHIRAZ",
-    "sku": "SKU: 640615",
-    "price": "$16.05",
-    "alcohol": "14",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/syrah/de-bortoli-shiraz",
+    "wine_name": "Shiraz",
+    "vineyard": "De Bortoli",
+    "price_range": "14-19",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Shiraz",
@@ -1399,16 +1238,13 @@
       "flavor_secondary": "spice",
       "flavor_tertiary": "oak",
       "country": "Australia",
-      "price_tier": "mid",
-      "stock_status": "Low in stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "DON DAVID RESERVE MALBEC",
-    "sku": "SKU: 156455",
-    "price": "$21.65",
-    "alcohol": "13.9",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/red-malbec/don-david-reserve-malbec",
+    "wine_name": "Malbec",
+    "vineyard": "Don David Reserve",
+    "price_range": "19-24",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Malbec",
@@ -1425,16 +1261,13 @@
       "flavor_secondary": "cocoa",
       "flavor_tertiary": "violet",
       "country": "Argentina",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "ABRUZZI - IL FEUD FONTE VENNA",
-    "sku": "SKU: 24562",
-    "price": "$26.22",
-    "alcohol": "13.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/italian-blend/abruzzi-il-feud-fonte-venna",
+    "wine_name": "Il Feud Fonte Venna",
+    "vineyard": "Abruzzi",
+    "price_range": "24-29",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Red Blend",
@@ -1451,16 +1284,13 @@
       "flavor_secondary": "spice",
       "flavor_tertiary": "oak",
       "country": "Italy",
-      "price_tier": "mid",
-      "stock_status": "OUT OF STOCK"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "ALLEGRINI ROSSO DI MONTALCINO",
-    "sku": "SKU: 160630",
-    "price": "$40.57",
-    "alcohol": "14",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/sangiovese/allegrini-rosso-di-montalcino",
+    "wine_name": "Rosso Di Montalcino",
+    "vineyard": "Allegrini",
+    "price_range": "38-43",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Red Blend",
@@ -1477,16 +1307,13 @@
       "flavor_secondary": "spice",
       "flavor_tertiary": "oak",
       "country": "Italy",
-      "price_tier": "premium",
-      "stock_status": "Low in stock"
+      "price_tier": "premium"
     }
   },
   {
-    "name": "ARROGANT FROG CAB SAUV",
-    "sku": "SKU: 384628",
-    "price": "$18.17",
-    "alcohol": "13.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/cabernet-sauvignon/arrogant-frog-cab-sauv",
+    "wine_name": "Frog Cab Sauv",
+    "vineyard": "Arrogant",
+    "price_range": "16-21",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Red Blend",
@@ -1503,16 +1330,13 @@
       "flavor_secondary": "spice",
       "flavor_tertiary": "oak",
       "country": "France",
-      "price_tier": "mid",
-      "stock_status": "OUT OF STOCK"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "AUGEY BORDEAUX ROUGE",
-    "sku": "SKU: 775437",
-    "price": "$21.40",
-    "alcohol": "12",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/bordeaux/augey-rouge",
+    "wine_name": "Bordeaux Rouge",
+    "vineyard": "Augey",
+    "price_range": "19-24",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Red Blend",
@@ -1529,16 +1353,13 @@
       "flavor_secondary": "spice",
       "flavor_tertiary": "oak",
       "country": "France",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "BANFI ASKA",
-    "sku": "SKU: 868463",
-    "price": "$32.74",
-    "alcohol": "14",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/italian-blend/banfi-aska",
+    "wine_name": "Aska",
+    "vineyard": "Banfi",
+    "price_range": "30-35",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Red Blend",
@@ -1555,16 +1376,13 @@
       "flavor_secondary": "spice",
       "flavor_tertiary": "oak",
       "country": "Italy",
-      "price_tier": "premium",
-      "stock_status": "In stock"
+      "price_tier": "premium"
     }
   },
   {
-    "name": "BLACK HILLS - HIATUS COLLECTION BONA FIDE 2024",
-    "sku": "SKU: 693195",
-    "price": "$41.00",
-    "alcohol": "13.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/black-hills-hiatus-collection-bona-fide-2024",
+    "wine_name": "Hiatus Collection Bona Fide 2024",
+    "vineyard": "Black Hills",
+    "price_range": "39-43",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Red Blend",
@@ -1581,16 +1399,13 @@
       "flavor_secondary": "spice",
       "flavor_tertiary": "oak",
       "country": "Canada",
-      "price_tier": "premium",
-      "stock_status": "In stock"
+      "price_tier": "premium"
     }
   },
   {
-    "name": "BLACK HILLS - NOTA BENE 2021",
-    "sku": "SKU: 708073",
-    "price": "$75.78",
-    "alcohol": "13",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/black-hills-nota-bene-2021",
+    "wine_name": "Nota Bene 2021",
+    "vineyard": "Black Hills",
+    "price_range": "73-78",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Red Blend",
@@ -1607,16 +1422,13 @@
       "flavor_secondary": "spice",
       "flavor_tertiary": "oak",
       "country": "Canada",
-      "price_tier": "premium",
-      "stock_status": "In stock"
+      "price_tier": "premium"
     }
   },
   {
-    "name": "BLACK SAGE VINEYARD OLIVER - PIPE 2017",
-    "sku": "SKU: 713750",
-    "price": "$34.70",
-    "alcohol": "19.2",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/black-sage-vineyard-oliver-pipe-2017",
+    "wine_name": "Pipe 2017",
+    "vineyard": "Black Sage Vineyard Oliver",
+    "price_range": "32-37",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Red Blend",
@@ -1633,16 +1445,13 @@
       "flavor_secondary": "spice",
       "flavor_tertiary": "oak",
       "country": "Canada",
-      "price_tier": "premium",
-      "stock_status": "Low in stock"
+      "price_tier": "premium"
     }
   },
   {
-    "name": "BLACKMARKET SECRET SOCIETY RED",
-    "sku": "SKU: 5839422",
-    "price": "$34.26",
-    "alcohol": "",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/blackmarket-secret-society-red",
+    "wine_name": "Secret Society Red",
+    "vineyard": "Blackmarket",
+    "price_range": "32-37",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Red Blend",
@@ -1659,16 +1468,13 @@
       "flavor_secondary": "spice",
       "flavor_tertiary": "oak",
       "country": "Canada",
-      "price_tier": "premium",
-      "stock_status": "In stock"
+      "price_tier": "premium"
     }
   },
   {
-    "name": "BLAUFRANKISCH-CLAUS PREISINGER 2012",
-    "sku": "SKU: 508937",
-    "price": "$40.35",
-    "alcohol": "12.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/blaufrankisch/blaufrankisch-claus-preisinger-2012",
+    "wine_name": "Preisinger 2012",
+    "vineyard": "Blaufrankisch-Claus",
+    "price_range": "38-43",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Red Blend",
@@ -1685,16 +1491,13 @@
       "flavor_secondary": "spice",
       "flavor_tertiary": "oak",
       "country": "Austria",
-      "price_tier": "premium",
-      "stock_status": "In stock"
+      "price_tier": "premium"
     }
   },
   {
-    "name": "BLUE MOUNTAIN GAMAY NOIR",
-    "sku": "SKU: 389882",
-    "price": "$33.61",
-    "alcohol": "13",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/gamay/blue-mtn-gamay-noir",
+    "wine_name": "Mountain Gamay Noir",
+    "vineyard": "Blue",
+    "price_range": "31-36",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Red Blend",
@@ -1711,16 +1514,13 @@
       "flavor_secondary": "spice",
       "flavor_tertiary": "oak",
       "country": "Canada",
-      "price_tier": "premium",
-      "stock_status": "In stock"
+      "price_tier": "premium"
     }
   },
   {
-    "name": "BODACIOUS SMOOTH RED",
-    "sku": "SKU: 459677",
-    "price": "$13.17",
-    "alcohol": "12.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/blended-red/bodacious-smooth-red",
+    "wine_name": "Smooth Red",
+    "vineyard": "Bodacious",
+    "price_range": "11-16",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Red Blend",
@@ -1737,16 +1537,13 @@
       "flavor_secondary": "spice",
       "flavor_tertiary": "oak",
       "country": "Canada",
-      "price_tier": "budget",
-      "stock_status": "In stock"
+      "price_tier": "budget"
     }
   },
   {
-    "name": "CANTINA TOLLO ROSSO",
-    "sku": "SKU: 7799",
-    "price": "$17.74",
-    "alcohol": "12",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/montepulciano/tollo-montepulciano-d-abruzzo",
+    "wine_name": "Tollo Rosso",
+    "vineyard": "Cantina",
+    "price_range": "15-20",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Red Blend",
@@ -1763,16 +1560,13 @@
       "flavor_secondary": "spice",
       "flavor_tertiary": "oak",
       "country": "Italy",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "CARMEN GRAN RESERVA",
-    "sku": "SKU: 358309",
-    "price": "$23.39",
-    "alcohol": "14",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/cabernet-sauvignon/carmen-cab-sauv-gran-reserva-maipo",
+    "wine_name": "Gran Reserva",
+    "vineyard": "Carmen",
+    "price_range": "21-26",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Red Blend",
@@ -1789,16 +1583,13 @@
       "flavor_secondary": "spice",
       "flavor_tertiary": "oak",
       "country": "Chile",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "CARMEN RESERVA CARMENERE",
-    "sku": "SKU: 638536",
-    "price": "$16.43",
-    "alcohol": "14",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/carmenere/carmen-reserva-carmenere",
+    "wine_name": "Reserva Carmenere",
+    "vineyard": "Carmen",
+    "price_range": "14-19",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Red Blend",
@@ -1815,16 +1606,13 @@
       "flavor_secondary": "spice",
       "flavor_tertiary": "oak",
       "country": "Chile",
-      "price_tier": "mid",
-      "stock_status": "Low in stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "CARPINETO - GRAN SELEZIONE CHIANTI",
-    "sku": "SKU: 105729",
-    "price": "$76.39",
-    "alcohol": "14",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/blended-red/carpineto-gran-selezione-chianti",
+    "wine_name": "Gran Selezione Chianti",
+    "vineyard": "Carpineto",
+    "price_range": "74-79",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Red Blend",
@@ -1841,16 +1629,13 @@
       "flavor_secondary": "spice",
       "flavor_tertiary": "oak",
       "country": "Italy",
-      "price_tier": "premium",
-      "stock_status": "In stock"
+      "price_tier": "premium"
     }
   },
   {
-    "name": "CARPINETTO CHIANTI CLASSICO",
-    "sku": "SKU: 130187",
-    "price": "$33.83",
-    "alcohol": "13",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/blended-red/carpinetto-chianti-classico",
+    "wine_name": "Chianti Classico",
+    "vineyard": "Carpinetto",
+    "price_range": "31-36",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Red Blend",
@@ -1867,16 +1652,13 @@
       "flavor_secondary": "spice",
       "flavor_tertiary": "oak",
       "country": "Italy",
-      "price_tier": "premium",
-      "stock_status": "In stock"
+      "price_tier": "premium"
     }
   },
   {
-    "name": "CASA SANTOS LIMA BONAVITA",
-    "sku": "SKU: 566604",
-    "price": "$14.70",
-    "alcohol": "14",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/blended-red/casa-santos-lima-bonavita",
+    "wine_name": "Santos Lima Bonavita",
+    "vineyard": "Casa",
+    "price_range": "12-17",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Red Blend",
@@ -1893,16 +1675,13 @@
       "flavor_secondary": "spice",
       "flavor_tertiary": "oak",
       "country": "Portugal",
-      "price_tier": "budget",
-      "stock_status": "In stock"
+      "price_tier": "budget"
     }
   },
   {
-    "name": "CASTANO ECOLOGICO",
-    "sku": "SKU: 570804",
-    "price": "$17.52",
-    "alcohol": "13.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/spanish-blend/castano-ecologico",
+    "wine_name": "Ecologico",
+    "vineyard": "Castano",
+    "price_range": "15-20",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Red Blend",
@@ -1919,16 +1698,13 @@
       "flavor_secondary": "spice",
       "flavor_tertiary": "oak",
       "country": "Spain",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "CASTEL DEL MONTE - TORMARESCA BOCCA DI LUPO",
-    "sku": "SKU: 148668",
-    "price": "$77.30",
-    "alcohol": "15",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/italian-blend/castel-del-monte-tormaresca-bocca-di-lupo",
+    "wine_name": "Tormaresca Bocca Di Lupo",
+    "vineyard": "Castel Del Monte",
+    "price_range": "75-80",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Red Blend",
@@ -1945,16 +1721,13 @@
       "flavor_secondary": "spice",
       "flavor_tertiary": "oak",
       "country": "Italy",
-      "price_tier": "premium",
-      "stock_status": "Low in stock"
+      "price_tier": "premium"
     }
   },
   {
-    "name": "CASTELLO DI QUERCETO CIGNALE",
-    "sku": "SKU: 182162",
-    "price": "$98.17",
-    "alcohol": "13.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/tuscan/castello-di-querceto-cignale",
+    "wine_name": "Di Querceto Cignale",
+    "vineyard": "Castello",
+    "price_range": "96-101",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Red Blend",
@@ -1971,16 +1744,13 @@
       "flavor_secondary": "spice",
       "flavor_tertiary": "oak",
       "country": "Italy",
-      "price_tier": "premium",
-      "stock_status": "OUT OF STOCK"
+      "price_tier": "premium"
     }
   },
   {
-    "name": "CHABERTON - AC 50",
-    "sku": "SKU: 834481",
-    "price": "$63.35",
-    "alcohol": "13.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/meritage/chaberton-ac-50",
+    "wine_name": "Ac 50",
+    "vineyard": "Chaberton",
+    "price_range": "61-66",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Red Blend",
@@ -1997,16 +1767,13 @@
       "flavor_secondary": "spice",
       "flavor_tertiary": "oak",
       "country": "Canada",
-      "price_tier": "premium",
-      "stock_status": "OUT OF STOCK"
+      "price_tier": "premium"
     }
   },
   {
-    "name": "CHATEAU DE MONTFAUCON VIN DE MONSIEUR LE BARON",
-    "sku": "SKU: 437111",
-    "price": "$75.39",
-    "alcohol": "14.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/gsm/chateau-de-montfaucon-vin-de-monsieur-le-baron",
+    "wine_name": "De Montfaucon Vin De Monsieur Le Baron",
+    "vineyard": "Chateau",
+    "price_range": "73-78",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Red Blend",
@@ -2023,16 +1790,13 @@
       "flavor_secondary": "spice",
       "flavor_tertiary": "oak",
       "country": "France",
-      "price_tier": "premium",
-      "stock_status": "OUT OF STOCK"
+      "price_tier": "premium"
     }
   },
   {
-    "name": "CHATEAU MONLOT 2010",
-    "sku": "SKU: 513424",
-    "price": "$277.57",
-    "alcohol": "14.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/bordeaux/chateau-monlot-2010",
+    "wine_name": "Monlot 2010",
+    "vineyard": "Chateau",
+    "price_range": "275-280",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Red Blend",
@@ -2049,16 +1813,13 @@
       "flavor_secondary": "spice",
       "flavor_tertiary": "oak",
       "country": "France",
-      "price_tier": "highend",
-      "stock_status": "In stock"
+      "price_tier": "highend"
     }
   },
   {
-    "name": "CHATEAU VARTELY RED",
-    "sku": "SKU: 135812",
-    "price": "$23.61",
-    "alcohol": "14",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/blended-red/chateau-vartely-red",
+    "wine_name": "Vartely Red",
+    "vineyard": "Chateau",
+    "price_range": "21-26",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Red Blend",
@@ -2075,16 +1836,13 @@
       "flavor_secondary": "spice",
       "flavor_tertiary": "oak",
       "country": "Modolva",
-      "price_tier": "mid",
-      "stock_status": "Low in stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "CHATEAU VERDIGNAN HAUT MEDOC",
-    "sku": "SKU: 758359",
-    "price": "$60.78",
-    "alcohol": "13",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/bordeaux/chateau-verdignan-haut-medoc",
+    "wine_name": "Verdignan Haut Medoc",
+    "vineyard": "Chateau",
+    "price_range": "58-63",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Red Blend",
@@ -2101,16 +1859,13 @@
       "flavor_secondary": "spice",
       "flavor_tertiary": "oak",
       "country": "France",
-      "price_tier": "premium",
-      "stock_status": "In stock"
+      "price_tier": "premium"
     }
   },
   {
-    "name": "CHATEAU WOLFF ESTATE ROUGE",
-    "sku": "SKU: 449900",
-    "price": "$23.39",
-    "alcohol": "18.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/chateau-wolff-estate-rouge",
+    "wine_name": "Wolff Estate Rouge",
+    "vineyard": "Chateau",
+    "price_range": "21-26",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Red Blend",
@@ -2127,16 +1882,13 @@
       "flavor_secondary": "spice",
       "flavor_tertiary": "oak",
       "country": "Canada",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "CHIANTI - FELSINA RESERVA RANCIA",
-    "sku": "SKU: 526696",
-    "price": "$102.52",
-    "alcohol": "13.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/sangiovese/chianti-felsina-reserva-rancia",
+    "wine_name": "Felsina Reserva Rancia",
+    "vineyard": "Chianti",
+    "price_range": "100-105",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Red Blend",
@@ -2153,16 +1905,13 @@
       "flavor_secondary": "spice",
       "flavor_tertiary": "oak",
       "country": "Italy",
-      "price_tier": "highend",
-      "stock_status": "Low in stock"
+      "price_tier": "highend"
     }
   },
   {
-    "name": "CHOCOLATE SHOP WINE",
-    "sku": "SKU: 157545",
-    "price": "$32.09",
-    "alcohol": "12.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/blended-red/chocolate-shop-the-chocolate-lovers-wine",
+    "wine_name": "Shop Wine",
+    "vineyard": "Chocolate",
+    "price_range": "30-35",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Red Blend",
@@ -2179,16 +1928,13 @@
       "flavor_secondary": "spice",
       "flavor_tertiary": "oak",
       "country": "United States",
-      "price_tier": "premium",
-      "stock_status": "OUT OF STOCK"
+      "price_tier": "premium"
     }
   },
   {
-    "name": "CHURCH & STATE MERITAGE",
-    "sku": "SKU: 278267",
-    "price": "$34.70",
-    "alcohol": "14",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/meritage/church-state-meritage",
+    "wine_name": "& State Meritage",
+    "vineyard": "Church",
+    "price_range": "32-37",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Red Blend",
@@ -2205,16 +1951,13 @@
       "flavor_secondary": "spice",
       "flavor_tertiary": "oak",
       "country": "Canada",
-      "price_tier": "premium",
-      "stock_status": "In stock"
+      "price_tier": "premium"
     }
   },
   {
-    "name": "CLOS DU SOLEIL RESERVE RED",
-    "sku": "SKU: 966887",
-    "price": "$72.09",
-    "alcohol": "14.6",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/clos-du-soleil-estate-red-reserve-2018",
+    "wine_name": "Du Soleil Reserve Red",
+    "vineyard": "Clos",
+    "price_range": "70-75",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Red Blend",
@@ -2231,16 +1974,13 @@
       "flavor_secondary": "spice",
       "flavor_tertiary": "oak",
       "country": "Canada",
-      "price_tier": "premium",
-      "stock_status": "In stock"
+      "price_tier": "premium"
     }
   },
   {
-    "name": "CONFESSIONS CAB SAUV",
-    "sku": "SKU: 414792",
-    "price": "$17.65",
-    "alcohol": "13.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/confessions-cab-sauv",
+    "wine_name": "Cab Sauv",
+    "vineyard": "Confessions",
+    "price_range": "15-20",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Red Blend",
@@ -2257,16 +1997,13 @@
       "flavor_secondary": "spice",
       "flavor_tertiary": "oak",
       "country": "United States",
-      "price_tier": "mid",
-      "stock_status": "Low in stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "CORNAS - JEAN-LUC COLOMBO TERRES BRULEES",
-    "sku": "SKU: 31958",
-    "price": "$90.35",
-    "alcohol": "14.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/gsm/cornas-jean-luc-colombo-terres-brulees",
+    "wine_name": "Jean-Luc Colombo Terres Brulees",
+    "vineyard": "Cornas",
+    "price_range": "88-93",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Red Blend",
@@ -2283,16 +2020,13 @@
       "flavor_secondary": "spice",
       "flavor_tertiary": "oak",
       "country": "France",
-      "price_tier": "premium",
-      "stock_status": "Low in stock"
+      "price_tier": "premium"
     }
   },
   {
-    "name": "COTE ROTIE - DOMAINE GEORGES VERNAY MAISON ROUGE",
-    "sku": "SKU: 738435",
-    "price": "$252.96",
-    "alcohol": "13.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/red-french-blend/cote-rotie-domaine-georges-vernay-maison-rouge",
+    "wine_name": "Domaine Georges Vernay Maison Rouge",
+    "vineyard": "Cote Rotie",
+    "price_range": "250-255",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Red Blend",
@@ -2309,16 +2043,13 @@
       "flavor_secondary": "spice",
       "flavor_tertiary": "oak",
       "country": "France",
-      "price_tier": "highend",
-      "stock_status": "Low in stock"
+      "price_tier": "highend"
     }
   },
   {
-    "name": "CROWN AND THIEVES SCOUNDRELS PUNCH",
-    "sku": "SKU: 14919",
-    "price": "$29.48",
-    "alcohol": "",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/blended-red/crown-and-thieves-scoundrels-punch",
+    "wine_name": "And Thieves Scoundrels Punch",
+    "vineyard": "Crown",
+    "price_range": "27-32",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Red Blend",
@@ -2335,16 +2066,13 @@
       "flavor_secondary": "spice",
       "flavor_tertiary": "oak",
       "country": "Canada",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "DIRTY LAUNDRY HUSH RED",
-    "sku": "SKU: 11888",
-    "price": "$23.26",
-    "alcohol": "13",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/blended-red/dl-hush-red",
+    "wine_name": "Laundry Hush Red",
+    "vineyard": "Dirty",
+    "price_range": "21-26",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Red Blend",
@@ -2361,16 +2089,13 @@
       "flavor_secondary": "spice",
       "flavor_tertiary": "oak",
       "country": "Canada",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "DOMINIO DE EGUREN PROTOCOLO RED",
-    "sku": "SKU: 463745",
-    "price": "$16.19",
-    "alcohol": "",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/red-wine/spanish-blend/protocolo-manchuela-dominio-eguren",
+    "wine_name": "De Eguren Protocolo Red",
+    "vineyard": "Dominio",
+    "price_range": "14-19",
     "recommendation_matches": {
       "category": "Red Wine",
       "grape_primary": "Red Blend",
@@ -2387,16 +2112,13 @@
       "flavor_secondary": "spice",
       "flavor_tertiary": "oak",
       "country": "Spain",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "INDIGENOUS WORLD WINES HEE-HEE-TEL-KIN WHITE BLEND",
-    "sku": "SKU: 168925",
-    "price": "$25.13",
-    "alcohol": "12.6",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/blended-white/indigenous-world-wines-hee-hee-tel-kin-white-blend",
+    "wine_name": "World Wines Hee-Hee-Tel-Kin White Blend",
+    "vineyard": "Indigenous",
+    "price_range": "23-28",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "White Blend",
@@ -2413,16 +2135,13 @@
       "flavor_secondary": "floral",
       "flavor_tertiary": "mineral",
       "country": "Canada",
-      "price_tier": "mid",
-      "stock_status": "OUT OF STOCK"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "LOST INHIBITIONS - WHITE BLEND CAN",
-    "sku": "SKU: 46732719",
-    "price": "$7.52",
-    "alcohol": "13.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/lost-inhibitions-white-blend-can",
+    "wine_name": "White Blend Can",
+    "vineyard": "Lost Inhibitions",
+    "price_range": "5-10",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "White Blend",
@@ -2439,16 +2158,13 @@
       "flavor_secondary": "floral",
       "flavor_tertiary": "mineral",
       "country": "Canada",
-      "price_tier": "budget",
-      "stock_status": "Low in stock"
+      "price_tier": "budget"
     }
   },
   {
-    "name": "INDIGENOUS HEE-HEE-TEL-KIN WHITE BLEND 2022",
-    "sku": "SKU: 20683",
-    "price": "$25.13",
-    "alcohol": "12.1",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/blended-white/indigenous-hee-hee-tel-kin-white-blend-2022",
+    "wine_name": "Hee-Hee-Tel-Kin White Blend 2022",
+    "vineyard": "Indigenous",
+    "price_range": "23-28",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "White Blend",
@@ -2465,16 +2181,13 @@
       "flavor_secondary": "floral",
       "flavor_tertiary": "mineral",
       "country": "Canada",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "FRIND BIG WHITE BLEND",
-    "sku": "SKU: 50895",
-    "price": "$23.39",
-    "alcohol": "12.3",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/blended-white/frind-big-white",
+    "wine_name": "Big White Blend",
+    "vineyard": "Frind",
+    "price_range": "21-26",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "White Blend",
@@ -2491,16 +2204,13 @@
       "flavor_secondary": "floral",
       "flavor_tertiary": "mineral",
       "country": "Canada",
-      "price_tier": "mid",
-      "stock_status": "OUT OF STOCK"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "CANTINA TOLLO TREBBIANO D'ABRUZZO",
-    "sku": "SKU: 19315",
-    "price": "$17.96",
-    "alcohol": "11.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/trebbiano/tollo-trebbiano",
+    "wine_name": "Tollo Trebbiano D'Abruzzo",
+    "vineyard": "Cantina",
+    "price_range": "15-20",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "White Blend",
@@ -2517,16 +2227,13 @@
       "flavor_secondary": "floral",
       "flavor_tertiary": "mineral",
       "country": "Italy",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "JACKSON TRIGGS PROPRIETOR`S SELECTION RIESLING GE",
-    "sku": "SKU: 517169",
-    "price": "$12.30",
-    "alcohol": "12.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/jackson-triggs-proprietor-s-selection-riesling-ge",
+    "wine_name": "Riesling Ge",
+    "vineyard": "Jackson Triggs Proprietor`S Selection",
+    "price_range": "10-15",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "Riesling",
@@ -2543,16 +2250,13 @@
       "flavor_secondary": "lime",
       "flavor_tertiary": "honey",
       "country": "Canada",
-      "price_tier": "budget",
-      "stock_status": "In stock"
+      "price_tier": "budget"
     }
   },
   {
-    "name": "INNISKILLIN RIESLING RESERVE",
-    "sku": "SKU: 244095",
-    "price": "$20.78",
-    "alcohol": "12.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/inniskillin-riesling-reserve",
+    "wine_name": "Riesling Reserve",
+    "vineyard": "Inniskillin",
+    "price_range": "18-23",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "Riesling",
@@ -2569,16 +2273,13 @@
       "flavor_secondary": "lime",
       "flavor_tertiary": "honey",
       "country": "Canada",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "DR. LOOSEN RIESLING",
-    "sku": "SKU: 599274",
-    "price": "$21.65",
-    "alcohol": "8.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/dr-loosen-riesling",
+    "wine_name": "Riesling",
+    "vineyard": "Dr. Loosen",
+    "price_range": "19-24",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "Riesling",
@@ -2595,16 +2296,13 @@
       "flavor_secondary": "lime",
       "flavor_tertiary": "honey",
       "country": "Germany",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "ADEGA ON 45TH - RIESLING",
-    "sku": "SKU: 53015",
-    "price": "$23.57",
-    "alcohol": "11.9",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/adega-on-45th-riesling",
+    "wine_name": "Riesling",
+    "vineyard": "Adega On 45Th",
+    "price_range": "21-26",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "Riesling",
@@ -2621,16 +2319,13 @@
       "flavor_secondary": "lime",
       "flavor_tertiary": "honey",
       "country": "Canada",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "MONTE CRK RIESLING",
-    "sku": "SKU: 785717",
-    "price": "$24.70",
-    "alcohol": "",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/monte-crk-riesling",
+    "wine_name": "Riesling",
+    "vineyard": "Monte Crk",
+    "price_range": "22-27",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "Riesling",
@@ -2647,16 +2342,13 @@
       "flavor_secondary": "lime",
       "flavor_tertiary": "honey",
       "country": "Canada",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "KUNG FU GIRL RIESLING",
-    "sku": "SKU: 301671",
-    "price": "$21.13",
-    "alcohol": "12.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/kung-fu-girl-riesling",
+    "wine_name": "Riesling",
+    "vineyard": "Kung Fu Girl",
+    "price_range": "19-24",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "Riesling",
@@ -2673,16 +2365,13 @@
       "flavor_secondary": "lime",
       "flavor_tertiary": "honey",
       "country": "United States",
-      "price_tier": "mid",
-      "stock_status": "OUT OF STOCK"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "BLACKMARKET COLLUSION SERIES SAUVIGNON BLANC 2024",
-    "sku": "SKU: 65778924",
-    "price": "$25.35",
-    "alcohol": "",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/blackmarket-collusion-series-sauvignon-blanc-2024",
+    "wine_name": "Sauvignon Blanc 2024",
+    "vineyard": "Blackmarket Collusion Series",
+    "price_range": "23-28",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "Sauvignon Blanc",
@@ -2699,16 +2388,13 @@
       "flavor_secondary": "herb",
       "flavor_tertiary": "mineral",
       "country": "Canada",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "COPPER MOON SAUVIGNON BLANC",
-    "sku": "SKU: 508135",
-    "price": "$14.04",
-    "alcohol": "12.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/sauvignon-blanc/copper-moon-sauvignon-blanc",
+    "wine_name": "Sauvignon Blanc",
+    "vineyard": "Copper Moon",
+    "price_range": "12-17",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "Sauvignon Blanc",
@@ -2725,16 +2411,13 @@
       "flavor_secondary": "herb",
       "flavor_tertiary": "mineral",
       "country": "Canada",
-      "price_tier": "budget",
-      "stock_status": "In stock"
+      "price_tier": "budget"
     }
   },
   {
-    "name": "JACKSON TRIGGS RESERVE - SAUVIGNON BLANC WINEMAKER",
-    "sku": "SKU: 365662",
-    "price": "$19.99",
-    "alcohol": "13",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/jackson-triggs-reserve-sauvignon-blanc-winemaker",
+    "wine_name": "Sauvignon Blanc Winemaker",
+    "vineyard": "Jackson Triggs Reserve",
+    "price_range": "17-22",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "Sauvignon Blanc",
@@ -2751,16 +2434,13 @@
       "flavor_secondary": "herb",
       "flavor_tertiary": "mineral",
       "country": "Canada",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "JACKSON TRIGGS VQA SAUVIGNON BLANC",
-    "sku": "SKU: 593111",
-    "price": "$20.35",
-    "alcohol": "12 | 12.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/sauvignon-blanc/jackson-triggs-sauvignon-blanc",
+    "wine_name": "Sauvignon Blanc",
+    "vineyard": "Jackson Triggs Vqa",
+    "price_range": "18-23",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "Sauvignon Blanc",
@@ -2777,16 +2457,13 @@
       "flavor_secondary": "herb",
       "flavor_tertiary": "mineral",
       "country": "Canada",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "HESTER CREEK COLUMBIA SAUVIGNON BLANC",
-    "sku": "SKU: 248565",
-    "price": "$22.09",
-    "alcohol": "12.2",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/hester-creek-columbia-sauvignon-blanc",
+    "wine_name": "Sauvignon Blanc",
+    "vineyard": "Hester Creek Columbia",
+    "price_range": "20-25",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "Sauvignon Blanc",
@@ -2803,16 +2480,13 @@
       "flavor_secondary": "herb",
       "flavor_tertiary": "mineral",
       "country": "Canada",
-      "price_tier": "mid",
-      "stock_status": "OUT OF STOCK"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "CONO SUR TOCORNAL SAUVIGNON BLANC",
-    "sku": "SKU: 306472",
-    "price": "$18.17",
-    "alcohol": "12",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/sauvignon-blanc/tocornal-sauvignon-blanc-1-5l-magnum",
+    "wine_name": "Sauvignon Blanc",
+    "vineyard": "Cono Sur Tocornal",
+    "price_range": "16-21",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "Sauvignon Blanc",
@@ -2829,16 +2503,13 @@
       "flavor_secondary": "herb",
       "flavor_tertiary": "mineral",
       "country": "Chile",
-      "price_tier": "mid",
-      "stock_status": "OUT OF STOCK"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "CONO SUR BICICLETA SAUVIGNON BLANC",
-    "sku": "SKU: 813576",
-    "price": "$20.68",
-    "alcohol": "13.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/sauvignon-blanc/cono-sur-organic-sauvignon-blanc",
+    "wine_name": "Sauvignon Blanc",
+    "vineyard": "Cono Sur Bicicleta",
+    "price_range": "18-23",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "Sauvignon Blanc",
@@ -2855,16 +2526,13 @@
       "flavor_secondary": "herb",
       "flavor_tertiary": "mineral",
       "country": "Chile",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "MATUA SAUVIGNON BLANC",
-    "sku": "SKU: 309591",
-    "price": "$23.49",
-    "alcohol": "12",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/sauvignon-blanc/matua-sauvignon-blanc",
+    "wine_name": "Sauvignon Blanc",
+    "vineyard": "Matua",
+    "price_range": "21-26",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "Sauvignon Blanc",
@@ -2881,16 +2549,13 @@
       "flavor_secondary": "herb",
       "flavor_tertiary": "mineral",
       "country": "New Zealand",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "LES JAMELLES SAUVIGNON BLANC",
-    "sku": "SKU: 743740",
-    "price": "$19.91",
-    "alcohol": "12.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/sauvignon-blanc/les-jamelles-sauvignon-blanc",
+    "wine_name": "Sauvignon Blanc",
+    "vineyard": "Les Jamelles",
+    "price_range": "17-22",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "Sauvignon Blanc",
@@ -2907,16 +2572,13 @@
       "flavor_secondary": "herb",
       "flavor_tertiary": "mineral",
       "country": "France",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "LINDEMAN'S BIN 95 SAUVIGNON BLANC",
-    "sku": "SKU: 181388",
-    "price": "$16.00",
-    "alcohol": "11.7",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/sauvignon-blanc/lindemans-sauvignon-blanc",
+    "wine_name": "Sauvignon Blanc",
+    "vineyard": "Lindeman'S Bin 95",
+    "price_range": "14-18",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "Sauvignon Blanc",
@@ -2933,16 +2595,13 @@
       "flavor_secondary": "herb",
       "flavor_tertiary": "mineral",
       "country": "Australia",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "CASILLERO DEL DIABLO SAUVIGNON BLANC",
-    "sku": "SKU: 578641",
-    "price": "$16.49",
-    "alcohol": "13",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/sauvignon-blanc/casillero-sauvignon-blanc",
+    "wine_name": "Sauvignon Blanc",
+    "vineyard": "Casillero Del Diablo",
+    "price_range": "14-19",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "Sauvignon Blanc",
@@ -2959,16 +2618,13 @@
       "flavor_secondary": "herb",
       "flavor_tertiary": "mineral",
       "country": "Chile",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "CHABERTON SAUVIGNON BLANC",
-    "sku": "SKU: 555193",
-    "price": "$24.26",
-    "alcohol": "12.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/sauvignon-blanc/chaberton-sauvignon-blanc",
+    "wine_name": "Sauvignon Blanc",
+    "vineyard": "Chaberton",
+    "price_range": "22-27",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "Sauvignon Blanc",
@@ -2985,16 +2641,13 @@
       "flavor_secondary": "herb",
       "flavor_tertiary": "mineral",
       "country": "Canada",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "MOSCATO - JACOBS CREEK",
-    "sku": "SKU: 400267",
-    "price": "$15.48",
-    "alcohol": "8.3",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/moscato/moscato-jacobs-creek",
+    "wine_name": "Jacobs Creek",
+    "vineyard": "Moscato",
+    "price_range": "13-18",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "Moscato",
@@ -3011,16 +2664,13 @@
       "flavor_secondary": "orange",
       "flavor_tertiary": "floral",
       "country": "Australia",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "BAREFOOT MOSCATO",
-    "sku": "SKU: 789545",
-    "price": "$24.26",
-    "alcohol": "9",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/muscat/barefoot-moscato-1-5l-magnum",
+    "wine_name": "Moscato",
+    "vineyard": "Barefoot",
+    "price_range": "22-27",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "Moscato",
@@ -3037,16 +2687,13 @@
       "flavor_secondary": "orange",
       "flavor_tertiary": "floral",
       "country": "United States",
-      "price_tier": "mid",
-      "stock_status": "OUT OF STOCK"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "CONO SUR BICICLETA VIOGNIER",
-    "sku": "SKU: 566836",
-    "price": "$13.83",
-    "alcohol": "13.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/viognier/cono-sur-viognier",
+    "wine_name": "Sur Bicicleta Viognier",
+    "vineyard": "Cono",
+    "price_range": "11-16",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "Viognier",
@@ -3063,16 +2710,13 @@
       "flavor_secondary": "peach",
       "flavor_tertiary": "flower",
       "country": "Chile",
-      "price_tier": "budget",
-      "stock_status": "In stock"
+      "price_tier": "budget"
     }
   },
   {
-    "name": "CHATEAU MARIS VIOGNIER GRENACHE",
-    "sku": "SKU: 428370",
-    "price": "$24.57",
-    "alcohol": "14",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/blended-white/chateau-maris-viognier-grenache",
+    "wine_name": "Grenache",
+    "vineyard": "Chateau Maris Viognier",
+    "price_range": "22-27",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "Viognier",
@@ -3089,16 +2733,13 @@
       "flavor_secondary": "peach",
       "flavor_tertiary": "flower",
       "country": "France",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "MORAINE - VIOGNIER",
-    "sku": "SKU: 786392",
-    "price": "$28.39",
-    "alcohol": "12.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/viognier/moraine-viognier",
+    "wine_name": "Viognier",
+    "vineyard": "Moraine",
+    "price_range": "26-31",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "Viognier",
@@ -3115,16 +2756,13 @@
       "flavor_secondary": "peach",
       "flavor_tertiary": "flower",
       "country": "Canada",
-      "price_tier": "mid",
-      "stock_status": "OUT OF STOCK"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "BLUE MOUNTAIN CHARDONNAY",
-    "sku": "SKU: 350108",
-    "price": "$33.83",
-    "alcohol": "12.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/chardonnay-white/blue-mountain-chardonnay",
+    "wine_name": "Chardonnay",
+    "vineyard": "Blue Mountain",
+    "price_range": "31-36",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "Chardonnay",
@@ -3141,16 +2779,13 @@
       "flavor_secondary": "butter",
       "flavor_tertiary": "oak",
       "country": "Canada",
-      "price_tier": "premium",
-      "stock_status": "In stock"
+      "price_tier": "premium"
     }
   },
   {
-    "name": "BASK - CHARDONNAY",
-    "sku": "SKU: 259468",
-    "price": "$14.90",
-    "alcohol": "12.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/bask-chardonnay",
+    "wine_name": "Chardonnay",
+    "vineyard": "Bask",
+    "price_range": "12-17",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "Chardonnay",
@@ -3167,16 +2802,13 @@
       "flavor_secondary": "butter",
       "flavor_tertiary": "oak",
       "country": "Canada",
-      "price_tier": "budget",
-      "stock_status": "In stock"
+      "price_tier": "budget"
     }
   },
   {
-    "name": "BLACKMARKET CHARDONNAY",
-    "sku": "SKU: 25761523",
-    "price": "$34.26",
-    "alcohol": "",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/blackmarket-chardonnay",
+    "wine_name": "Chardonnay",
+    "vineyard": "Blackmarket",
+    "price_range": "32-37",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "Chardonnay",
@@ -3193,16 +2825,13 @@
       "flavor_secondary": "butter",
       "flavor_tertiary": "oak",
       "country": "Canada",
-      "price_tier": "premium",
-      "stock_status": "In stock"
+      "price_tier": "premium"
     }
   },
   {
-    "name": "JACKSON TRIGGS RESERVE - CHARDONNAY WINEMAKERS SER",
-    "sku": "SKU: 365674",
-    "price": "$19.48",
-    "alcohol": "13",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/jackson-triggs-reserve-chardonnay-winemakers-ser",
+    "wine_name": "Chardonnay Winemakers Ser",
+    "vineyard": "Jackson Triggs Reserve",
+    "price_range": "17-22",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "Chardonnay",
@@ -3219,16 +2848,13 @@
       "flavor_secondary": "butter",
       "flavor_tertiary": "oak",
       "country": "Canada",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "MISSION HILL RESERVE CHARDONNAY",
-    "sku": "SKU: 18812",
-    "price": "$31.49",
-    "alcohol": "13.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/chardonnay-white/mission-hill-reserve-chardonnay",
+    "wine_name": "Chardonnay",
+    "vineyard": "Mission Hill Reserve",
+    "price_range": "29-34",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "Chardonnay",
@@ -3245,16 +2871,13 @@
       "flavor_secondary": "butter",
       "flavor_tertiary": "oak",
       "country": "Canada",
-      "price_tier": "premium",
-      "stock_status": "OUT OF STOCK"
+      "price_tier": "premium"
     }
   },
   {
-    "name": "BLUE GROUSE - BG CHARDONNAY",
-    "sku": "SKU: 290687",
-    "price": "$31.87",
-    "alcohol": "12.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/blue-grouse-bg-chardonnay",
+    "wine_name": "Bg Chardonnay",
+    "vineyard": "Blue Grouse",
+    "price_range": "29-34",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "Chardonnay",
@@ -3271,16 +2894,13 @@
       "flavor_secondary": "butter",
       "flavor_tertiary": "oak",
       "country": "Canada",
-      "price_tier": "premium",
-      "stock_status": "Low in stock"
+      "price_tier": "premium"
     }
   },
   {
-    "name": "GRAY MONK - UNWOODED CHARDONNAY 2024",
-    "sku": "SKU: 335268",
-    "price": "$24.49",
-    "alcohol": "13",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/gray-monk-unwooded-chardonnay-2024",
+    "wine_name": "Unwooded Chardonnay 2024",
+    "vineyard": "Gray Monk",
+    "price_range": "22-27",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "Chardonnay",
@@ -3297,16 +2917,13 @@
       "flavor_secondary": "butter",
       "flavor_tertiary": "oak",
       "country": "Canada",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "CONO SUR BICICLETA CHARDONNAY",
-    "sku": "SKU: 376855",
-    "price": "$18.61",
-    "alcohol": "12",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/chardonnay-white/tocornal-chardonnay-1-5l-magnum",
+    "wine_name": "Chardonnay",
+    "vineyard": "Cono Sur Bicicleta",
+    "price_range": "16-21",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "Chardonnay",
@@ -3323,16 +2940,13 @@
       "flavor_secondary": "butter",
       "flavor_tertiary": "oak",
       "country": "Chile",
-      "price_tier": "mid",
-      "stock_status": "OUT OF STOCK"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "J. LOHR RIVERSTONE CHARDONNAY",
-    "sku": "SKU: 258699",
-    "price": "$28.43",
-    "alcohol": "13",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/chardonnay-white/j-lohr-riverstone-chardonnay",
+    "wine_name": "Chardonnay",
+    "vineyard": "J. Lohr Riverstone",
+    "price_range": "26-31",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "Chardonnay",
@@ -3349,16 +2963,13 @@
       "flavor_secondary": "butter",
       "flavor_tertiary": "oak",
       "country": "United States",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "CHARDONNAY - BREAD AND BUTTER 2019",
-    "sku": "SKU: 199367",
-    "price": "$27.74",
-    "alcohol": "13.6",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/chardonnay-white/chardonnay-bread-and-butter-2019",
+    "wine_name": "Bread And Butter 2019",
+    "vineyard": "Chardonnay",
+    "price_range": "25-30",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "Chardonnay",
@@ -3375,16 +2986,13 @@
       "flavor_secondary": "butter",
       "flavor_tertiary": "oak",
       "country": "United States",
-      "price_tier": "mid",
-      "stock_status": "OUT OF STOCK"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "CRANSWICK WINES LAUGHING BIRD CHARDONNAY",
-    "sku": "SKU: 541409",
-    "price": "$13.39",
-    "alcohol": "12.8",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/chardonnay-white/laughing-bird-chardonnay",
+    "wine_name": "Chardonnay",
+    "vineyard": "Cranswick Wines Laughing Bird",
+    "price_range": "11-16",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "Chardonnay",
@@ -3401,16 +3009,13 @@
       "flavor_secondary": "butter",
       "flavor_tertiary": "oak",
       "country": "Australia",
-      "price_tier": "budget",
-      "stock_status": "OUT OF STOCK"
+      "price_tier": "budget"
     }
   },
   {
-    "name": "NATURAL SELECTION CHARDONNAY",
-    "sku": "SKU: 421964",
-    "price": "$14.70",
-    "alcohol": "12",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/chardonnay-white/natural-selection-chardonnay",
+    "wine_name": "Chardonnay",
+    "vineyard": "Natural Selection",
+    "price_range": "12-17",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "Chardonnay",
@@ -3427,16 +3032,13 @@
       "flavor_secondary": "butter",
       "flavor_tertiary": "oak",
       "country": "Australia",
-      "price_tier": "budget",
-      "stock_status": "In stock"
+      "price_tier": "budget"
     }
   },
   {
-    "name": "MT BOUCHERIE CHARDONNAY",
-    "sku": "SKU: 64527",
-    "price": "$26.61",
-    "alcohol": "13",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/chardonnay-white/mt-boucherie-chardonnay",
+    "wine_name": "Chardonnay",
+    "vineyard": "Mt Boucherie",
+    "price_range": "24-29",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "Chardonnay",
@@ -3453,16 +3055,13 @@
       "flavor_secondary": "butter",
       "flavor_tertiary": "oak",
       "country": "Canada",
-      "price_tier": "mid",
-      "stock_status": "OUT OF STOCK"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "LA CLOSERIE CHARDONNAY",
-    "sku": "SKU: 133921",
-    "price": "$25.13",
-    "alcohol": "13",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/chardonnay-white/la-closerie-chardonnay",
+    "wine_name": "Chardonnay",
+    "vineyard": "La Closerie",
+    "price_range": "23-28",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "Chardonnay",
@@ -3479,16 +3078,13 @@
       "flavor_secondary": "butter",
       "flavor_tertiary": "oak",
       "country": "France",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "CUPCAKE CHARDONNAY",
-    "sku": "SKU: 143776",
-    "price": "$18.17",
-    "alcohol": "13.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/chardonnay-white/cupcake-chardonnay",
+    "wine_name": "Chardonnay",
+    "vineyard": "Cupcake",
+    "price_range": "16-21",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "Chardonnay",
@@ -3505,16 +3101,13 @@
       "flavor_secondary": "butter",
       "flavor_tertiary": "oak",
       "country": "United States",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "FRONTERA CHARDONNAY",
-    "sku": "SKU: 465849",
-    "price": "$18.83",
-    "alcohol": "",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/chardonnay-white/frontera-chardonnay",
+    "wine_name": "Chardonnay",
+    "vineyard": "Frontera",
+    "price_range": "16-21",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "Chardonnay",
@@ -3531,16 +3124,13 @@
       "flavor_secondary": "butter",
       "flavor_tertiary": "oak",
       "country": "Chile",
-      "price_tier": "mid",
-      "stock_status": "Low in stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "GARDEN OF GRANITE CHARDONNAY",
-    "sku": "SKU: 442710",
-    "price": "$26.22",
-    "alcohol": "12.8",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/chardonnay-white/garden-of-granite-chardonnay",
+    "wine_name": "Chardonnay",
+    "vineyard": "Garden Of Granite",
+    "price_range": "24-29",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "Chardonnay",
@@ -3557,16 +3147,13 @@
       "flavor_secondary": "butter",
       "flavor_tertiary": "oak",
       "country": "Canada",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "BLUE GROUSE - CHARME DE L ILE",
-    "sku": "SKU: 320306",
-    "price": "$32.96",
-    "alcohol": "12",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/blue-grouse-charme-de-l-ile",
+    "wine_name": "Charme De L Ile",
+    "vineyard": "Blue Grouse",
+    "price_range": "30-35",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "White Blend",
@@ -3583,16 +3170,13 @@
       "flavor_secondary": "floral",
       "flavor_tertiary": "mineral",
       "country": "Canada",
-      "price_tier": "premium",
-      "stock_status": "Low in stock"
+      "price_tier": "premium"
     }
   },
   {
-    "name": "BLACK CELLAR - PINOT GRIGIO",
-    "sku": "SKU: 351403",
-    "price": "$12.74",
-    "alcohol": "12",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/pinot-gris/black-cellar-pinot-grigio",
+    "wine_name": "Pinot Grigio",
+    "vineyard": "Black Cellar",
+    "price_range": "10-15",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "Pinot Grigio",
@@ -3609,16 +3193,13 @@
       "flavor_secondary": "lemon",
       "flavor_tertiary": "floral",
       "country": "Canada",
-      "price_tier": "budget",
-      "stock_status": "In stock"
+      "price_tier": "budget"
     }
   },
   {
-    "name": "HONEST LOT PINOT GRIGIO",
-    "sku": "SKU: 253974",
-    "price": "$13.99",
-    "alcohol": "12",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/honest-lot-pinot-grigio",
+    "wine_name": "Pinot Grigio",
+    "vineyard": "Honest Lot",
+    "price_range": "11-16",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "Pinot Grigio",
@@ -3635,16 +3216,13 @@
       "flavor_secondary": "lemon",
       "flavor_tertiary": "floral",
       "country": "Canada",
-      "price_tier": "budget",
-      "stock_status": "In stock"
+      "price_tier": "budget"
     }
   },
   {
-    "name": "HONEST LOT PINOT GRIGIO",
-    "sku": "SKU: 286986",
-    "price": "$49.48",
-    "alcohol": "12",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/pinot-gris/honest-lot-pinot-grigio",
+    "wine_name": "Pinot Grigio",
+    "vineyard": "Honest Lot",
+    "price_range": "47-52",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "Pinot Grigio",
@@ -3661,16 +3239,13 @@
       "flavor_secondary": "lemon",
       "flavor_tertiary": "floral",
       "country": "Canada",
-      "price_tier": "premium",
-      "stock_status": "In stock"
+      "price_tier": "premium"
     }
   },
   {
-    "name": "BURROWING OWL CHARD",
-    "sku": "SKU: 417683",
-    "price": "$40.78",
-    "alcohol": "13.7",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/chardonnay-white/burrowing-owl-chard",
+    "wine_name": "Owl Chard",
+    "vineyard": "Burrowing",
+    "price_range": "38-43",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "White Blend",
@@ -3687,16 +3262,13 @@
       "flavor_secondary": "floral",
       "flavor_tertiary": "mineral",
       "country": "Canada",
-      "price_tier": "premium",
-      "stock_status": "In stock"
+      "price_tier": "premium"
     }
   },
   {
-    "name": "HONEST LOT PINOT GRIGIO 4L",
-    "sku": "SKU: 1251901",
-    "price": "$39.90",
-    "alcohol": "12",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/honest-lot-pinot-grigio-4l",
+    "wine_name": "Pinot Grigio 4L",
+    "vineyard": "Honest Lot",
+    "price_range": "37-42",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "Pinot Grigio",
@@ -3713,16 +3285,13 @@
       "flavor_secondary": "lemon",
       "flavor_tertiary": "floral",
       "country": "Canada",
-      "price_tier": "premium",
-      "stock_status": "Low in stock"
+      "price_tier": "premium"
     }
   },
   {
-    "name": "JACKSON TRIGGS PROPRIETORS SELECTION SAUVIGNON BLA",
-    "sku": "SKU: 399410",
-    "price": "$13.61",
-    "alcohol": "12.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/jackson-triggs-proprietors-selection-sauvignon-bla",
+    "wine_name": "Sauvignon Bla",
+    "vineyard": "Jackson Triggs Proprietors Selection",
+    "price_range": "11-16",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "White Blend",
@@ -3739,16 +3308,13 @@
       "flavor_secondary": "floral",
       "flavor_tertiary": "mineral",
       "country": "Canada",
-      "price_tier": "budget",
-      "stock_status": "In stock"
+      "price_tier": "budget"
     }
   },
   {
-    "name": "COPPER MOON PINOT GRIGIO",
-    "sku": "SKU: 789982",
-    "price": "$13.61",
-    "alcohol": "12.5 | 12.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/pinot-gris/copper-moon-pinot-grigio",
+    "wine_name": "Pinot Grigio",
+    "vineyard": "Copper Moon",
+    "price_range": "11-16",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "Pinot Grigio",
@@ -3765,16 +3331,13 @@
       "flavor_secondary": "lemon",
       "flavor_tertiary": "floral",
       "country": "Canada",
-      "price_tier": "budget",
-      "stock_status": "In stock"
+      "price_tier": "budget"
     }
   },
   {
-    "name": "HESTER CREEK PINOT GRIS",
-    "sku": "SKU: 248570",
-    "price": "$23.83",
-    "alcohol": "",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/hester-creek-pinot-gris",
+    "wine_name": "Pinot Gris",
+    "vineyard": "Hester Creek",
+    "price_range": "21-26",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "White Blend",
@@ -3791,16 +3354,13 @@
       "flavor_secondary": "floral",
       "flavor_tertiary": "mineral",
       "country": "Canada",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "BORDERTOWN PINOT GRIGIO",
-    "sku": "SKU: 237269",
-    "price": "$23.39",
-    "alcohol": "13.6",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/pinot-gris/bordertown-pinot-gris",
+    "wine_name": "Pinot Grigio",
+    "vineyard": "Bordertown",
+    "price_range": "21-26",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "Pinot Grigio",
@@ -3817,16 +3377,13 @@
       "flavor_secondary": "lemon",
       "flavor_tertiary": "floral",
       "country": "Canada",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "HESTER CREEK ESTATE WINERY CHARACTER WHITE",
-    "sku": "SKU: 158147",
-    "price": "$22.52",
-    "alcohol": "13.8",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/blended-white/hester-creek-character-white",
+    "wine_name": "Creek Estate Winery Character White",
+    "vineyard": "Hester",
+    "price_range": "20-25",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "White Blend",
@@ -3843,16 +3400,13 @@
       "flavor_secondary": "floral",
       "flavor_tertiary": "mineral",
       "country": "Canada",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "BLUE GROUSE - CHARME DE L ILE ROSE",
-    "sku": "SKU: 327406",
-    "price": "$32.74",
-    "alcohol": "12",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/blue-grouse-charme-de-l-ile-rose",
+    "wine_name": "Charme De L Ile Rose",
+    "vineyard": "Blue Grouse",
+    "price_range": "30-35",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "White Blend",
@@ -3869,16 +3423,13 @@
       "flavor_secondary": "floral",
       "flavor_tertiary": "mineral",
       "country": "Canada",
-      "price_tier": "premium",
-      "stock_status": "In stock"
+      "price_tier": "premium"
     }
   },
   {
-    "name": "GRAY MONK ESTATE PINOT GRIS",
-    "sku": "SKU: 289912",
-    "price": "$24.22",
-    "alcohol": "13.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/pinot-gris/gray-monk-pinot-gris",
+    "wine_name": "Pinot Gris",
+    "vineyard": "Gray Monk Estate",
+    "price_range": "22-27",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "White Blend",
@@ -3895,16 +3446,13 @@
       "flavor_secondary": "floral",
       "flavor_tertiary": "mineral",
       "country": "Canada",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "JACKSON TRIGGS VQA PINOT GRIGIO",
-    "sku": "SKU: 220172",
-    "price": "$19.48",
-    "alcohol": "13",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/pinot-gris/jackson-triggs-pinot-grigio",
+    "wine_name": "Pinot Grigio",
+    "vineyard": "Jackson Triggs Vqa",
+    "price_range": "17-22",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "Pinot Grigio",
@@ -3921,16 +3469,13 @@
       "flavor_secondary": "lemon",
       "flavor_tertiary": "floral",
       "country": "Canada",
-      "price_tier": "mid",
-      "stock_status": "Low in stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "DIRTY LAUNDRY - PINOT GRIS CRAFTED IN BC 2024",
-    "sku": "SKU: 299407",
-    "price": "$22.99",
-    "alcohol": "12.7",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/dirty-laundry-pinot-gris-crafted-in-bc-2024",
+    "wine_name": "Pinot Gris Crafted In Bc 2024",
+    "vineyard": "Dirty Laundry",
+    "price_range": "20-25",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "White Blend",
@@ -3947,16 +3492,13 @@
       "flavor_secondary": "floral",
       "flavor_tertiary": "mineral",
       "country": "Canada",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "JACKSON TRIGGS RESERVE - PINOT GRIGIO WINEMAKERS S",
-    "sku": "SKU: 365653",
-    "price": "$19.57",
-    "alcohol": "13",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/jackson-triggs-reserve-pinot-grigio-winemakers-s",
+    "wine_name": "Pinot Grigio Winemakers S",
+    "vineyard": "Jackson Triggs Reserve",
+    "price_range": "17-22",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "Pinot Grigio",
@@ -3973,16 +3515,13 @@
       "flavor_secondary": "lemon",
       "flavor_tertiary": "floral",
       "country": "Canada",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "AVENUE SAUV BLANC",
-    "sku": "SKU: 327806",
-    "price": "$16.00",
-    "alcohol": "",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/avenue-sauv-blanc",
+    "wine_name": "Sauv Blanc",
+    "vineyard": "Avenue",
+    "price_range": "14-18",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "White Blend",
@@ -3999,16 +3538,13 @@
       "flavor_secondary": "floral",
       "flavor_tertiary": "mineral",
       "country": "France",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "JACOB'S CREEK PINOT GRIGIO",
-    "sku": "SKU: 149354",
-    "price": "$14.91",
-    "alcohol": "10.8",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/pinot-gris/jacobs-creek-dots-pinot-grigio",
+    "wine_name": "Pinot Grigio",
+    "vineyard": "Jacob'S Creek",
+    "price_range": "12-17",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "Pinot Grigio",
@@ -4025,16 +3561,13 @@
       "flavor_secondary": "lemon",
       "flavor_tertiary": "floral",
       "country": "New Zealand",
-      "price_tier": "budget",
-      "stock_status": "In stock"
+      "price_tier": "budget"
     }
   },
   {
-    "name": "JOSH PINOT GRIGIO",
-    "sku": "SKU: 13546",
-    "price": "$26.43",
-    "alcohol": "13.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/pinot-gris/josh-pinot-grigio",
+    "wine_name": "Pinot Grigio",
+    "vineyard": "Josh",
+    "price_range": "24-29",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "Pinot Grigio",
@@ -4051,16 +3584,13 @@
       "flavor_secondary": "lemon",
       "flavor_tertiary": "floral",
       "country": "United States",
-      "price_tier": "mid",
-      "stock_status": "Low in stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "GROWS WILD WHITE",
-    "sku": "SKU: 1642",
-    "price": "$20.74",
-    "alcohol": "12.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/blended-white/grows-wild-white",
+    "wine_name": "Wild White",
+    "vineyard": "Grows",
+    "price_range": "18-23",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "White Blend",
@@ -4077,16 +3607,13 @@
       "flavor_secondary": "floral",
       "flavor_tertiary": "mineral",
       "country": "Canada",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "LAURENT MIQUEL BLANC",
-    "sku": "SKU: 32634",
-    "price": "$15.57",
-    "alcohol": "12.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/blended-white/laurent-miquel-blanc",
+    "wine_name": "Miquel Blanc",
+    "vineyard": "Laurent",
+    "price_range": "13-18",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "White Blend",
@@ -4103,16 +3630,13 @@
       "flavor_secondary": "floral",
       "flavor_tertiary": "mineral",
       "country": "France",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "GEHRINGER - DESERT SUN 2019",
-    "sku": "SKU: 398107",
-    "price": "$15.57",
-    "alcohol": "12.8",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/gehringer-desert-sun-2019",
+    "wine_name": "Desert Sun 2019",
+    "vineyard": "Gehringer",
+    "price_range": "13-18",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "White Blend",
@@ -4129,16 +3653,13 @@
       "flavor_secondary": "floral",
       "flavor_tertiary": "mineral",
       "country": "Canada",
-      "price_tier": "mid",
-      "stock_status": "Low in stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "50TH PARALLEL ESTATE - GEWURZTRAMINER NATURAL TECH",
-    "sku": "SKU: 142097",
-    "price": "$21.65",
-    "alcohol": "13.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/50th-parallel-estate-gewurztraminer-natural-tech",
+    "wine_name": "Gewurztraminer Natural Tech",
+    "vineyard": "50Th Parallel Estate",
+    "price_range": "19-24",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "Gewurztraminer",
@@ -4155,16 +3676,13 @@
       "flavor_secondary": "rose",
       "flavor_tertiary": "spice",
       "country": "Canada",
-      "price_tier": "mid",
-      "stock_status": "OUT OF STOCK"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "KEEP CALM AND LAUGH PINOT GRIGIO",
-    "sku": "SKU: 63261",
-    "price": "$11.99",
-    "alcohol": "12",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/pinot-gris/keep-calm-and-laugh-pinot-grigio",
+    "wine_name": "Pinot Grigio",
+    "vineyard": "Keep Calm And Laugh",
+    "price_range": "9-14",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "Pinot Grigio",
@@ -4181,16 +3699,13 @@
       "flavor_secondary": "lemon",
       "flavor_tertiary": "floral",
       "country": "Canada",
-      "price_tier": "budget",
-      "stock_status": "In stock"
+      "price_tier": "budget"
     }
   },
   {
-    "name": "CITRA PINOT GRIGIO DABRUZZO",
-    "sku": "SKU: 539312",
-    "price": "$16.43",
-    "alcohol": "",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/pinot-gris/citra-pinot-grigio-dabruzzo",
+    "wine_name": "Pinot Grigio Dabruzzo",
+    "vineyard": "Citra",
+    "price_range": "14-19",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "Pinot Grigio",
@@ -4207,16 +3722,13 @@
       "flavor_secondary": "lemon",
       "flavor_tertiary": "floral",
       "country": "Italy",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "GAZELA VINHO VERDE",
-    "sku": "SKU: 141432",
-    "price": "$13.83",
-    "alcohol": "9",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/vinho-verde/gazela-vinho-verde",
+    "wine_name": "Vinho Verde",
+    "vineyard": "Gazela",
+    "price_range": "11-16",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "White Blend",
@@ -4233,16 +3745,13 @@
       "flavor_secondary": "floral",
       "flavor_tertiary": "mineral",
       "country": "Portugal",
-      "price_tier": "budget",
-      "stock_status": "Low in stock"
+      "price_tier": "budget"
     }
   },
   {
-    "name": "ELEMENTAL PINOT GRIGIO",
-    "sku": "SKU: 257871",
-    "price": "$33.83",
-    "alcohol": "",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/elemental-pinot-grigio",
+    "wine_name": "Pinot Grigio",
+    "vineyard": "Elemental",
+    "price_range": "31-36",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "Pinot Grigio",
@@ -4259,16 +3768,13 @@
       "flavor_secondary": "lemon",
       "flavor_tertiary": "floral",
       "country": "United States",
-      "price_tier": "premium",
-      "stock_status": "In stock"
+      "price_tier": "premium"
     }
   },
   {
-    "name": "LOUIS BERNARD COTE DU RHONE WHITE",
-    "sku": "SKU: 589432",
-    "price": "$19.48",
-    "alcohol": "12.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/blended-white/louis-bernard-cotes-du-rhone-blanc",
+    "wine_name": "Bernard Cote Du Rhone White",
+    "vineyard": "Louis",
+    "price_range": "17-22",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "White Blend",
@@ -4285,16 +3791,13 @@
       "flavor_secondary": "floral",
       "flavor_tertiary": "mineral",
       "country": "France",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "FANTINI FARNESE PINOT GRIGIO",
-    "sku": "SKU: 145920",
-    "price": "$17.09",
-    "alcohol": "12.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/pinot-gris/farnese-pinot-grigio",
+    "wine_name": "Pinot Grigio",
+    "vineyard": "Fantini Farnese",
+    "price_range": "15-20",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "Pinot Grigio",
@@ -4311,16 +3814,13 @@
       "flavor_secondary": "lemon",
       "flavor_tertiary": "floral",
       "country": "Italy",
-      "price_tier": "mid",
-      "stock_status": "OUT OF STOCK"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "BODACIOUS SMOOTH WHITE",
-    "sku": "SKU: 370833",
-    "price": "$13.17",
-    "alcohol": "12.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/blended-white/bodacious-smooth-white",
+    "wine_name": "Smooth White",
+    "vineyard": "Bodacious",
+    "price_range": "11-16",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "White Blend",
@@ -4337,16 +3837,13 @@
       "flavor_secondary": "floral",
       "flavor_tertiary": "mineral",
       "country": "Canada",
-      "price_tier": "budget",
-      "stock_status": "In stock"
+      "price_tier": "budget"
     }
   },
   {
-    "name": "CROWN AND THIEVES - THE WINEMAKERS WENCH",
-    "sku": "SKU: 10168",
-    "price": "$20.82",
-    "alcohol": "12.2",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/crown-and-thieves-the-winemakers-wench",
+    "wine_name": "The Winemakers Wench",
+    "vineyard": "Crown And Thieves",
+    "price_range": "18-23",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "White Blend",
@@ -4363,16 +3860,13 @@
       "flavor_secondary": "floral",
       "flavor_tertiary": "mineral",
       "country": "Canada",
-      "price_tier": "mid",
-      "stock_status": "OUT OF STOCK"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "MT. BOUCHERIE - PINOT GRIS 2024",
-    "sku": "SKU: 295323",
-    "price": "$25.22",
-    "alcohol": "13",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/mt-boucherie-pinot-gris-2024",
+    "wine_name": "Pinot Gris 2024",
+    "vineyard": "Mt. Boucherie",
+    "price_range": "23-28",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "White Blend",
@@ -4389,16 +3883,13 @@
       "flavor_secondary": "floral",
       "flavor_tertiary": "mineral",
       "country": "Canada",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "FIELD & FLIGHT PINOT GRIS",
-    "sku": "SKU: 341657",
-    "price": "$23.83",
-    "alcohol": "13",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/field-flight-pinot-gris",
+    "wine_name": "Pinot Gris",
+    "vineyard": "Field & Flight",
+    "price_range": "21-26",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "White Blend",
@@ -4415,16 +3906,13 @@
       "flavor_secondary": "floral",
       "flavor_tertiary": "mineral",
       "country": "Canada",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "LA VIEILLE FERME LUBERON BLANC",
-    "sku": "SKU: 298505",
-    "price": "$16.87",
-    "alcohol": "12",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/blended-white/la-vieille-ferme-white",
+    "wine_name": "Vieille Ferme Luberon Blanc",
+    "vineyard": "La",
+    "price_range": "14-19",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "White Blend",
@@ -4441,16 +3929,13 @@
       "flavor_secondary": "floral",
       "flavor_tertiary": "mineral",
       "country": "France",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "CLAUDE VAL BLANC",
-    "sku": "SKU: 41486",
-    "price": "$43.30",
-    "alcohol": "12.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/blended-white/claude-val-blanc-3l-box",
+    "wine_name": "Val Blanc",
+    "vineyard": "Claude",
+    "price_range": "41-46",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "White Blend",
@@ -4467,16 +3952,13 @@
       "flavor_secondary": "floral",
       "flavor_tertiary": "mineral",
       "country": "France",
-      "price_tier": "premium",
-      "stock_status": "OUT OF STOCK"
+      "price_tier": "premium"
     }
   },
   {
-    "name": "CROWN AND THIEVES - THE WINEMAKER`S WENCH WASHING",
-    "sku": "SKU: 270221",
-    "price": "$23.70",
-    "alcohol": "12.7",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/crown-and-thieves-the-winemaker-s-wench-washing",
+    "wine_name": "The Winemaker`S Wench Washing",
+    "vineyard": "Crown And Thieves",
+    "price_range": "21-26",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "White Blend",
@@ -4493,16 +3975,13 @@
       "flavor_secondary": "floral",
       "flavor_tertiary": "mineral",
       "country": "Canada",
-      "price_tier": "mid",
-      "stock_status": "OUT OF STOCK"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "FOX AND ARCHER AMRITA 2021",
-    "sku": "SKU: 420346",
-    "price": "$29.22",
-    "alcohol": "11.8",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/blended-white/fox-and-archer-amrita-2021",
+    "wine_name": "And Archer Amrita 2021",
+    "vineyard": "Fox",
+    "price_range": "27-32",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "White Blend",
@@ -4519,16 +3998,13 @@
       "flavor_secondary": "floral",
       "flavor_tertiary": "mineral",
       "country": "Canada",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "JASCI & MARCHESANI ORGANIC PECORINO",
-    "sku": "SKU: 188253",
-    "price": "$38.61",
-    "alcohol": "13.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/jasci-marchesani-organic-pecorino",
+    "wine_name": "& Marchesani Organic Pecorino",
+    "vineyard": "Jasci",
+    "price_range": "36-41",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "White Blend",
@@ -4545,16 +4021,13 @@
       "flavor_secondary": "floral",
       "flavor_tertiary": "mineral",
       "country": "Italy",
-      "price_tier": "premium",
-      "stock_status": "OUT OF STOCK"
+      "price_tier": "premium"
     }
   },
   {
-    "name": "JP CHENET WHITE NON ALC",
-    "sku": "SKU: W19946",
-    "price": "$19.04",
-    "alcohol": "",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/jp-chenet-white-non-alc",
+    "wine_name": "Chenet White Non Alc",
+    "vineyard": "Jp",
+    "price_range": "17-22",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "White Blend",
@@ -4571,16 +4044,13 @@
       "flavor_secondary": "floral",
       "flavor_tertiary": "mineral",
       "country": "France",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "JOIRYDE TREAD LIGHTLY 2024",
-    "sku": "SKU: 336881",
-    "price": "$25.11",
-    "alcohol": "12.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/joiryde-tread-lightly-2024",
+    "wine_name": "Tread Lightly 2024",
+    "vineyard": "Joiryde",
+    "price_range": "23-28",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "White Blend",
@@ -4597,16 +4067,13 @@
       "flavor_secondary": "floral",
       "flavor_tertiary": "mineral",
       "country": "Canada",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "LOST INHIBITIONS LEWD WHITE",
-    "sku": "SKU: 77239219",
-    "price": "$19.48",
-    "alcohol": "14",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/blended-white/lost-inhibitions-lewd-white",
+    "wine_name": "Inhibitions Lewd White",
+    "vineyard": "Lost",
+    "price_range": "17-22",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "White Blend",
@@ -4623,16 +4090,13 @@
       "flavor_secondary": "floral",
       "flavor_tertiary": "mineral",
       "country": "Canada",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "DIRTY LAUNDRY - HUSH WHITE CRAFTED IN BC 2024",
-    "sku": "SKU: 299394",
-    "price": "$22.52",
-    "alcohol": "12.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/dirty-laundry-hush-white-crafted-in-bc-2024",
+    "wine_name": "Hush White Crafted In Bc 2024",
+    "vineyard": "Dirty Laundry",
+    "price_range": "20-25",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "White Blend",
@@ -4649,16 +4113,13 @@
       "flavor_secondary": "floral",
       "flavor_tertiary": "mineral",
       "country": "Canada",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "CASILLERO DEL DIABLO PINOT GRIGIO",
-    "sku": "SKU: 234021",
-    "price": "$18.49",
-    "alcohol": "12.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/pinot-gris/casillero-del-diablo-pinot-grigio",
+    "wine_name": "Pinot Grigio",
+    "vineyard": "Casillero Del Diablo",
+    "price_range": "16-21",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "Pinot Grigio",
@@ -4675,16 +4136,13 @@
       "flavor_secondary": "lemon",
       "flavor_tertiary": "floral",
       "country": "Chile",
-      "price_tier": "mid",
-      "stock_status": "Low in stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "DOMAINE DE LA SOLITUDE COTES DU RHONE WHITE",
-    "sku": "SKU: 370935",
-    "price": "$27.83",
-    "alcohol": "13.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/blended-white/solitude-cotes-du-rhone-blanc",
+    "wine_name": "De La Solitude Cotes Du Rhone White",
+    "vineyard": "Domaine",
+    "price_range": "25-30",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "White Blend",
@@ -4701,16 +4159,13 @@
       "flavor_secondary": "floral",
       "flavor_tertiary": "mineral",
       "country": "France",
-      "price_tier": "mid",
-      "stock_status": "OUT OF STOCK"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "CASAL GARCIA VINHO VERDE",
-    "sku": "SKU: 400531",
-    "price": "$17.09",
-    "alcohol": "10",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/vinho-verde/casal-garcia-vinho-verde",
+    "wine_name": "Garcia Vinho Verde",
+    "vineyard": "Casal",
+    "price_range": "15-20",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "White Blend",
@@ -4727,16 +4182,13 @@
       "flavor_secondary": "floral",
       "flavor_tertiary": "mineral",
       "country": "Portugal",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "INDIGENOUS WORLD WINERY GEWURZTRAMINER",
-    "sku": "SKU: 191117",
-    "price": "$26.87",
-    "alcohol": "12.8",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/gewurtztraminer/indigenous-world-winery-gewurztraminer",
+    "wine_name": "Gewurztraminer",
+    "vineyard": "Indigenous World Winery",
+    "price_range": "24-29",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "Gewurztraminer",
@@ -4753,16 +4205,13 @@
       "flavor_secondary": "rose",
       "flavor_tertiary": "spice",
       "country": "Canada",
-      "price_tier": "mid",
-      "stock_status": "OUT OF STOCK"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "BODACIOUS - PINOT GRIGIO",
-    "sku": "SKU: 49687",
-    "price": "$46.87",
-    "alcohol": "12",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/bodacious-pinot-grigio",
+    "wine_name": "Pinot Grigio",
+    "vineyard": "Bodacious",
+    "price_range": "44-49",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "Pinot Grigio",
@@ -4779,16 +4228,13 @@
       "flavor_secondary": "lemon",
       "flavor_tertiary": "floral",
       "country": "Canada",
-      "price_tier": "premium",
-      "stock_status": "Low in stock"
+      "price_tier": "premium"
     }
   },
   {
-    "name": "HAYWIRE SWITCHBACK PINOT GRIS",
-    "sku": "SKU: 665034",
-    "price": "$26.43",
-    "alcohol": "14.1",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/pinot-gris/haywire-pinot-gris",
+    "wine_name": "Pinot Gris",
+    "vineyard": "Haywire Switchback",
+    "price_range": "24-29",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "White Blend",
@@ -4805,16 +4251,13 @@
       "flavor_secondary": "floral",
       "flavor_tertiary": "mineral",
       "country": "Canada",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "CLOS DU SOLEIL SATURN 2022 - 375ML",
-    "sku": "SKU: 742676",
-    "price": "$42.52",
-    "alcohol": "12",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/clos-du-soleil-saturn-2022-375ml",
+    "wine_name": "375Ml",
+    "vineyard": "Clos Du Soleil Saturn 2022",
+    "price_range": "40-45",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "White Blend",
@@ -4831,16 +4274,13 @@
       "flavor_secondary": "floral",
       "flavor_tertiary": "mineral",
       "country": "Canada",
-      "price_tier": "premium",
-      "stock_status": "In stock"
+      "price_tier": "premium"
     }
   },
   {
-    "name": "GEHRINGER DESERT SUN USA 2024",
-    "sku": "SKU: 365268",
-    "price": "$11.61",
-    "alcohol": "12.7",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/gehringer-desert-sun-usa-2024",
+    "wine_name": "Desert Sun Usa 2024",
+    "vineyard": "Gehringer",
+    "price_range": "9-14",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "White Blend",
@@ -4857,16 +4297,13 @@
       "flavor_secondary": "floral",
       "flavor_tertiary": "mineral",
       "country": "Canada",
-      "price_tier": "budget",
-      "stock_status": "In stock"
+      "price_tier": "budget"
     }
   },
   {
-    "name": "HAYWIRE GARNET VALLEY RANCH CHARDONNY",
-    "sku": "SKU: 531470",
-    "price": "$38.61",
-    "alcohol": "12.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/haywire-garnet-valley-ranch-chardonny",
+    "wine_name": "Garnet Valley Ranch Chardonny",
+    "vineyard": "Haywire",
+    "price_range": "36-41",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "White Blend",
@@ -4883,16 +4320,13 @@
       "flavor_secondary": "floral",
       "flavor_tertiary": "mineral",
       "country": "Canada",
-      "price_tier": "premium",
-      "stock_status": "In stock"
+      "price_tier": "premium"
     }
   },
   {
-    "name": "DOMAINE GAUTHERON VIELLES VIGNES CHABLIS",
-    "sku": "SKU: 958512",
-    "price": "$51.22",
-    "alcohol": "12.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/chardonnay-white/domaine-gautheron-chablis",
+    "wine_name": "Gautheron Vielles Vignes Chablis",
+    "vineyard": "Domaine",
+    "price_range": "49-54",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "White Blend",
@@ -4909,16 +4343,13 @@
       "flavor_secondary": "floral",
       "flavor_tertiary": "mineral",
       "country": "France",
-      "price_tier": "premium",
-      "stock_status": "OUT OF STOCK"
+      "price_tier": "premium"
     }
   },
   {
-    "name": "MOUTON CADET BORDEAUX BLANC",
-    "sku": "SKU: 2527",
-    "price": "$21.65",
-    "alcohol": "12.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/blended-white/mouton-cadet-blanc",
+    "wine_name": "Cadet Bordeaux Blanc",
+    "vineyard": "Mouton",
+    "price_range": "19-24",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "White Blend",
@@ -4935,16 +4366,13 @@
       "flavor_secondary": "floral",
       "flavor_tertiary": "mineral",
       "country": "France",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "CALLIOPE PINOT GRIS",
-    "sku": "SKU: 335139",
-    "price": "$17.22",
-    "alcohol": "13.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/calliope-pinot-gris",
+    "wine_name": "Pinot Gris",
+    "vineyard": "Calliope",
+    "price_range": "15-20",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "White Blend",
@@ -4961,16 +4389,13 @@
       "flavor_secondary": "floral",
       "flavor_tertiary": "mineral",
       "country": "Canada",
-      "price_tier": "mid",
-      "stock_status": "Low in stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "COUNTRY VINES - SIPPIN PRETTY",
-    "sku": "SKU: 679498",
-    "price": "$10.35",
-    "alcohol": "12.8",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/white-wine/blended-white/country-vines-sippin-pretty",
+    "wine_name": "Sippin Pretty",
+    "vineyard": "Country Vines",
+    "price_range": "8-13",
     "recommendation_matches": {
       "category": "White Wine",
       "grape_primary": "White Blend",
@@ -4987,16 +4412,13 @@
       "flavor_secondary": "floral",
       "flavor_tertiary": "mineral",
       "country": "Canada",
-      "price_tier": "budget",
-      "stock_status": "OUT OF STOCK"
+      "price_tier": "budget"
     }
   },
   {
-    "name": "VENETO ITALIAN ROSE - FREIXENET",
-    "sku": "SKU: 456109",
-    "price": "$25.99",
-    "alcohol": "",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/rose-wine/veneto-italian-rose-freixenet",
+    "wine_name": "Freixenet",
+    "vineyard": "Veneto Italian Rose",
+    "price_range": "23-28",
     "recommendation_matches": {
       "category": "Rose Wine",
       "grape_primary": "N/A",
@@ -5013,16 +4435,13 @@
       "flavor_secondary": "citrus",
       "flavor_tertiary": "floral",
       "country": "Italy",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "CONO SUR ORGANIC ROSE",
-    "sku": "SKU: 248743",
-    "price": "$20.99",
-    "alcohol": "12",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/rose-wine/cono-sur-organic-rose",
+    "wine_name": "Rose",
+    "vineyard": "Cono Sur Organic",
+    "price_range": "18-23",
     "recommendation_matches": {
       "category": "Rose Wine",
       "grape_primary": "N/A",
@@ -5039,16 +4458,13 @@
       "flavor_secondary": "citrus",
       "flavor_tertiary": "floral",
       "country": "Chile",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "SAINTLY - THE GOOD ROSE LIMITED RELEASE 2024",
-    "sku": "SKU: 365622",
-    "price": "$22.99",
-    "alcohol": "12.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/rose-wine/saintly-the-good-rose-limited-release-2024",
+    "wine_name": "The Good Rose Limited Release 2024",
+    "vineyard": "Saintly",
+    "price_range": "20-25",
     "recommendation_matches": {
       "category": "Rose Wine",
       "grape_primary": "N/A",
@@ -5065,16 +4481,13 @@
       "flavor_secondary": "citrus",
       "flavor_tertiary": "floral",
       "country": "Canada",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "JOSH ROSE",
-    "sku": "SKU: 237063",
-    "price": "$25.39",
-    "alcohol": "12.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/rose-wine/josh-rose",
+    "wine_name": "Rose",
+    "vineyard": "Josh",
+    "price_range": "23-28",
     "recommendation_matches": {
       "category": "Rose Wine",
       "grape_primary": "N/A",
@@ -5091,16 +4504,13 @@
       "flavor_secondary": "citrus",
       "flavor_tertiary": "floral",
       "country": "United States",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "IMBZZL - RUSE ROSE",
-    "sku": "SKU: 387299",
-    "price": "$24.70",
-    "alcohol": "13.9",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/rose-wine/imbzzl-ruse-rose",
+    "wine_name": "Ruse Rose",
+    "vineyard": "Imbzzl",
+    "price_range": "22-27",
     "recommendation_matches": {
       "category": "Rose Wine",
       "grape_primary": "N/A",
@@ -5117,16 +4527,13 @@
       "flavor_secondary": "citrus",
       "flavor_tertiary": "floral",
       "country": "Canada",
-      "price_tier": "mid",
-      "stock_status": "Low in stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "BORDERTOWN ROSE 2021",
-    "sku": "SKU: 421055",
-    "price": "$24.04",
-    "alcohol": "13.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/rose-wine/bordertown-rose-2021",
+    "wine_name": "Rose 2021",
+    "vineyard": "Bordertown",
+    "price_range": "22-27",
     "recommendation_matches": {
       "category": "Rose Wine",
       "grape_primary": "N/A",
@@ -5143,16 +4550,13 @@
       "flavor_secondary": "citrus",
       "flavor_tertiary": "floral",
       "country": "Canada",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "QUAILS` GATE - FIELD & FLIGHT ROSE 2024",
-    "sku": "SKU: 289377",
-    "price": "$23.00",
-    "alcohol": "12",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/rose-wine/quails-gate-field-flight-rose-2024",
+    "wine_name": "Field & Flight Rose 2024",
+    "vineyard": "Quails` Gate",
+    "price_range": "21-25",
     "recommendation_matches": {
       "category": "Rose Wine",
       "grape_primary": "N/A",
@@ -5169,16 +4573,13 @@
       "flavor_secondary": "citrus",
       "flavor_tertiary": "floral",
       "country": "United States",
-      "price_tier": "mid",
-      "stock_status": "OUT OF STOCK"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "FRANCE ROSE - LE PETIT CHAT MALIN",
-    "sku": "SKU: 823229",
-    "price": "$19.04",
-    "alcohol": "12.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/rose-wine/france-rose-le-petit-chat-malin",
+    "wine_name": "Le Petit Chat Malin",
+    "vineyard": "France Rose",
+    "price_range": "17-22",
     "recommendation_matches": {
       "category": "Rose Wine",
       "grape_primary": "N/A",
@@ -5195,16 +4596,13 @@
       "flavor_secondary": "citrus",
       "flavor_tertiary": "floral",
       "country": "France",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "BREAD & BUTTER ROSE",
-    "sku": "SKU: 177100",
-    "price": "$27.65",
-    "alcohol": "12.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/rose-wine/blended-rose/bread-butter-rose",
+    "wine_name": "Rose",
+    "vineyard": "Bread & Butter",
+    "price_range": "25-30",
     "recommendation_matches": {
       "category": "Rose Wine",
       "grape_primary": "N/A",
@@ -5221,16 +4619,13 @@
       "flavor_secondary": "citrus",
       "flavor_tertiary": "floral",
       "country": "United States",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "COPPER MOON - ROSE",
-    "sku": "SKU: 163634",
-    "price": "$13.61",
-    "alcohol": "10.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/rose-wine/copper-moon-rose",
+    "wine_name": "Rose",
+    "vineyard": "Copper Moon",
+    "price_range": "11-16",
     "recommendation_matches": {
       "category": "Rose Wine",
       "grape_primary": "N/A",
@@ -5247,16 +4642,13 @@
       "flavor_secondary": "citrus",
       "flavor_tertiary": "floral",
       "country": "Canada",
-      "price_tier": "budget",
-      "stock_status": "Low in stock"
+      "price_tier": "budget"
     }
   },
   {
-    "name": "SEE YA LATER RANCH NELLY ROSE 2024",
-    "sku": "SKU: 288475",
-    "price": "$22.97",
-    "alcohol": "13",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/rose-wine/see-ya-later-ranch-nelly-rose-2024",
+    "wine_name": "Rose 2024",
+    "vineyard": "See Ya Later Ranch Nelly",
+    "price_range": "20-25",
     "recommendation_matches": {
       "category": "Rose Wine",
       "grape_primary": "N/A",
@@ -5273,16 +4665,13 @@
       "flavor_secondary": "citrus",
       "flavor_tertiary": "floral",
       "country": "Canada",
-      "price_tier": "mid",
-      "stock_status": "Low in stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "BLACKMARKET COLLUSION SERIES ROSE",
-    "sku": "SKU: 23097624",
-    "price": "$27.09",
-    "alcohol": "",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/rose-wine/blackmarket-collusion-series-rose",
+    "wine_name": "Rose",
+    "vineyard": "Blackmarket Collusion Series",
+    "price_range": "25-30",
     "recommendation_matches": {
       "category": "Rose Wine",
       "grape_primary": "N/A",
@@ -5299,16 +4688,13 @@
       "flavor_secondary": "citrus",
       "flavor_tertiary": "floral",
       "country": "Canada",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "BLUE GROUSE - ROSE",
-    "sku": "SKU: 290554",
-    "price": "$26.87",
-    "alcohol": "11.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/rose-wine/blue-grouse-rose",
+    "wine_name": "Rose",
+    "vineyard": "Blue Grouse",
+    "price_range": "24-29",
     "recommendation_matches": {
       "category": "Rose Wine",
       "grape_primary": "N/A",
@@ -5325,16 +4711,13 @@
       "flavor_secondary": "citrus",
       "flavor_tertiary": "floral",
       "country": "Canada",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "HONEST LOT ROSE",
-    "sku": "SKU: 451920",
-    "price": "$13.99",
-    "alcohol": "11",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/rose-wine/honest-lot-rose",
+    "wine_name": "Rose",
+    "vineyard": "Honest Lot",
+    "price_range": "11-16",
     "recommendation_matches": {
       "category": "Rose Wine",
       "grape_primary": "N/A",
@@ -5351,16 +4734,13 @@
       "flavor_secondary": "citrus",
       "flavor_tertiary": "floral",
       "country": "Canada",
-      "price_tier": "budget",
-      "stock_status": "In stock"
+      "price_tier": "budget"
     }
   },
   {
-    "name": "LIGHTNING ROCK WINERY - ROSE",
-    "sku": "SKU: 185146",
-    "price": "$31.43",
-    "alcohol": "12.1",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/rose-wine/lightning-rock-winery-rose",
+    "wine_name": "Rose",
+    "vineyard": "Lightning Rock Winery",
+    "price_range": "29-34",
     "recommendation_matches": {
       "category": "Rose Wine",
       "grape_primary": "N/A",
@@ -5377,16 +4757,13 @@
       "flavor_secondary": "citrus",
       "flavor_tertiary": "floral",
       "country": "Canada",
-      "price_tier": "premium",
-      "stock_status": "In stock"
+      "price_tier": "premium"
     }
   },
   {
-    "name": "PINK POODLE ROSE",
-    "sku": "SKU: 63762",
-    "price": "$13.61",
-    "alcohol": "12",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/rose-wine/blended-rose/pink-poodle-rose",
+    "wine_name": "Rose",
+    "vineyard": "Pink Poodle",
+    "price_range": "11-16",
     "recommendation_matches": {
       "category": "Rose Wine",
       "grape_primary": "N/A",
@@ -5403,16 +4780,13 @@
       "flavor_secondary": "citrus",
       "flavor_tertiary": "floral",
       "country": "Canada",
-      "price_tier": "budget",
-      "stock_status": "OUT OF STOCK"
+      "price_tier": "budget"
     }
   },
   {
-    "name": "BASK ROSE 3L",
-    "sku": "SKU: 451787",
-    "price": "$44.99",
-    "alcohol": "12",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/rose-wine/blended-rose/bask-rose-3l",
+    "wine_name": "Rose 3L",
+    "vineyard": "Bask",
+    "price_range": "42-47",
     "recommendation_matches": {
       "category": "Rose Wine",
       "grape_primary": "N/A",
@@ -5429,16 +4803,13 @@
       "flavor_secondary": "citrus",
       "flavor_tertiary": "floral",
       "country": "Canada",
-      "price_tier": "premium",
-      "stock_status": "In stock"
+      "price_tier": "premium"
     }
   },
   {
-    "name": "JOIRYDE ROSE 2024",
-    "sku": "SKU: 336878",
-    "price": "$28.05",
-    "alcohol": "12",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/rose-wine/joiryde-rose-2024",
+    "wine_name": "Rose 2024",
+    "vineyard": "Joiryde",
+    "price_range": "26-31",
     "recommendation_matches": {
       "category": "Rose Wine",
       "grape_primary": "N/A",
@@ -5455,16 +4826,13 @@
       "flavor_secondary": "citrus",
       "flavor_tertiary": "floral",
       "country": "Canada",
-      "price_tier": "mid",
-      "stock_status": "Low in stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "PELLER ROSE",
-    "sku": "SKU: 221069",
-    "price": "$48.35",
-    "alcohol": "10.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/rose-wine/blended-rose/peller-4l-rose-box",
+    "wine_name": "Rose",
+    "vineyard": "Peller",
+    "price_range": "46-51",
     "recommendation_matches": {
       "category": "Rose Wine",
       "grape_primary": "N/A",
@@ -5481,16 +4849,13 @@
       "flavor_secondary": "citrus",
       "flavor_tertiary": "floral",
       "country": "Canada",
-      "price_tier": "premium",
-      "stock_status": "In stock"
+      "price_tier": "premium"
     }
   },
   {
-    "name": "GRAY MONK - ROSE 2022",
-    "sku": "SKU: 321620",
-    "price": "$22.74",
-    "alcohol": "12.4",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/rose-wine/gray-monk-rose-2022",
+    "wine_name": "Rose 2022",
+    "vineyard": "Gray Monk",
+    "price_range": "20-25",
     "recommendation_matches": {
       "category": "Rose Wine",
       "grape_primary": "N/A",
@@ -5507,16 +4872,13 @@
       "flavor_secondary": "citrus",
       "flavor_tertiary": "floral",
       "country": "Canada",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "BASK ROSE",
-    "sku": "SKU: 9338",
-    "price": "$14.99",
-    "alcohol": "12",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/rose-wine/blended-rose/bask-crisp-rose",
+    "wine_name": "Rose",
+    "vineyard": "Bask",
+    "price_range": "12-17",
     "recommendation_matches": {
       "category": "Rose Wine",
       "grape_primary": "N/A",
@@ -5533,16 +4895,13 @@
       "flavor_secondary": "citrus",
       "flavor_tertiary": "floral",
       "country": "Canada",
-      "price_tier": "budget",
-      "stock_status": "In stock"
+      "price_tier": "budget"
     }
   },
   {
-    "name": "AVENUE - ROSE",
-    "sku": "SKU: 289229",
-    "price": "$19.99",
-    "alcohol": "12.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/rose-wine/avenue-rose",
+    "wine_name": "Rose",
+    "vineyard": "Avenue",
+    "price_range": "17-22",
     "recommendation_matches": {
       "category": "Rose Wine",
       "grape_primary": "N/A",
@@ -5559,16 +4918,13 @@
       "flavor_secondary": "citrus",
       "flavor_tertiary": "floral",
       "country": "France",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "OPEN ROSÉ VQA",
-    "sku": "SKU: 189109",
-    "price": "$15.57",
-    "alcohol": "13.98",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/rose-wine/blended-rose/open-rose",
+    "wine_name": "Rosé Vqa",
+    "vineyard": "Open",
+    "price_range": "13-18",
     "recommendation_matches": {
       "category": "Rose Wine",
       "grape_primary": "N/A",
@@ -5585,16 +4941,13 @@
       "flavor_secondary": "citrus",
       "flavor_tertiary": "floral",
       "country": "Canada",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "DIRTY LAUNDRY - HUSH ROSE CRAFTED IN BC 2024",
-    "sku": "SKU: 299391",
-    "price": "$23.00",
-    "alcohol": "12.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/rose-wine/dirty-laundry-hush-rose-crafted-in-bc-2024",
+    "wine_name": "Hush Rose Crafted In Bc 2024",
+    "vineyard": "Dirty Laundry",
+    "price_range": "21-25",
     "recommendation_matches": {
       "category": "Rose Wine",
       "grape_primary": "N/A",
@@ -5611,16 +4964,13 @@
       "flavor_secondary": "citrus",
       "flavor_tertiary": "floral",
       "country": "Canada",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "PELLER ROSE",
-    "sku": "SKU: 361147",
-    "price": "$12.09",
-    "alcohol": "10.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/rose-wine/blended-rose/peller-rose",
+    "wine_name": "Rose",
+    "vineyard": "Peller",
+    "price_range": "10-15",
     "recommendation_matches": {
       "category": "Rose Wine",
       "grape_primary": "N/A",
@@ -5637,16 +4987,13 @@
       "flavor_secondary": "citrus",
       "flavor_tertiary": "floral",
       "country": "Canada",
-      "price_tier": "budget",
-      "stock_status": "In stock"
+      "price_tier": "budget"
     }
   },
   {
-    "name": "GROW WILD ROSE",
-    "sku": "SKU: 79406",
-    "price": "$21.65",
-    "alcohol": "12",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/rose-wine/blended-rose/grow-wild-rose",
+    "wine_name": "Rose",
+    "vineyard": "Grow Wild",
+    "price_range": "19-24",
     "recommendation_matches": {
       "category": "Rose Wine",
       "grape_primary": "N/A",
@@ -5663,16 +5010,13 @@
       "flavor_secondary": "citrus",
       "flavor_tertiary": "floral",
       "country": "Canada",
-      "price_tier": "mid",
-      "stock_status": "OUT OF STOCK"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "PELLER ROSE",
-    "sku": "SKU: 361253",
-    "price": "$19.48",
-    "alcohol": "10.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/rose-wine/blended-rose/peller-1-5l-rose-magnum",
+    "wine_name": "Rose",
+    "vineyard": "Peller",
+    "price_range": "17-22",
     "recommendation_matches": {
       "category": "Rose Wine",
       "grape_primary": "N/A",
@@ -5689,16 +5033,13 @@
       "flavor_secondary": "citrus",
       "flavor_tertiary": "floral",
       "country": "Canada",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "KEEP CALM AND CHILL ROSE",
-    "sku": "SKU: 404106",
-    "price": "$11.99",
-    "alcohol": "12",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/rose-wine/blended-rose/keep-calm-and-chill-rose",
+    "wine_name": "Rose",
+    "vineyard": "Keep Calm And Chill",
+    "price_range": "9-14",
     "recommendation_matches": {
       "category": "Rose Wine",
       "grape_primary": "N/A",
@@ -5715,16 +5056,13 @@
       "flavor_secondary": "citrus",
       "flavor_tertiary": "floral",
       "country": "Canada",
-      "price_tier": "budget",
-      "stock_status": "In stock"
+      "price_tier": "budget"
     }
   },
   {
-    "name": "GRAY MONK ROSE 2024",
-    "sku": "SKU: 335585",
-    "price": "$23.04",
-    "alcohol": "13",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/rose-wine/gray-monk-rose-2024",
+    "wine_name": "Rose 2024",
+    "vineyard": "Gray Monk",
+    "price_range": "21-26",
     "recommendation_matches": {
       "category": "Rose Wine",
       "grape_primary": "N/A",
@@ -5741,16 +5079,13 @@
       "flavor_secondary": "citrus",
       "flavor_tertiary": "floral",
       "country": "Canada",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "PASQUIERS GRENACHE ROSE",
-    "sku": "SKU: 561514",
-    "price": "$20.57",
-    "alcohol": "12.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/rose-wine/blended-rose/pasquiers-grenache-rose",
+    "wine_name": "Grenache Rose",
+    "vineyard": "Pasquiers",
+    "price_range": "18-23",
     "recommendation_matches": {
       "category": "Rose Wine",
       "grape_primary": "N/A",
@@ -5767,16 +5102,13 @@
       "flavor_secondary": "watermelon",
       "flavor_tertiary": "spice",
       "country": "France",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "TAITTINGER BRUT RESERVE",
-    "sku": "SKU: 457713",
-    "price": "$86.87",
-    "alcohol": "12",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/sparkling-wine/champagne/taittinger-brut-reserve",
+    "wine_name": "Brut Reserve",
+    "vineyard": "Taittinger",
+    "price_range": "84-89",
     "recommendation_matches": {
       "category": "Sparkling Wine",
       "grape_primary": "Sparkling Blend",
@@ -5793,16 +5125,13 @@
       "flavor_secondary": "fruit",
       "flavor_tertiary": "floral",
       "country": "France",
-      "price_tier": "premium",
-      "stock_status": "In stock"
+      "price_tier": "premium"
     }
   },
   {
-    "name": "8TH GENERATION CONFIDENCE",
-    "sku": "SKU: 79307",
-    "price": "$25.82",
-    "alcohol": "12.3",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/sparkling-wine/8th-generation-confidence",
+    "wine_name": "Generation Confidence",
+    "vineyard": "8Th",
+    "price_range": "23-28",
     "recommendation_matches": {
       "category": "Sparkling Wine",
       "grape_primary": "Sparkling Blend",
@@ -5819,16 +5148,13 @@
       "flavor_secondary": "fruit",
       "flavor_tertiary": "floral",
       "country": "Canada",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "COOLSHANAGH - BLANC DE BLANC",
-    "sku": "SKU: 269657",
-    "price": "$33.83",
-    "alcohol": "12.3",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/sparkling-wine/coolshanagh-blanc-de-blanc",
+    "wine_name": "Blanc De Blanc",
+    "vineyard": "Coolshanagh",
+    "price_range": "31-36",
     "recommendation_matches": {
       "category": "Sparkling Wine",
       "grape_primary": "Sparkling Blend",
@@ -5845,16 +5171,13 @@
       "flavor_secondary": "fruit",
       "flavor_tertiary": "floral",
       "country": "Canada",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "RAINMAKER - SUPERNOVA SPARKLING CABERNET SAUVIGNON",
-    "sku": "SKU: 329100",
-    "price": "$26.59",
-    "alcohol": "13",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/sparkling-wine/rainmaker-supernova-sparkling-cabernet-sauvignon",
+    "wine_name": "Supernova Sparkling Cabernet Sauvignon",
+    "vineyard": "Rainmaker",
+    "price_range": "24-29",
     "recommendation_matches": {
       "category": "Sparkling Wine",
       "grape_primary": "Sparkling Blend",
@@ -5871,16 +5194,13 @@
       "flavor_secondary": "fruit",
       "flavor_tertiary": "floral",
       "country": "Canada",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "VILLA TERESA PROSECCO",
-    "sku": "SKU: 268714",
-    "price": "$27.22",
-    "alcohol": "11",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/sparkling-wine/prosecco/villa-teresa-organic-prosecco-frizzanti",
+    "wine_name": "Prosecco",
+    "vineyard": "Villa Teresa",
+    "price_range": "25-30",
     "recommendation_matches": {
       "category": "Sparkling Wine",
       "grape_primary": "Prosecco",
@@ -5897,16 +5217,13 @@
       "flavor_secondary": "apple",
       "flavor_tertiary": "floral",
       "country": "Italy",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "VEUVE CLICQUOT YELLOW LABEL BRUT CHAMPAGNE",
-    "sku": "SKU: 563338",
-    "price": "$91.99",
-    "alcohol": "12",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/sparkling-wine/champagne/veuve-clicquot-yellow-label-brut-champagne",
+    "wine_name": "Champagne",
+    "vineyard": "Veuve Clicquot Yellow Label Brut",
+    "price_range": "89-94",
     "recommendation_matches": {
       "category": "Sparkling Wine",
       "grape_primary": "Champagne",
@@ -5923,16 +5240,13 @@
       "flavor_secondary": "toast",
       "flavor_tertiary": "almond",
       "country": "France",
-      "price_tier": "premium",
-      "stock_status": "In stock"
+      "price_tier": "premium"
     }
   },
   {
-    "name": "DIRTY LAUNDRY - LET`S GET FIZZICAL ROSE CRAFTED I",
-    "sku": "SKU: 338073",
-    "price": "$26.90",
-    "alcohol": "12.6",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/sparkling-wine/dirty-laundry-let-s-get-fizzical-rose-crafted-i",
+    "wine_name": "Let`S Get Fizzical Rose Crafted I",
+    "vineyard": "Dirty Laundry",
+    "price_range": "24-29",
     "recommendation_matches": {
       "category": "Sparkling Wine",
       "grape_primary": "Sparkling Blend",
@@ -5949,16 +5263,13 @@
       "flavor_secondary": "fruit",
       "flavor_tertiary": "floral",
       "country": "Canada",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "LAMARCA - PROSECCO",
-    "sku": "SKU: 321182",
-    "price": "$27.65",
-    "alcohol": "11",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/sparkling-wine/lamarca-prosecco",
+    "wine_name": "Prosecco",
+    "vineyard": "Lamarca",
+    "price_range": "25-30",
     "recommendation_matches": {
       "category": "Sparkling Wine",
       "grape_primary": "Prosecco",
@@ -5975,16 +5286,13 @@
       "flavor_secondary": "apple",
       "flavor_tertiary": "floral",
       "country": "Italy",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "FREIXENET - CAVA CORDON NEGRO GRAN SELECCION BRUT",
-    "sku": "SKU: 88591",
-    "price": "$22.99$24.99",
-    "alcohol": "12",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/sparkling-wine/cava/freixenet-cava-cordon-negro-gran-seleccion-brut",
+    "wine_name": "Cava Cordon Negro Gran Seleccion Brut",
+    "vineyard": "Freixenet",
+    "price_range": "20-25",
     "recommendation_matches": {
       "category": "Sparkling Wine",
       "grape_primary": "Cava",
@@ -6001,16 +5309,13 @@
       "flavor_secondary": "brioche",
       "flavor_tertiary": "mineral",
       "country": "Spain",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "MOET DOM PERIGNON",
-    "sku": "SKU: 280461",
-    "price": "$342.52",
-    "alcohol": "12",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/sparkling-wine/champagne/dom-perignon",
+    "wine_name": "Dom Perignon",
+    "vineyard": "Moet",
+    "price_range": "340-345",
     "recommendation_matches": {
       "category": "Sparkling Wine",
       "grape_primary": "Sparkling Blend",
@@ -6027,16 +5332,13 @@
       "flavor_secondary": "fruit",
       "flavor_tertiary": "floral",
       "country": "France",
-      "price_tier": "highend",
-      "stock_status": "OUT OF STOCK"
+      "price_tier": "highend"
     }
   },
   {
-    "name": "MOET & CHANDON BRUT ROSE",
-    "sku": "SKU: 482026",
-    "price": "$102.77",
-    "alcohol": "12.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/sparkling-wine/champagne/moet-chandon-brut-rose",
+    "wine_name": "Rose",
+    "vineyard": "Moet & Chandon Brut",
+    "price_range": "100-105",
     "recommendation_matches": {
       "category": "Sparkling Wine",
       "grape_primary": "Sparkling Blend",
@@ -6053,16 +5355,13 @@
       "flavor_secondary": "fruit",
       "flavor_tertiary": "floral",
       "country": "France",
-      "price_tier": "highend",
-      "stock_status": "OUT OF STOCK"
+      "price_tier": "highend"
     }
   },
   {
-    "name": "CAVIT ROSCATO SPARKLING SWEET RED",
-    "sku": "SKU: 17023",
-    "price": "$24.98",
-    "alcohol": "10",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/sparkling-wine/sparkling-rose/cavit-roscato-sparkling-sweet-red",
+    "wine_name": "Roscato Sparkling Sweet Red",
+    "vineyard": "Cavit",
+    "price_range": "22-27",
     "recommendation_matches": {
       "category": "Sparkling Wine",
       "grape_primary": "Sparkling Blend",
@@ -6079,16 +5378,13 @@
       "flavor_secondary": "fruit",
       "flavor_tertiary": "floral",
       "country": "Italy",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "LETS GET FIZZICAL DIRTY LAUNDRY VINEYARD - SPARKLI",
-    "sku": "SKU: 279615",
-    "price": "$22.52",
-    "alcohol": "12.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/sparkling-wine/sparkling-rose/lets-get-fizzical-dirty-laundry-vineyard-sparkli",
+    "wine_name": "Sparkli",
+    "vineyard": "Lets Get Fizzical Dirty Laundry Vineyard",
+    "price_range": "20-25",
     "recommendation_matches": {
       "category": "Sparkling Wine",
       "grape_primary": "Sparkling Blend",
@@ -6105,16 +5401,13 @@
       "flavor_secondary": "fruit",
       "flavor_tertiary": "floral",
       "country": "Canada",
-      "price_tier": "mid",
-      "stock_status": "OUT OF STOCK"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "MUMM CORDON ROUGE BRUT",
-    "sku": "SKU: 308056",
-    "price": "$87.99",
-    "alcohol": "11.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/sparkling-wine/champagne/mumm-cordon-rouge-brut",
+    "wine_name": "Cordon Rouge Brut",
+    "vineyard": "Mumm",
+    "price_range": "85-90",
     "recommendation_matches": {
       "category": "Sparkling Wine",
       "grape_primary": "Sparkling Blend",
@@ -6131,16 +5424,13 @@
       "flavor_secondary": "fruit",
       "flavor_tertiary": "floral",
       "country": "France",
-      "price_tier": "premium",
-      "stock_status": "In stock"
+      "price_tier": "premium"
     }
   },
   {
-    "name": "SAINTLY - THE GOOD BUBBLY LIMITED RELEASE 2024",
-    "sku": "SKU: 281579",
-    "price": "$23.04",
-    "alcohol": "12",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/sparkling-wine/saintly-the-good-bubbly-limited-release-2024",
+    "wine_name": "The Good Bubbly Limited Release 2024",
+    "vineyard": "Saintly",
+    "price_range": "21-26",
     "recommendation_matches": {
       "category": "Sparkling Wine",
       "grape_primary": "Sparkling Blend",
@@ -6157,16 +5447,13 @@
       "flavor_secondary": "fruit",
       "flavor_tertiary": "floral",
       "country": "Canada",
-      "price_tier": "mid",
-      "stock_status": "OUT OF STOCK"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "CANELLA LIDO PROSECCO ROSE BRUT",
-    "sku": "SKU: 41547",
-    "price": "$27.74",
-    "alcohol": "11",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/sparkling-wine/prosecco/canella-lido-prosecco-rose-brut",
+    "wine_name": "Prosecco Rose Brut",
+    "vineyard": "Canella Lido",
+    "price_range": "25-30",
     "recommendation_matches": {
       "category": "Sparkling Wine",
       "grape_primary": "Prosecco",
@@ -6183,16 +5470,13 @@
       "flavor_secondary": "apple",
       "flavor_tertiary": "floral",
       "country": "Italy",
-      "price_tier": "mid",
-      "stock_status": "Low in stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "8TH GENERATION INTEGRITY",
-    "sku": "SKU: 79310",
-    "price": "$33.94",
-    "alcohol": "13",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/sparkling-wine/8th-generation-integrity",
+    "wine_name": "Generation Integrity",
+    "vineyard": "8Th",
+    "price_range": "31-36",
     "recommendation_matches": {
       "category": "Sparkling Wine",
       "grape_primary": "Sparkling Blend",
@@ -6209,16 +5493,13 @@
       "flavor_secondary": "fruit",
       "flavor_tertiary": "floral",
       "country": "Canada",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "HONEST LOT SPARKLING",
-    "sku": "SKU: 700813",
-    "price": "$14.99",
-    "alcohol": "12",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/sparkling-wine/honest-lot-sparkling",
+    "wine_name": "Lot Sparkling",
+    "vineyard": "Honest",
+    "price_range": "12-17",
     "recommendation_matches": {
       "category": "Sparkling Wine",
       "grape_primary": "Sparkling Blend",
@@ -6235,16 +5516,13 @@
       "flavor_secondary": "fruit",
       "flavor_tertiary": "floral",
       "country": "Canada",
-      "price_tier": "budget",
-      "stock_status": "In stock"
+      "price_tier": "budget"
     }
   },
   {
-    "name": "LUC BELAIRE RARE SPARKLING ROSE",
-    "sku": "SKU: 9605",
-    "price": "$36.48$39.48",
-    "alcohol": "11.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/sparkling-wine/sparkling-rose/luc-belaire-rose",
+    "wine_name": "Rose",
+    "vineyard": "Luc Belaire Rare Sparkling",
+    "price_range": "34-39",
     "recommendation_matches": {
       "category": "Sparkling Wine",
       "grape_primary": "Sparkling Blend",
@@ -6261,16 +5539,13 @@
       "flavor_secondary": "fruit",
       "flavor_tertiary": "floral",
       "country": "France",
-      "price_tier": "premium",
-      "stock_status": "Low in stock"
+      "price_tier": "premium"
     }
   },
   {
-    "name": "MARTINI ASTI",
-    "sku": "SKU: 1875",
-    "price": "$19.49",
-    "alcohol": "7",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/sparkling-wine/prosecco/martini-asti",
+    "wine_name": "Asti",
+    "vineyard": "Martini",
+    "price_range": "17-22",
     "recommendation_matches": {
       "category": "Sparkling Wine",
       "grape_primary": "Sparkling Blend",
@@ -6287,16 +5562,13 @@
       "flavor_secondary": "fruit",
       "flavor_tertiary": "floral",
       "country": "Italy",
-      "price_tier": "budget",
-      "stock_status": "In stock"
+      "price_tier": "budget"
     }
   },
   {
-    "name": "JACOB'S CREEK SPARKLING ROSE",
-    "sku": "SKU: 147675",
-    "price": "$16.43",
-    "alcohol": "7.6",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/sparkling-wine/sparkling-rose/jacobs-creek-sparkling-moscato-rose",
+    "wine_name": "Rose",
+    "vineyard": "Jacob'S Creek Sparkling",
+    "price_range": "14-19",
     "recommendation_matches": {
       "category": "Sparkling Wine",
       "grape_primary": "Sparkling Blend",
@@ -6313,16 +5585,13 @@
       "flavor_secondary": "fruit",
       "flavor_tertiary": "floral",
       "country": "Australia",
-      "price_tier": "budget",
-      "stock_status": "In stock"
+      "price_tier": "budget"
     }
   },
   {
-    "name": "POL ROGER CUVEE DE RESERVE BRUT",
-    "sku": "SKU: 51953",
-    "price": "$95.57",
-    "alcohol": "12",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/sparkling-wine/champagne/pol-roger-cuvee-de-reserve-brut",
+    "wine_name": "Roger Cuvee De Reserve Brut",
+    "vineyard": "Pol",
+    "price_range": "93-98",
     "recommendation_matches": {
       "category": "Sparkling Wine",
       "grape_primary": "Sparkling Blend",
@@ -6339,16 +5608,13 @@
       "flavor_secondary": "fruit",
       "flavor_tertiary": "floral",
       "country": "France",
-      "price_tier": "premium",
-      "stock_status": "Low in stock"
+      "price_tier": "premium"
     }
   },
   {
-    "name": "CRISTAL BRUT VINTAGE CHAMPAGNE",
-    "sku": "SKU: 268755",
-    "price": "$407.74",
-    "alcohol": "12",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/sparkling-wine/champagne/louis-roederer-cristal-brut",
+    "wine_name": "Champagne",
+    "vineyard": "Cristal Brut Vintage",
+    "price_range": "405-410",
     "recommendation_matches": {
       "category": "Sparkling Wine",
       "grape_primary": "Champagne",
@@ -6365,16 +5631,13 @@
       "flavor_secondary": "toast",
       "flavor_tertiary": "almond",
       "country": "France",
-      "price_tier": "highend",
-      "stock_status": "In stock"
+      "price_tier": "highend"
     }
   },
   {
-    "name": "LINI 910 LAMBRUSCO",
-    "sku": "SKU: 30163",
-    "price": "$26.57",
-    "alcohol": "11",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/sparkling-wine/lambrusco/lini-910-lambrusco",
+    "wine_name": "910 Lambrusco",
+    "vineyard": "Lini",
+    "price_range": "24-29",
     "recommendation_matches": {
       "category": "Sparkling Wine",
       "grape_primary": "Sparkling Blend",
@@ -6391,16 +5654,13 @@
       "flavor_secondary": "fruit",
       "flavor_tertiary": "floral",
       "country": "Italy",
-      "price_tier": "mid",
-      "stock_status": "OUT OF STOCK"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "CONCERTO LAMBRUSCO",
-    "sku": "SKU: 571968",
-    "price": "$26.00",
-    "alcohol": "11.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/sparkling-wine/lambrusco/concerto-lambrusco",
+    "wine_name": "Lambrusco",
+    "vineyard": "Concerto",
+    "price_range": "24-28",
     "recommendation_matches": {
       "category": "Sparkling Wine",
       "grape_primary": "Sparkling Blend",
@@ -6417,16 +5677,13 @@
       "flavor_secondary": "fruit",
       "flavor_tertiary": "floral",
       "country": "Italy",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "JOSH CELLARS PROSECCO",
-    "sku": "SKU: 476125",
-    "price": "$27.18",
-    "alcohol": "11",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/sparkling-wine/josh-cellars-prosecco",
+    "wine_name": "Prosecco",
+    "vineyard": "Josh Cellars",
+    "price_range": "25-30",
     "recommendation_matches": {
       "category": "Sparkling Wine",
       "grape_primary": "Prosecco",
@@ -6443,16 +5700,13 @@
       "flavor_secondary": "apple",
       "flavor_tertiary": "floral",
       "country": "Italy",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "BOTTEGA PROSECCO",
-    "sku": "SKU: 95711",
-    "price": "$22.74",
-    "alcohol": "11",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/sparkling-wine/prosecco/bottega-treviso-prosecco",
+    "wine_name": "Prosecco",
+    "vineyard": "Bottega",
+    "price_range": "20-25",
     "recommendation_matches": {
       "category": "Sparkling Wine",
       "grape_primary": "Prosecco",
@@ -6469,16 +5723,13 @@
       "flavor_secondary": "apple",
       "flavor_tertiary": "floral",
       "country": "Italy",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "VILLA TERESA ROSE",
-    "sku": "SKU: 826875",
-    "price": "$23.84",
-    "alcohol": "11",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/sparkling-wine/sparkling-rose/villa-teresa-rose-frizzante",
+    "wine_name": "Rose",
+    "vineyard": "Villa Teresa",
+    "price_range": "21-26",
     "recommendation_matches": {
       "category": "Sparkling Wine",
       "grape_primary": "Sparkling Blend",
@@ -6495,16 +5746,13 @@
       "flavor_secondary": "fruit",
       "flavor_tertiary": "floral",
       "country": "Italy",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "GIGGLEWATER PROSECCO ROSE",
-    "sku": "SKU: 70780",
-    "price": "$25.08",
-    "alcohol": "11.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/sparkling-wine/prosecco/gigglewater-prosecco-rose",
+    "wine_name": "Prosecco Rose",
+    "vineyard": "Gigglewater",
+    "price_range": "23-28",
     "recommendation_matches": {
       "category": "Sparkling Wine",
       "grape_primary": "Prosecco",
@@ -6521,16 +5769,13 @@
       "flavor_secondary": "apple",
       "flavor_tertiary": "floral",
       "country": "Italy",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "MOET AND CHANDON - BRUT IMPERIAL",
-    "sku": "SKU: 453084",
-    "price": "$86.87",
-    "alcohol": "12",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/sparkling-wine/champagne/moet-and-chandon-brut-imperial",
+    "wine_name": "Brut Imperial",
+    "vineyard": "Moet And Chandon",
+    "price_range": "84-89",
     "recommendation_matches": {
       "category": "Sparkling Wine",
       "grape_primary": "Sparkling Blend",
@@ -6547,16 +5792,13 @@
       "flavor_secondary": "fruit",
       "flavor_tertiary": "floral",
       "country": "France",
-      "price_tier": "premium",
-      "stock_status": "OUT OF STOCK"
+      "price_tier": "premium"
     }
   },
   {
-    "name": "RUFFINO - PROSECCO EXTRA DRY",
-    "sku": "SKU: 192153",
-    "price": "$24.49$26.49",
-    "alcohol": "11",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/sparkling-wine/prosecco/ruffino-prosecco-extra-dry",
+    "wine_name": "Prosecco Extra Dry",
+    "vineyard": "Ruffino",
+    "price_range": "22-27",
     "recommendation_matches": {
       "category": "Sparkling Wine",
       "grape_primary": "Prosecco",
@@ -6573,16 +5815,13 @@
       "flavor_secondary": "apple",
       "flavor_tertiary": "floral",
       "country": "Italy",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "SAINTLY - THE GOOD SPARKLING ROSE LIMITED RELEASE",
-    "sku": "SKU: 281830",
-    "price": "$8.61",
-    "alcohol": "12",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/sparkling-wine/saintly-the-good-sparkling-rose-limited-release",
+    "wine_name": "The Good Sparkling Rose Limited Release",
+    "vineyard": "Saintly",
+    "price_range": "6-11",
     "recommendation_matches": {
       "category": "Sparkling Wine",
       "grape_primary": "Sparkling Blend",
@@ -6599,16 +5838,13 @@
       "flavor_secondary": "fruit",
       "flavor_tertiary": "floral",
       "country": "Canada",
-      "price_tier": "budget",
-      "stock_status": "In stock"
+      "price_tier": "budget"
     }
   },
   {
-    "name": "MOUTARD GRANDE CUVEE CHAMPAGNE",
-    "sku": "SKU: 957936",
-    "price": "$85.13",
-    "alcohol": "12.5",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/sparkling-wine/champagne/moutard-grande-cuvee-champagne",
+    "wine_name": "Champagne",
+    "vineyard": "Moutard Grande Cuvee",
+    "price_range": "83-88",
     "recommendation_matches": {
       "category": "Sparkling Wine",
       "grape_primary": "Champagne",
@@ -6625,16 +5861,13 @@
       "flavor_secondary": "toast",
       "flavor_tertiary": "almond",
       "country": "France",
-      "price_tier": "premium",
-      "stock_status": "Low in stock"
+      "price_tier": "premium"
     }
   },
   {
-    "name": "HAYWIRE THE BUB TRADITIONAL METHOD 2012",
-    "sku": "SKU: 273433",
-    "price": "$31.30",
-    "alcohol": "12.6",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/sparkling-wine/haywire-the-bub-traditional-method-2012",
+    "wine_name": "The Bub Traditional Method 2012",
+    "vineyard": "Haywire",
+    "price_range": "29-34",
     "recommendation_matches": {
       "category": "Sparkling Wine",
       "grape_primary": "Sparkling Blend",
@@ -6651,16 +5884,13 @@
       "flavor_secondary": "fruit",
       "flavor_tertiary": "floral",
       "country": "Canada",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "GIGGLEWATER PROSECCO",
-    "sku": "SKU: 100011",
-    "price": "$24.48",
-    "alcohol": "11",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/sparkling-wine/prosecco/gigglewater-prosecco-brut",
+    "wine_name": "Prosecco",
+    "vineyard": "Gigglewater",
+    "price_range": "22-27",
     "recommendation_matches": {
       "category": "Sparkling Wine",
       "grape_primary": "Prosecco",
@@ -6677,16 +5907,13 @@
       "flavor_secondary": "apple",
       "flavor_tertiary": "floral",
       "country": "Italy",
-      "price_tier": "mid",
-      "stock_status": "In stock"
+      "price_tier": "mid"
     }
   },
   {
-    "name": "VEUVE CLICQUOT ROSE BRUT",
-    "sku": "SKU: 945261",
-    "price": "$112.96",
-    "alcohol": "12.3",
-    "url": "https://www.myliquorstore.ca/CT/product/wine/sparkling-wine/champagne/veuve-clicquot-rose-brut",
+    "wine_name": "Rose Brut",
+    "vineyard": "Veuve Clicquot",
+    "price_range": "110-115",
     "recommendation_matches": {
       "category": "Sparkling Wine",
       "grape_primary": "Sparkling Blend",
@@ -6703,8 +5930,7 @@
       "flavor_secondary": "fruit",
       "flavor_tertiary": "floral",
       "country": "France",
-      "price_tier": "premium",
-      "stock_status": "In stock"
+      "price_tier": "premium"
     }
   }
 ]
