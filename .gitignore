@@ -8,3 +8,10 @@ __pycache__/
 # Logs
 *.log
 
+# Node
+node_modules/
+**/node_modules/
+
+# Build output
+dist/
+**/dist/
