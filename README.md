@@ -4,7 +4,7 @@ Myra Phase 1 is a production-ready mobile-first recommendation experience with a
 
 ## Version
 
-Current version: `v0.1`
+Current version: `v0.2`
 
 ## What's New
 
@@ -16,6 +16,8 @@ Current version: `v0.1`
 - Local recommendation history storage on device
 - Optional location permission flow with Google Maps handoff
 - Removed specific retailer and `myrabottle.png` references from the primary web entry file
+- Security increment: upgraded mobile stack to Expo SDK 54 with React 19 / React Native 0.81
+- Mobile dependency vulnerability scan now passes with no high-severity findings
 
 ## Project Layout
 
@@ -112,4 +114,4 @@ cd mobile && npm run lint && npm run build
 
 ## Update Report
 
-See: [`myra-v0.1-updates.md`](myra-v0.1-updates.md)
+See: [`myra-v0.2-updates.md`](myra-v0.2-updates.md)

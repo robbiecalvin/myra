@@ -40,6 +40,8 @@ Key implementation notes:
 
 ## Failed to implement
 
+Resolution status update (2026-02-18): Resolved in `v0.2` by upgrading mobile from Expo SDK 52 to SDK 54 and re-validating lint/build/audit.
+
 - Fully remediating all mobile dependency vulnerabilities without a breaking Expo SDK upgrade.
   - What was attempted:
     - Ran `npm audit` and `npm audit fix` in `/mobile`.
