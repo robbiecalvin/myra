@@ -1,14 +1,19 @@
 {
   "name": "myra-mobile",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "private": true,
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
     "android": "expo run:android",
     "ios": "expo run:ios",
+    "doctor": "expo doctor",
     "lint": "tsc -p tsconfig.json --noEmit",
-    "build": "tsc -p tsconfig.json --noEmit"
+    "build": "tsc -p tsconfig.json --noEmit",
+    "build:android": "npx eas-cli build --platform android --profile production",
+    "build:ios": "npx eas-cli build --platform ios --profile production",
+    "submit:android": "npx eas-cli submit --platform android --profile production",
+    "submit:ios": "npx eas-cli submit --platform ios --profile production"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "2.2.0",

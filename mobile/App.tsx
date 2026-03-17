@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { Animated, Easing } from "react-native";
+import Constants from "expo-constants";
 import { StatusBar } from "expo-status-bar";
 import { HomeScreen } from "./src/screens/HomeScreen";
 import { HistoryScreen } from "./src/screens/HistoryScreen";
@@ -10,7 +11,7 @@ import { saveHistoryRecord } from "./src/services/historyStorage";
 import { getRecommendations } from "./src/services/api";
 import type { HistoryRecord, RecommendationResponse, Screen } from "./src/types";
 
-const APP_VERSION = "v0.1";
+const APP_VERSION = `v${Constants.expoConfig?.version ?? "dev"}`;
 
 export default function App() {
   const [screen, setScreen] = useState<Screen>("splash");

@@ -3,6 +3,7 @@
 Myra is a browser-based recommendation experience focused on **Wine and Beer** with:
 - Web experience in `/index.html`
 - Backend API in `/backend`
+- Expo mobile app in `/mobile` (Android + iOS)
 
 ## Version
 
@@ -57,6 +58,33 @@ Backend default URL: `http://localhost:4000`
 ### Web (Legacy)
 
 Open `/index.html` in your local dev server setup.
+
+### Mobile (Android + iOS)
+
+```bash
+cd mobile
+npm install
+cp .env.example .env
+# set EXPO_PUBLIC_API_BASE_URL to your deployed API
+npx expo start
+```
+
+Production builds and store submission:
+
+```bash
+cd mobile
+npx eas login
+npx eas init
+npm run build:android
+npm run build:ios
+npm run submit:android
+npm run submit:ios
+```
+
+Release configuration files:
+- `mobile/app.config.ts`
+- `mobile/eas.json`
+- `mobile/.env.example`
 
 ## Verification Commands
 
