@@ -88,6 +88,11 @@
 
         <div class="screen" id="screen-results">
           <div class="flow-panel results-panel">
+            <header class="results-intro">
+              <span class="results-eyebrow">MYRA · YOUR PERSONAL SOMMELIER</span>
+              <h1>Your next favourite.</h1>
+              <p>A few thoughtful picks, chosen around your taste. Start with our top recommendation, or explore the alternatives.</p>
+            </header>
             <div id="results" aria-live="polite"></div>
             <div class="actions flow-actions">
               <button class="btn" id="btnResultsStartOver" type="button">Start Over</button>
@@ -778,8 +783,8 @@
           const wrap = document.createElement("div");
           wrap.className = "myra-store";
           wrap.innerHTML = `
-            <h4 class="myra-store-title">Nearby Retailers</h4>
-            <div class="myra-store-help">You can find a list of nearby retailers close to your location below.</div>
+            <h4 class="myra-store-title">Find your next favourite nearby</h4>
+            <div class="myra-store-help">Explore local retailers. Check availability before you go.</div>
             <div class="myra-store-actions">
               <a class="btn btn-primary" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(STORE.mapsQuery)}" target="_blank" rel="noopener noreferrer">Browse Nearby Retailers</a>
             </div>
@@ -1844,7 +1849,8 @@
 
               div.innerHTML = `
                 <div class="myra-result-header">
-                  <h3 class="myra-result-title">${label ? `${label}: ` : ""}<a class="myra-link" href="https://www.google.com/search?tbm=isch&q=${q}" target="_blank" rel="noopener noreferrer">${wineName}</a></h3>
+                  ${label ? `<div class="myra-pick-label">${label}</div>` : ""}
+                  <h2 class="myra-result-title"><a class="myra-link" href="https://www.google.com/search?tbm=isch&q=${q}" target="_blank" rel="noopener noreferrer">${wineName}</a></h2>
                   ${vineyard ? `<div class="myra-result-subtitle">${vineyard}</div>` : ""}
                   <div class="myra-result-subtitle">${subtitleBits.join(" · ")}</div>
                   <div class="myra-badges">
@@ -2192,7 +2198,7 @@
 
             function renderBeerCard(b, label, { confidence } = {}) {
               const q = encodeURIComponent(`${safeText(b.name)} beer`);
-              const hops = splitPipe(b.hops).join(", ");
+              const hops = splitPipe(b.hops).filter(hop => hop.toLowerCase() !== "null").join(", ");
               const foods = splitPipe(b.foods_best_with).join(", ");
               const noteBits = [safeText(b.flavor), safeText(b.aroma), safeText(b.appearance)].filter(Boolean);
               const abv = b?._myra?.abv;
@@ -2211,7 +2217,8 @@
 
               div.innerHTML = `
                 <div class="myra-result-header">
-                  <h3 class="myra-result-title">${label ? `${label}: ` : ""}<a class="myra-link" href="https://www.google.com/search?tbm=isch&q=${q}" target="_blank" rel="noopener noreferrer">${safeText(b.name)}</a></h3>
+                  ${label ? `<div class="myra-pick-label">${label}</div>` : ""}
+                  <h2 class="myra-result-title"><a class="myra-link" href="https://www.google.com/search?tbm=isch&q=${q}" target="_blank" rel="noopener noreferrer">${safeText(b.name)}</a></h2>
                   <div class="myra-result-subtitle">${subtitleBits.join(" · ")}</div>
                   <div class="myra-badges">
                     ${rating ? `<span class="myra-badge myra-badge-confidence">${rating.stars} ${rating.label}</span>` : ""}

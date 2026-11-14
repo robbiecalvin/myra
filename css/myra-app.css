@@ -995,3 +995,100 @@ select:focus-visible {
 canvas#room-canvas {
   display: none !important;
 }
+
+/* A quieter results canvas with one clear recommendation hierarchy. */
+body.mode-results {
+  background: radial-gradient(ellipse at 50% 0%, #282820 0%, #171a1c 65%);
+}
+body.mode-results #myra-app {
+  max-width: 1040px;
+  margin-top: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  box-shadow: none;
+}
+#screen-results .results-panel {
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  box-shadow: none;
+}
+.results-intro { max-width: 650px; padding: 20px 0 32px; }
+.results-eyebrow, .myra-pick-label {
+  color: #d9b879;
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .14em;
+  line-height: 1.6;
+  text-transform: uppercase;
+}
+.results-intro h1 {
+  margin: 12px 0;
+  color: #f6f1e7;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(2.25rem, 5vw, 3.6rem);
+  font-weight: 400;
+  letter-spacing: -.045em;
+  line-height: 1.15;
+}
+.results-intro p { margin: 0; font-size: 1rem; color: #b4b6b4; }
+#results { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+#results > * { min-width: 0; grid-column: 1 / -1; }
+#results > .myra-result-card { grid-column: auto; }
+#results > .myra-result-card:first-of-type,
+#results > .myra-result-card:not(.myra-result-card ~ .myra-result-card) {
+  grid-column: 1 / -1;
+  border-color: #716244;
+  background: linear-gradient(120deg, #302e27, #242726 70%);
+}
+#results .myra-result-card {
+  border-radius: 20px;
+  background: #222627;
+  border: 1px solid #3b4040;
+  box-shadow: none;
+  overflow-wrap: anywhere;
+}
+#results .myra-result-header { padding: 26px 28px 0; background: none; border: 0; }
+#results .myra-pick-label { margin-bottom: 10px; }
+#results .myra-result-title { margin: 0 0 8px; font-size: 1.45rem; line-height: 1.3; font-weight: 600; }
+#results .myra-result-title a { color: #f3eee3; }
+#results .myra-result-title a:hover { color: #e4c58d; text-decoration: underline; text-underline-offset: 4px; }
+#results .myra-result-subtitle { color: #b4b9b7; font-size: .88rem; line-height: 1.6; }
+#results .myra-badges { gap: 6px 14px; margin-top: 18px; align-items: center; }
+#results .myra-badge { padding: 3px 0; border: 0; background: none; border-radius: 0; font-size: .78rem; color: #bfc4c0; }
+#results .myra-badge-confidence { color: #e4c58d; }
+#results .myra-result-body { padding: 22px 28px 28px; font-size: .9rem; line-height: 1.75; }
+#results .myra-result-body p { color: #ccd0cb; line-height: 1.75; }
+#results .myra-result-body strong { color: #eeeade; font-weight: 500; }
+#results .myra-kv { margin-top: 18px; display: block; }
+#results .myra-kv:empty, #results .myra-result-actions:empty { display: none; }
+#results .myra-kv li { background: none; border: 0; border-top: 1px solid #414542; border-radius: 0; padding: 16px 0 0; color: #bcc2bd; }
+#results .myra-kv strong { color: #e1d5bb; font-size: .76rem; margin-bottom: 5px; }
+#results .myra-media { grid-template-columns: 90px minmax(0, 1fr); gap: 20px; }
+#results .myra-media img { width: 90px; height: 140px; padding: 8px; background: #ffffff08; border: 0; }
+#results .myra-store { padding: 26px 28px; margin-top: 8px; background: none; border: 1px solid #414542; box-shadow: none; }
+#results .myra-store-title { color: #eeeade; font-weight: 500; font-size: 1.15rem; }
+#results .myra-store-help { font-size: .9rem; line-height: 1.7; color: #b4b9b7; }
+#results .myra-store-actions { margin: 18px 0 0; }
+#screen-results .btn { min-height: 44px; font-size: .85rem; border-radius: 10px; }
+#screen-results .btn-primary { color: #231f17; background: #dfc28b; border-color: #dfc28b; box-shadow: none; }
+#screen-results .btn-primary:hover { background: #efd6a8; }
+#screen-results > .results-panel > .flow-actions { padding-top: 24px; margin-top: 8px; border-top: 1px solid #ffffff12; }
+#results .myra-transcript { margin: 0 0 4px; padding: 16px; background: #ffffff04; }
+#results .myra-transcript-editrow { grid-template-columns: auto minmax(0, 1fr) auto; }
+@media (max-width: 640px) {
+  body.mode-results .wrap { padding: 22px 16px 40px; }
+  .results-intro { padding: 12px 4px 26px; }
+  .results-intro p { font-size: .92rem; }
+  #results { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  #results .myra-result-header { padding: 22px 20px 0; }
+  #results .myra-result-body, #results .myra-store { padding: 20px; }
+  #results .myra-result-title { font-size: 1.3rem; }
+  #results .myra-transcript-editrow { grid-template-columns: minmax(0, 1fr) auto; }
+  #results .myra-transcript-label { grid-column: 1 / -1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #screen-results.active { animation: none; }
+}
