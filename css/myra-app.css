@@ -1092,3 +1092,16 @@ body.mode-results #myra-app {
 @media (prefers-reduced-motion: reduce) {
   #screen-results.active { animation: none; }
 }
+
+.myra-install {
+  margin-top: 1rem;
+}
+
+.myra-install[hidden] {
+  display: none;
+}
+
+.myra-install-help {
+  max-width: 33rem;
+  margin: 0.75rem auto 0;
+}

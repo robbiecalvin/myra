@@ -51,6 +51,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="./assets/images/myra-icon-180.png" />
     <link rel="stylesheet" href="./css/myra-app.css" />
   </head>
   <body class="mode-home">
@@ -69,6 +71,8 @@
               <button class="btn btn-mode btn-server" id="btnGuided" type="button">Server Mode</button>
               <button class="btn btn-mode btn-request" id="btnTalk" type="button">Request Mode</button>
             </div>
+            <button class="btn myra-install" id="myraInstall" type="button" aria-expanded="false" aria-controls="myraInstallHelp" hidden>Install Myra</button>
+            <p class="myra-install-help" id="myraInstallHelp" role="status" hidden></p>
             <div id="homeStatus" class="status-line"></div>
           </div>
         </div>
@@ -102,6 +106,7 @@
       </div>
     </div>
 
+    <script src="./js/myra-install.js" defer></script>
     <script src="./js/myra-voice.js"></script>
     <script src="./js/myra-nlu.js"></script>
     <script>
