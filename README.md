@@ -103,3 +103,7 @@ Release configuration files
 ## Update Report
 
 [Myra v0.3 Update Report](myra-v0.3-updates.md)
+
+## Recommendation evaluation
+
+The web client uses bundled data and parsing modules; the Express backend handles retailer placement. `backend/src/tests/rankingService.test.ts` uses synthetic retailer fixtures to assert premium-first placement followed by distance ordering. This validates a specific business rule, not overall recommendation quality or model accuracy.
