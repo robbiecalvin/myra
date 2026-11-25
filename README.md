@@ -107,3 +107,8 @@ Release configuration files
 ## Recommendation evaluation
 
 The web client uses bundled data and parsing modules; the Express backend handles retailer placement. `backend/src/tests/rankingService.test.ts` uses synthetic retailer fixtures to assert premium-first placement followed by distance ordering. This validates a specific business rule, not overall recommendation quality or model accuracy.
+
+
+## Technical portfolio case study
+
+[Read the technical case study](CASE_STUDY.md) for the problem, architecture, engineering decisions, evaluation evidence and limitations.
