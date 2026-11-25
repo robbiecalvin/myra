@@ -31,6 +31,17 @@ npm test
 ## Limitations
 No measured recommendation accuracy, conversion uplift or verified live retailer coverage is claimed. Payment integration requires separately configured test credentials.
 
+## Reproducible fixture demonstration
+
+The ranking fixture supplies an active free retailer at 1 km and active premium retailers at 3 km and 8 km. Expected order is premium at 3 km, premium at 8 km, then free at 1 km. The demo uses synthetic retailer records and requires no external payment credentials.
+
+```sh
+cd backend
+npm ci
+npm run build
+npm test
+```
+
 ## Resume summary
 Developed a cross-platform recommendation application and synthetic-fixture tests for deterministic retailer ranking.
 
